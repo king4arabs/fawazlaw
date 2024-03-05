@@ -2,6 +2,9 @@
 
 use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\categoryController;
+use App\Http\Controllers\ImageUpload;
+use App\Http\Controllers\ServiceCategoryController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\TestController;
 use Illuminate\Http\Request;
@@ -40,4 +43,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/user', function (Request $request) {
         return $request->user();
     });
+    Route::post('/upload-images', [ImageUpload::class, 'upload'])->name('admin.upload.image');
+    Route::apiResource('service-categories', ServiceCategoryController::class);
+
 });
