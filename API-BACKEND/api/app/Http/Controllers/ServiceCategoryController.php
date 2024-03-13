@@ -28,7 +28,7 @@ class ServiceCategoryController extends Controller
         ]);
 
         if ($request->hasFile('thumbnail')) {
-            $thumbnailPath = $request->file('thumbnail')->store('public/thumbnails');
+            $thumbnailPath = $request->file('thumbnail')->store('public/service_categories_thumbnails');
             $validatedData['thumbnail'] = $thumbnailPath;
         }
 
@@ -49,7 +49,6 @@ class ServiceCategoryController extends Controller
      */
     public function update(Request $request, ServiceCategory $serviceCategory)
     {
-        dd($request);
         $validatedData = $request->validate([
             'name' => 'string|max:255',
             'description' => 'nullable|string',
