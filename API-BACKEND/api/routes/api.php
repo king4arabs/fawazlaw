@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\categoryController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ImageUpload;
 use App\Http\Controllers\MyFatoorahController;
 use App\Http\Controllers\ServiceCategoryController;
@@ -36,6 +37,9 @@ Route::get('services/category/{category_id}', [ServicesController::class, 'servi
 
 Route::post('/process-payment', [MyFatoorahController::class, 'index']);
 Route::get('/myfatoorah-callback', [MyFatoorahController::class, 'callback']);
+
+
+Route::post('contact-us', [ContactController::class, 'store']);
 Route::middleware(['auth:sanctum'])->group(function () {
 
     // Admin logout route
@@ -53,5 +57,6 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::apiResource('services', ServicesController::class);
     Route::post('services/map', [ServicesController::class, 'mapServiceToCategory']);
     Route::post('services/unmap', [ServicesController::class, 'unmapServiceToCategory']);
-
+    Route::put('mark-as-done/{id}', [ContactController::class, 'markAsDone']);
+    Route::put('mark-as-undone/{id}', [ContactController::class, 'markAsUnDone']);
 });
