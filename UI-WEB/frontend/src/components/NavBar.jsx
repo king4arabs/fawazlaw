@@ -51,7 +51,7 @@ const NavBar = () => {
               <p className=" text-white">info@fawazlaw.sa</p>
             </a>
           </div>
-          <div className=" flex items-center gap-">
+          <div className=" items-center gap-2 lg:flex hidden">
             <div className="px-3 py-2 flex text-white items-center gap-[1px]">
               <PiCaretDownBold />
               <p>العربية</p>

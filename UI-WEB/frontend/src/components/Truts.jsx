@@ -12,11 +12,11 @@ const Truts = () => {
   ];
   return (
     <div className=" w-full my-14">
-      <div className=" mx-auto w-[80%] flex flex-col justify-between items-center">
-        <h1 className="text-[50px] font-bold w-fit justify-between text-end">
+      <div className=" mx-auto w-[80%] gap-2 flex flex-col justify-between items-center">
+        <h1 className="lg:text-[50px] text-4xl font-bold w-fit justify-between text-end">
           جهات نفخر بهم
         </h1>
-        <h6 className="text-[16px]">
+        <h6 className="text-[14px]">
           الشركات والهيئات والمؤسسات التي نتعامل معاها
         </h6>
       </div>

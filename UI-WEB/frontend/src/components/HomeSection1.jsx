@@ -4,11 +4,11 @@ const HomeSection1 = () => {
   return (
     <div className="w-full my-14">
       <div className=" mx-auto w-[80%] flex flex-col justify-between items-center">
-        <h1 className="text-[50px] font-bold w-fit justify-between text-end">
+        <h1 className="lg:text-[50px] text-4xl font-bold w-fit justify-between text-end pb-3">
           المحاماة وقاية لا علاج
         </h1>
         <p className=" text-[16px]">خدمات قانونية رائدة منذ 15 عاما</p>
-        <div className="  flex gap-3 justify-center items-center my-16 lg:h-[400px]">
+        <div className="  flex lg:flex-row flex-col gap-3 justify-center items-center my-16 lg:h-[400px]">
           <div className=" w-[370px] py-8 px-5 border rounded-lg gap-10 group flex flex-col items-end hover:shadow-2xl">
             <div className=" flex flex-col items-end gap-5">
               <img src="\Images\Iconpeople.png" alt="" />

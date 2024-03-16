@@ -7,14 +7,14 @@ import Truts from "./components/Truts";
 
 function App() {
   return (
-    <>
+    <div className=" overflow-hidden">
       <NavBar />
       <Hero />
       <HomeSection1 />
       <Truts />
       <DarkblueSection />
       <HomeSection3 />
-    </>
+    </div>
   );
 }
 
