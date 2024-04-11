@@ -1,14 +1,13 @@
-import React from "react";
+import Marquee from "react-fast-marquee";
 
 const Truts = () => {
   const logos = [
-    "/Images/_x37_uoDrF.tif11111.png",
-    "/Images/Bitmap33333.png",
-    "/Images/Bitmap44444.png",
-    "/Images/image 166666.png",
-    "/Images/image 477777.png",
-    "/Images/image 2439888888.png",
-    "/Images/image 5999999.png",
+    "/Images/1234ffferer.png",
+    "/Images/Bitmap.png",
+    "/Images/Bitmap4.png",
+    "/Images/ima1212.png",
+    "/Images/image1243.png",
+    "/Images/ima99.png",
   ];
   return (
     <div className=" w-full my-14">
@@ -21,16 +20,18 @@ const Truts = () => {
         </h6>
       </div>
       <div className="flex flex-row w-full gap-7 justify-center items-center">
-        {logos.map((logo, index) => {
-          return (
-            <div
-              key={index}
-              className="w-[200px] h-[200px] justify-center items-center flex"
-            >
-              <img src={logo} alt="logo" />
-            </div>
-          );
-        })}
+        <Marquee pauseOnClick={true} pauseOnHover={true} speed={100}>
+          {logos.map((logo, index) => {
+            return (
+              <div
+                key={index}
+                className="w-[200px] h-[200px] justify-center items-center flex"
+              >
+                <img src={logo} alt="logo" />
+              </div>
+            );
+          })}
+        </Marquee>
       </div>
     </div>
   );

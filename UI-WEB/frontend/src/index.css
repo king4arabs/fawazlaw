@@ -2,11 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  font-family: Montserrat;
+}
+
 :root {
+  --fallback-b1: white;
+  /* Change background color to white */
+  --fallback-bc: black;
+  /* Change text color to black */
   --gradirnt: linear-gradient(180deg, #EEF3FE 0%, rgba(255, 255, 255, 0.38) 100%);
+  --gradirnt2: linear-gradient(0deg, rgba(236, 246, 255, 0.41) 0%, rgba(255, 255, 255, 0) 102.27%);
 }
 
 .gradientbg {
   background: linear-gradient(180deg, #EEF3FE 0%, rgba(255, 255, 255, 0.38) 100%);
 
+}
+
+@font-face {
+  font-family: Montserrat;
+  src: url(./fonts/Montserrat-Arabic-Light.otf);
 }

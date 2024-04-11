@@ -1,5 +1,4 @@
 import React from "react";
-import { BsArrow90DegLeft } from "react-icons/bs";
 
 const HomeSection3 = () => {
   return (
@@ -27,7 +26,7 @@ const HomeSection3 = () => {
           <div
             className="  bg-[gradientbg] bg-bggradient w-full h-full flex flex-col gap-2 "
             style={{
-              backgroundImage: `url("/Images/Convention Building.png")`,
+              backgroundImage: `url("/Images/building2323.png")`,
               backgroundRepeat: "no-repeat",
               backgroundSize: 250,
               backgroundPositionY: 184,
@@ -35,7 +34,7 @@ const HomeSection3 = () => {
           >
             <div className=" w-full flex flex-col justify-center items-center gap-9 mx-auto ">
               <div className=" w-[260px] flex flex-col justify-center  gap-4">
-                <h1 className=" lg:text-3xl  font-bold text-end">
+                <h1 className=" lg:text-3xl text-[24px]  font-bold text-end">
                   فريق قانوني لمنشأتك مجانا
                 </h1>
                 <p className=" text-end flex ">

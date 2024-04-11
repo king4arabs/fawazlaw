@@ -1,10 +1,11 @@
+import "swiper/css";
+// import { Swiper } from "swiper";
+import "swiper/css/pagination";
 import React from "react";
-import {
-  BsArrow90DegLeft,
-  BsArrowBarLeft,
-  BsArrowLeftCircle,
-} from "react-icons/bs";
-import { PiCaretLeft, PiCaretLeftThin, PiCaretRight } from "react-icons/pi";
+import { BsArrowLeftCircle } from "react-icons/bs";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { PiCaretLeft, PiCaretRight } from "react-icons/pi";
+import SwperController from "./SwperController";
 
 const DarkblueSection = () => {
   return (
@@ -22,29 +23,51 @@ const DarkblueSection = () => {
           </p>
         </div>
       </div>
-      <div className=" flex flex-row gap-9 justify-end lg:mr-32 mr-16 ">
-        <img src="\Images\Group 1000003317oooooo.png" alt="" className=" " />
-        <img
-          src="\Images\Group 1000003316nnnnncncncn.png"
-          alt=""
-          className=" "
-        />
-        <img
-          src="/Images/Group 1000003315fefefefef.png"
-          className=" w-[500px] "
-          alt=""
-        />
-      </div>
-      <div className=" w-[80%] mx-auto pb-12 flex flex-row  justify-between  ">
-        <div className=" flex flex-row gap-2 ">
-          <div className=" text-black w-6 h-6 rounded-full bg-white justify-center items-center flex ">
-            <PiCaretLeft />
-          </div>
-          <div className=" text-black w-6 h-6 rounded-full bg-white justify-center items-center flex ">
-            <PiCaretRight />
-          </div>
-        </div>
-        <div className=" text-white"> 01 من 15 </div>
+      <div className=" flex flex-row gap-9 relative justify-end lg:mr-32 mr-16 ">
+        <Swiper
+          // modules={[Navigation, Pagination, Ally]}
+          className="mb-16"
+          slidesPerView={3}
+          autoplay
+          spaceBetween={30}
+        >
+          <SwiperSlide>
+            <img
+              src="\Images\Group 1000003317oooooo.png"
+              alt=""
+              className=" "
+            />
+          </SwiperSlide>
+          <SwiperSlide>
+            <img
+              src="\Images\Group 1000003316nnnnncncncn.png"
+              alt=""
+              className=" "
+            />
+          </SwiperSlide>
+          <SwiperSlide>
+            <img
+              src="/Images/Group 1000003315fefefefef.png"
+              className=" w-[500px] lg:h-[450px] "
+              alt=""
+            />
+          </SwiperSlide>
+          <SwiperSlide>
+            <img
+              src="\Images\Group 1000003316nnnnncncncn.png"
+              alt=""
+              className=" "
+            />
+          </SwiperSlide>
+          <SwiperSlide className=" mb-20">
+            <img
+              src="/Images/Group 1000003315fefefefef.png"
+              className=" w-[500px] lg:h-[450px] "
+              alt=""
+            />
+          </SwiperSlide>
+          <SwperController />
+        </Swiper>
       </div>
     </div>
   );

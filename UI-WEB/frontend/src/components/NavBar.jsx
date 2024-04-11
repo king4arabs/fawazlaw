@@ -15,7 +15,7 @@ const NavBar = () => {
     <>
       <div className=" w-[100%] flex h-12 bg-[#003E6F] justify-center items-center">
         <div className="w-[80%] flex justify-between items-center">
-          <div className=" flex items-center gap-2">
+          <div className=" flex flex-row items-center gap-2">
             <a href="#" target="_blank">
               <BsTwitterX size={25} className="  text-white" />
             </a>

@@ -5,8 +5,10 @@ module.exports = {
     extend: {
       backgroundImage: {
         bggradient: "var(--gradirnt)",
+        bggradient2: "var(--gradirnt2)",
       },
     },
   },
-  plugins: [],
+  // plugins: [],
+  plugins: [require("daisyui")],
 };
