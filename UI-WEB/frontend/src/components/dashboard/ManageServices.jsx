@@ -86,7 +86,7 @@ const ManageServices = () => {
           <div key={service.id}>
             <div className="flex items-center">
               <img
-                src={`https://api.fawazlaw.sa/${service.thumbnail}`}
+                src={service.thumbnail}
                 alt={service.name}
                 className="w-16 h-16 object-cover mr-4"
               />

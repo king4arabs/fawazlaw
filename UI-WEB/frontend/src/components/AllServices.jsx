@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { AiOutlineHome } from "react-icons/ai";
 import { FaAngleLeft } from "react-icons/fa6";
 
-const ServicesHero = () => {
+const AllServices = () => {
   const [services, setServices] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -27,15 +27,14 @@ const ServicesHero = () => {
         );
 
         // Sort the services array in descending order based on a date or order property
-        const sortedServices = response.data.sort((a, b) => {
-          // Replace this with your actual sorting logic
-          return b.id - a.id; // Assuming a higher ID means a more recent service
-        });
+        //   const sortedServices = response.data.sort((a, b) => {
+        //     // Replace this with your actual sorting logic
+        //     return b.id - a.id; // Assuming a higher ID means a more recent service
+        //   });
 
         // Take the first three services from the sorted array
-        const latestThreeServices = sortedServices.slice(0, 3);
-
-        setServices(latestThreeServices);
+        //   const latestThreeServices = sortedServices.slice(0, 3);
+        setServices(response.data);
       } catch (error) {
         setError("Failed to fetch services.");
         console.error("Error fetching services:", error);
@@ -80,12 +79,12 @@ const ServicesHero = () => {
           </div>
         </div>
       </div>
-      <div className=" w-full lg:-mt-20 -z-50  ">
-        <div className=" w-[80%] overflow-hidden -z-40 flex justify-center items-center lg:flex-row flex-col mx-auto gap-6  ">
+      <div className=" w-full  -z-50  ">
+        <div className=" w-[85%] overflow-hidden -z-40 grid grid-cols-3 justify-center items-center lg:flex-row mx-auto gap-10  ">
           {services.map((service) => (
             <div
               key={service.id}
-              className=" w-[370px] h-[330px] bg-white z-50 py-8 px-5 border rounded-lg gap-10 group flex flex-col  hover:shadow-2xl"
+              className=" w-[340px] h-[330px] bg-white z-50 py-8 px-5 border rounded-lg gap-10 group flex flex-col hover:shadow-2xl"
             >
               <div className=" flex flex-col items-end gap-5">
                 <img src="\Images\Circleidk.png" alt="" />
@@ -114,4 +113,4 @@ const ServicesHero = () => {
   );
 };
 
-export default ServicesHero;
+export default AllServices;

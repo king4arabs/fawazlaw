@@ -196,7 +196,7 @@ const AddServices = () => {
                 value={formData.currency}
               >
                 <option value="">Select Currency</option>
-                <option value="NGN">SAR</option>
+                <option value="SAR">SAR</option>
                 <option value="USD">USD</option>
               </select>
             </label>

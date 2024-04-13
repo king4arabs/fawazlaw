@@ -11,10 +11,13 @@ const DarkblueSection = () => {
   return (
     <div className=" w-full bg-[#00192C] my-14 gap-10 flex flex-col">
       <div className=" w-[80%] flex lg:flex-row flex-col  justify-between mx-auto pt-12 gap-4  ">
-        <div className=" flex flex-row items-center text-white gap-2 ">
+        <a
+          href="/allServices"
+          className=" flex flex-row items-center text-white gap-2 "
+        >
           <BsArrowLeftCircle size={25} />
           <p>كل الخدمات</p>
-        </div>
+        </a>
         <div className=" lg:text-[48px] text-3xl font-bold text-white text-end">
           <h1>خدمات تتناسب مع طبيعة عملك</h1>
           <p className=" text-[16px] font-medium text-end">
