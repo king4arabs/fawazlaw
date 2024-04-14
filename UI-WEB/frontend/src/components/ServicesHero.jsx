@@ -2,31 +2,22 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { AiOutlineHome } from "react-icons/ai";
 import { FaAngleLeft } from "react-icons/fa6";
+import OrderForm from "./OrderForm";
 
 const ServicesHero = () => {
   const [services, setServices] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [selectedServiceId, setSelectedServiceId] = useState(null);
 
   useEffect(() => {
     const fetchServices = async () => {
       try {
-        const token = localStorage.getItem("token");
-        if (!token) {
-          setError("No token found. Access denied.");
-          return;
-        }
-
-        const response = await axios.get(
-          "https://api.fawazlaw.sa/api/services",
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-
-        // Sort the services array in descending order based on a date or order property
+        const response = await axios.get("https://api.fawazlaw.sa/services", {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
         const sortedServices = response.data.sort((a, b) => {
           // Replace this with your actual sorting logic
           return b.id - a.id; // Assuming a higher ID means a more recent service
@@ -47,6 +38,9 @@ const ServicesHero = () => {
     fetchServices();
   }, []);
 
+  const handleOrderClick = (serviceId) => {
+    setSelectedServiceId(serviceId);
+  };
   return (
     <>
       <div className=" overflow-hidden w-full bg-bggradient justify-center items-center relative lg:h-[50vh] z-0 lg:pb-28 lg:pt-10 py-9 ">
@@ -102,7 +96,10 @@ const ServicesHero = () => {
                 </div>
               </div>
               <div className=" justify-end items-end hidden group-hover:flex w-full opacity-0 group-hover:opacity-100 transition duration-[500ms] ">
-                <button className="px-5 py-2 flex border rounded-lg  text-[#3E4450] items-center gap-[1px]">
+                <button
+                  onClick={() => handleOrderClick(service.id)}
+                  className="px-5 py-2 flex border rounded-lg  text-[#3E4450] items-center gap-[1px]"
+                >
                   اطلب الان
                 </button>
               </div>
@@ -110,6 +107,12 @@ const ServicesHero = () => {
           ))}
         </div>
       </div>
+      {selectedServiceId && (
+        <OrderForm
+          serviceId={selectedServiceId}
+          onClose={() => setSelectedServiceId(null)}
+        />
+      )}
     </>
   );
 };

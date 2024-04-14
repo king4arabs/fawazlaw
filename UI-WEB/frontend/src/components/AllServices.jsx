@@ -13,29 +13,11 @@ const AllServices = () => {
   useEffect(() => {
     const fetchServices = async () => {
       try {
-        const token = localStorage.getItem("token");
-        if (!token) {
-          setError("No token found. Access denied.");
-          return;
-        }
-
-        const response = await axios.get(
-          "https://api.fawazlaw.sa/api/services",
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-
-        // Sort the services array in descending order based on a date or order property
-        //   const sortedServices = response.data.sort((a, b) => {
-        //     // Replace this with your actual sorting logic
-        //     return b.id - a.id; // Assuming a higher ID means a more recent service
-        //   });
-
-        // Take the first three services from the sorted array
-        //   const latestThreeServices = sortedServices.slice(0, 3);
+        const response = await axios.get("https://api.fawazlaw.sa/services", {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
         setServices(response.data);
       } catch (error) {
         setError("Failed to fetch services.");
@@ -85,7 +67,7 @@ const AllServices = () => {
         </div>
       </div>
       <div className=" w-full  -z-50  ">
-        <div className=" w-[85%] overflow-hidden -z-40 grid grid-cols-3 justify-center items-center lg:flex-row mx-auto gap-10  ">
+        <div className=" w-[85%] overflow-hidden -z-40 grid grid-cols-1 lg:grid-cols-3 justify-center items-center lg:flex-row mx-auto gap-10  ">
           {services.map((service) => (
             <div
               key={service.id}
