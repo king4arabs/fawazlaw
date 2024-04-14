@@ -18,7 +18,7 @@ const OrderForm = ({ serviceId, onClose }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
+    // console.log(formData);
     const { customerName, customerEmail, service_id } = formData;
 
     if (!customerName || !customerEmail) {
@@ -39,7 +39,7 @@ const OrderForm = ({ serviceId, onClose }) => {
       // Build the complete URL
       const url = `https://api.fawazlaw.sa/myfatoorah?${queryString}`;
 
-      console.log("Request URL:", url); // Log the request URL
+      //   console.log("Request URL:", url); // Log the request URL
 
       const response = await fetch(url);
       const data = await response.json();
