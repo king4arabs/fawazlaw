@@ -51,7 +51,7 @@ const DarkblueSection = () => {
           <SwiperSlide>
             <img
               src="/Images/Group 1000003315fefefefef.png"
-              className=" w-[500px] lg:h-[450px] "
+              className=" w-[500px] h-[120px] lg:h-[450px] "
               alt=""
             />
           </SwiperSlide>
@@ -65,7 +65,7 @@ const DarkblueSection = () => {
           <SwiperSlide className=" mb-20">
             <img
               src="/Images/Group 1000003315fefefefef.png"
-              className=" w-[500px] lg:h-[450px] "
+              className=" w-[500px] h-[120px] lg:h-[450px] "
               alt=""
             />
           </SwiperSlide>
