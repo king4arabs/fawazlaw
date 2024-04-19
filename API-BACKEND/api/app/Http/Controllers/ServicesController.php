@@ -12,11 +12,61 @@ use Illuminate\Support\Facades\Validator;
 
 class ServicesController extends Controller
 {
+    /**
+     * @OA\Get(
+     *     path="/services",
+     *     summary="Retrieve a list of services",
+     *     tags={"Services"},
+     *     @OA\Response(
+     *         response=200,
+     *         description="A list of services",
+     *         @OA\JsonContent(
+     *             type="array",
+     *             @OA\Items(ref="#/components/schemas/Service")
+     *         )
+     *     ),
+     *     security={{"bearerAuth": {}}}
+     * )
+     */
     public function index()
     {
         return response()->json(Service::all());
     }
-
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @OA\Post(
+     *     path="/services",
+     *     summary="Create a new service",
+     *     tags={"Services"},
+     *     @OA\RequestBody(
+     *         required=true,
+     *         description="Service data",
+     *         @OA\JsonContent(
+     *             required={"name", "price"},
+     *             @OA\Property(property="name", type="string", example="Service Name"),
+     *             @OA\Property(property="description", type="string", example="Service Description"),
+     *             @OA\Property(property="price", type="number", example=100.50),
+     *             @OA\Property(property="currency", type="string", example="USD"),
+     *             @OA\Property(property="thumbnail", type="string", example="service_thumbnail.jpg"),
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=201,
+     *         description="The created service",
+     *         @OA\JsonContent(ref="#/components/schemas/Service")
+     *     ),
+     *     @OA\Response(
+     *         response=422,
+     *         description="Validation error",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(property="errors", type="object", example={"name": {"The name field is required."}})
+     *         )
+     *     ),
+     *     security={{"bearerAuth": {}}}
+     * )
+     */
     public function store(Request $request)
     {
         $validatedData = $request->validate([
@@ -34,7 +84,32 @@ class ServicesController extends Controller
 
         return response()->json($service, 201);
     }
-
+    /**
+     * @OA\Get(
+     *     path="/services/{id}",
+     *     summary="Retrieve a specific service",
+     *     tags={"Services"},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         description="ID of the service",
+     *         @OA\Schema(
+     *             type="integer"
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="The specified service",
+     *         @OA\JsonContent(ref="#/components/schemas/Service")
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Service not found"
+     *     ),
+     *     security={{"bearerAuth": {}}}
+     * )
+     */
     public function show($id)
     {
         $service = Service::findOrFail($id);
@@ -46,7 +121,7 @@ class ServicesController extends Controller
         try {
             // Find the service category by its ID and eager load the associated services
             $category = ServiceCategory::with('services')->findOrFail($category_id);
-    
+
             // Return the category with its associated services
             return response()->json(['category' => $category, 'services' => $category->services]);
         } catch (\Exception $e) {
@@ -54,6 +129,54 @@ class ServicesController extends Controller
             return response()->json(["error" => "Category not found"], 404);
         }
     }
+    /**
+     * Update a specific service.
+     *
+     * @OA\Put(
+     *     path="/services/{id}",
+     *     summary="Update a specific service",
+     *     tags={"Services"},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         description="ID of the service",
+     *         @OA\Schema(
+     *             type="integer"
+     *         )
+     *     ),
+     *     @OA\RequestBody(
+     *         required=true,
+     *         description="Service data",
+     *         @OA\JsonContent(
+     *             required={"name", "price"},
+     *             @OA\Property(property="name", type="string", example="Updated Service Name"),
+     *             @OA\Property(property="description", type="string", example="Updated Service Description"),
+     *             @OA\Property(property="price", type="number", example=150.75),
+     *             @OA\Property(property="currency", type="string", example="USD"),
+     *             @OA\Property(property="thumbnail", type="string", example="updated_service_thumbnail.jpg"),
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="The updated service",
+     *         @OA\JsonContent(ref="#/components/schemas/Service")
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Service not found"
+     *     ),
+     *     @OA\Response(
+     *         response=422,
+     *         description="Validation error",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(property="errors", type="object", example={"name": {"The name field is required."}})
+     *         )
+     *     ),
+     *     security={{"bearerAuth": {}}}
+     * )
+     */
     public function update(Request $request, $id)
     {
         $validatedData = $request->validate([
@@ -74,7 +197,30 @@ class ServicesController extends Controller
 
         return response()->json($service, 200);
     }
-    //this function is to for linking service with it category
+    /**
+     * @OA\Post(
+     *     path="/services/map-category",
+     *     summary="Map a service to a category",
+     *     tags={"Services"},
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             required={"service_id", "category_id"},
+     *             @OA\Property(property="service_id", type="integer", description="ID of the service"),
+     *             @OA\Property(property="category_id", type="integer", description="ID of the category")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=201,
+     *         description="Service successfully mapped to the category"
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="No mapping found for the provided service and category"
+     *     ),
+     *     security={{"bearerAuth": {}}}
+     * )
+     */
     public function mapServiceToCategory(Request $request)
     {
         $validatedData = $request->validate([
@@ -101,17 +247,42 @@ class ServicesController extends Controller
             'message' => 'Service successfully mapped to the category.'
         ], 201); // HTTP 201 Created status code
     }
-    public function unmapServiceToCategory(Request $request) {
+    /**
+     * @OA\Post(
+     *     path="/services/unmap-category",
+     *     summary="Unmap a service from a category",
+     *     tags={"Services"},
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             required={"service_id", "category_id"},
+     *             @OA\Property(property="service_id", type="integer", description="ID of the service"),
+     *             @OA\Property(property="category_id", type="integer", description="ID of the category")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Service successfully unmapped from the category"
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="No mapping found for the provided service and category"
+     *     ),
+     *     security={{"bearerAuth": {}}}
+     * )
+     */
+    public function unmapServiceToCategory(Request $request)
+    {
         $validatedData = $request->validate([
             'service_id' => 'required|exists:services,id',
             'category_id' => 'required|exists:service_categories,id'
         ]);
-    
+
         // Find the mapping record
         $mapping = ServiceCategoryMapping::where('service_id', $validatedData['service_id'])
             ->where('category_id', $validatedData['category_id'])
             ->first();
-    
+
         // If mapping exists, delete it
         if ($mapping) {
             $mapping->delete();
@@ -124,6 +295,35 @@ class ServicesController extends Controller
             ], 404); // HTTP 404 Not Found status code
         }
     }
+    /**
+     * @OA\Delete(
+     *     path="/services/{id}",
+     *     summary="Delete a specific service",
+     *     tags={"Services"},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         description="ID of the service",
+     *         @OA\Schema(
+     *             type="integer"
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Service deleted successfully"
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Service not found"
+     *     ),
+     *     @OA\Response(
+     *         response=500,
+     *         description="Failed to delete service"
+     *     ),
+     *     security={{"bearerAuth": {}}}
+     * )
+     */
     public function destroy($id)
     {
         try {

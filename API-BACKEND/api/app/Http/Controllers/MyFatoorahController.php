@@ -28,7 +28,7 @@ class MyFatoorahController extends Controller {
         $this->mfConfig = [
             'apiKey'      => config('myfatoorah.api_key'),
             'isTest'      => config('myfatoorah.test_mode'),
-            'countryCode' => config('myfatoorah.country_iso'),
+            'countryCode' => 'SAU',
         ];
     }
 
@@ -49,10 +49,10 @@ class MyFatoorahController extends Controller {
             $serviceData = Service::findOrFail($request->service_id);
             // Generate payload data for MyFatoorah payment
             $payloadData = [
-                'CustomerName' => 'Your Customer Name', // Replace with customer name
-                'InvoiceValue' => $serviceData->price,
-                'DisplayCurrencyIso' => $serviceData->currency,
-                'CustomerEmail' => 'customer@example.com', // Replace with customer email
+                'CustomerName' => $request->customerName, // Replace with customer name
+               'InvoiceValue' => $serviceData->price,
+                'DisplayCurrencyIso' => 'SAR',
+              'CustomerEmail' => $request->customerEmail, // Replace with customer email
                 // Add more payload data as needed
             ];
             // Initialize MyFatoorah Payment object
@@ -62,7 +62,8 @@ class MyFatoorahController extends Controller {
             $payment = $mfPayment->getInvoiceURL($payloadData);
     
             // Redirect the user to MyFatoorah Invoice URL
-            return redirect($payment['invoiceURL']);
+            //return redirect($payment['invoiceURL']);
+            return response()->json(['invoiceURL' => $payment['invoiceURL']]); 
         } catch (Exception $ex) {
             // Handle any exceptions that may occur
             $errorMessage = __('myfatoorah.' . $ex->getMessage());
@@ -110,11 +111,25 @@ class MyFatoorahController extends Controller {
      * @return Response
      */
     public function callback() {
-        try {
+       try {
             $paymentId = request('paymentId');
 
             $mfObj = new MyFatoorahPaymentStatus($this->mfConfig);
             $data  = $mfObj->getPaymentStatus($paymentId, 'PaymentId');
+
+            // Store callback data into the database
+            MyFatoorah::create([
+                'service_id' => $data->ServiceID,
+                'customer_name' => $data->CustomerName,
+                'invoice_value' => $data->InvoiceValue,
+                'display_currency_iso' => $data->DisplayCurrencyIso,
+                'customer_email' => $data->CustomerEmail,
+                'invoice_url' => $data->InvoiceURL,
+                'callback_payment_id' => $data->PaymentId,
+                'callback_invoice_id' => $data->InvoiceId,
+                'callback_invoice_status' => $data->InvoiceStatus,
+                'callback_invoice_error' => $data->InvoiceError,
+            ]);
 
             $message = $this->getTestMessage($data->InvoiceStatus, $data->InvoiceError);
 

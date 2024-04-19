@@ -1,0 +1,1629 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Fawazlaw Api",
+        "description": "Just CMS api",
+        "contact": {
+            "email": "abderrahman4bouichou@gmail.com"
+        },
+        "license": {
+            "name": "MIT License",
+            "url": "https://opensource.org/licenses/MIT"
+        },
+        "version": "1.0"
+    },
+    "paths": {
+        "/articles": {
+            "get": {
+                "tags": [
+                    "Articles"
+                ],
+                "summary": "Get all articles",
+                "operationId": "89181b74a8aa4d580750ede6aa32f92a",
+                "responses": {
+                    "200": {
+                        "description": "List of articles",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Article"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Articles"
+                ],
+                "summary": "Create a new article",
+                "description": "Store a newly created resource in storage.",
+                "operationId": "ce06e2544b80bc76b184c771c0fb2e7e",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ArticleInput"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Article created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Article"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "errors": {
+                                            "type": "object",
+                                            "example": {
+                                                "title": [
+                                                    "The title field is required."
+                                                ]
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/articles/{id}": {
+            "get": {
+                "tags": [
+                    "Articles"
+                ],
+                "summary": "Get a specific article",
+                "operationId": "126f0079c2def3834cf2c4a2456d16f9",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the article",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Article found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Article"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Article not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                },
+                                "example": {
+                                    "error": "Article not found"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Articles"
+                ],
+                "summary": "Update a specific article",
+                "operationId": "4f085080b7bb5191b08358e1afc074ce",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the article",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ArticleInput"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Article updated successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Article"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Article not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                },
+                                "example": {
+                                    "error": "Article not found"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "errors": {
+                                            "type": "object",
+                                            "example": {
+                                                "title": [
+                                                    "The title field is required."
+                                                ]
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Articles"
+                ],
+                "summary": "Delete a specific article",
+                "operationId": "ec28483335ebdc4fd11f883fcf6f4487",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the article",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Article deleted successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                },
+                                "example": {
+                                    "message": "Article deleted successfully"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Article not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                },
+                                "example": {
+                                    "error": "Article not found"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/contacts": {
+            "post": {
+                "tags": [
+                    "Contacts"
+                ],
+                "summary": "Submit a contact form",
+                "operationId": "77b53a0b0cb97bf04eafa192e4cbac4e",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "email",
+                                    "message"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "John Doe"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "john@example.com"
+                                    },
+                                    "phone_number": {
+                                        "type": "string",
+                                        "example": "1234567890"
+                                    },
+                                    "message": {
+                                        "type": "string",
+                                        "example": "This is a test message"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Contact form submitted successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Contact form submitted successfully"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "errors": {
+                                            "type": "object",
+                                            "example": {
+                                                "name": [
+                                                    "The name field is required."
+                                                ]
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/contacts/{id}/mark-as-done": {
+            "patch": {
+                "tags": [
+                    "Contacts"
+                ],
+                "summary": "Mark a contact message as done",
+                "operationId": "70cb0b24b7e7b0e0b44eea5111e850c7",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the contact message",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Message marked as done",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                },
+                                "example": {
+                                    "message": "Message marked as done"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Message not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                },
+                                "example": {
+                                    "error": "Message not found"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/contacts/{id}/mark-as-undone": {
+            "patch": {
+                "tags": [
+                    "Contacts"
+                ],
+                "summary": "Mark a contact message as undone",
+                "operationId": "da28ece9baa5378857ac5d3eef5a09e2",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the contact message",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Message marked as undone",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                },
+                                "example": {
+                                    "message": "Message marked as undone"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Message not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                },
+                                "example": {
+                                    "error": "Message not found"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/service-categories": {
+            "get": {
+                "tags": [
+                    "Service Categories"
+                ],
+                "summary": "Get a list of service categories",
+                "operationId": "afffea92b3e499596050644044ced4f3",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/ServiceCategory"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Service Categories"
+                ],
+                "summary": "Create a new service category",
+                "description": "Store a newly created resource in storage.",
+                "operationId": "f2476f3f4c2c7edf0c26d1b8487f4a47",
+                "requestBody": {
+                    "description": "Service category data",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Category Name"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Category Description"
+                                    },
+                                    "thumbnail": {
+                                        "type": "string",
+                                        "example": "thumbnail.jpg"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Service category created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ServiceCategory"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "errors": {
+                                            "type": "object",
+                                            "example": {
+                                                "name": [
+                                                    "The name field is required."
+                                                ]
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/service-categories/{serviceCategory}": {
+            "get": {
+                "tags": [
+                    "Service Categories"
+                ],
+                "summary": "Get a specific service category",
+                "operationId": "a193404272b1fca1c71b96f95415f96e",
+                "parameters": [
+                    {
+                        "name": "serviceCategory",
+                        "in": "path",
+                        "description": "ID of the service category",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ServiceCategory"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Service category not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                },
+                                "example": {
+                                    "error": "Service category not found"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Service Categories"
+                ],
+                "summary": "Update a specific service category",
+                "description": "Update the specified resource in storage.",
+                "operationId": "ff3c3660386314ef7b9feb37087d2dc5",
+                "parameters": [
+                    {
+                        "name": "serviceCategory",
+                        "in": "path",
+                        "description": "ID of the service category",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Service category data",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Updated Category Name"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Updated Category Description"
+                                    },
+                                    "thumbnail": {
+                                        "type": "string",
+                                        "example": "updated_thumbnail.jpg"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Service category updated successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ServiceCategory"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Service category not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                },
+                                "example": {
+                                    "error": "Service category not found"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "errors": {
+                                            "type": "object",
+                                            "example": {
+                                                "name": [
+                                                    "The name field is required."
+                                                ]
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/service-categories/{id}": {
+            "delete": {
+                "tags": [
+                    "Service Categories"
+                ],
+                "summary": "Delete a specific service category",
+                "operationId": "e56bb7e7ad9e8ca1919945e56e233c39",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the service category",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Service category deleted successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                },
+                                "example": {
+                                    "message": "Service category deleted successfully"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Service category not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                },
+                                "example": {
+                                    "error": "Service category not found"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/services": {
+            "get": {
+                "tags": [
+                    "Services"
+                ],
+                "summary": "Retrieve a list of services",
+                "operationId": "0f76dda9be6628c47b978d3b7077529a",
+                "responses": {
+                    "200": {
+                        "description": "A list of services",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Service"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Services"
+                ],
+                "summary": "Create a new service",
+                "description": "Store a newly created resource in storage.",
+                "operationId": "ee694c210db03e85b35b350b82c18f1b",
+                "requestBody": {
+                    "description": "Service data",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "price"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Service Name"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Service Description"
+                                    },
+                                    "price": {
+                                        "type": "number",
+                                        "example": 100.5
+                                    },
+                                    "currency": {
+                                        "type": "string",
+                                        "example": "USD"
+                                    },
+                                    "thumbnail": {
+                                        "type": "string",
+                                        "example": "service_thumbnail.jpg"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "The created service",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Service"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "errors": {
+                                            "type": "object",
+                                            "example": {
+                                                "name": [
+                                                    "The name field is required."
+                                                ]
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/services/{id}": {
+            "get": {
+                "tags": [
+                    "Services"
+                ],
+                "summary": "Retrieve a specific service",
+                "operationId": "ee0c95755e1374f6e92ee6ae1cdddfb6",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the service",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The specified service",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Service"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Service not found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Services"
+                ],
+                "summary": "Update a specific service",
+                "description": "Update a specific service.",
+                "operationId": "b9a49c8480cb32ec2fa69841690d863e",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the service",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Service data",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "price"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Updated Service Name"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Updated Service Description"
+                                    },
+                                    "price": {
+                                        "type": "number",
+                                        "example": 150.75
+                                    },
+                                    "currency": {
+                                        "type": "string",
+                                        "example": "USD"
+                                    },
+                                    "thumbnail": {
+                                        "type": "string",
+                                        "example": "updated_service_thumbnail.jpg"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "The updated service",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Service"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Service not found"
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "errors": {
+                                            "type": "object",
+                                            "example": {
+                                                "name": [
+                                                    "The name field is required."
+                                                ]
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Services"
+                ],
+                "summary": "Delete a specific service",
+                "operationId": "cbb6bc64cf61a4812d1c6da5421fd545",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the service",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Service deleted successfully"
+                    },
+                    "404": {
+                        "description": "Service not found"
+                    },
+                    "500": {
+                        "description": "Failed to delete service"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/services/map-category": {
+            "post": {
+                "tags": [
+                    "Services"
+                ],
+                "summary": "Map a service to a category",
+                "operationId": "e6b295e55d73980f5681454967193d55",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "service_id",
+                                    "category_id"
+                                ],
+                                "properties": {
+                                    "service_id": {
+                                        "description": "ID of the service",
+                                        "type": "integer"
+                                    },
+                                    "category_id": {
+                                        "description": "ID of the category",
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Service successfully mapped to the category"
+                    },
+                    "404": {
+                        "description": "No mapping found for the provided service and category"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/services/unmap-category": {
+            "post": {
+                "tags": [
+                    "Services"
+                ],
+                "summary": "Unmap a service from a category",
+                "operationId": "e45b39d8b89ef547a24e10046e3f721d",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "service_id",
+                                    "category_id"
+                                ],
+                                "properties": {
+                                    "service_id": {
+                                        "description": "ID of the service",
+                                        "type": "integer"
+                                    },
+                                    "category_id": {
+                                        "description": "ID of the category",
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Service successfully unmapped from the category"
+                    },
+                    "404": {
+                        "description": "No mapping found for the provided service and category"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/tags": {
+            "get": {
+                "tags": [
+                    "Tags"
+                ],
+                "summary": "Retrieve a list of tags",
+                "operationId": "8767fe41ed2e75df7ce6f99c8aeb47cb",
+                "responses": {
+                    "200": {
+                        "description": "A list of tags",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Tag"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Tags"
+                ],
+                "summary": "Create a new tag",
+                "operationId": "386137f14d37c8d53bcb5869d04e5595",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Tag name"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "The created tag",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Tag"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/tags/{id}": {
+            "get": {
+                "tags": [
+                    "Tags"
+                ],
+                "summary": "Retrieve a specific tag",
+                "operationId": "1162afe8d0c9a74586f911df0194bb83",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the tag",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The specified tag",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Tag"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Tag not found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Tags"
+                ],
+                "summary": "Update a specific tag",
+                "operationId": "4cf68fe1043c53ff19e6bb3829820c01",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the tag",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Updated tag name"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "The updated tag",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Tag"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Tag not found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Tags"
+                ],
+                "summary": "Delete a specific tag",
+                "operationId": "8188a73045428da13127cfeb1249890e",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the tag",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Tag deleted successfully"
+                    },
+                    "404": {
+                        "description": "Tag not found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/tags/link": {
+            "post": {
+                "tags": [
+                    "Tags"
+                ],
+                "summary": "Link a tag to an article",
+                "operationId": "f8280f9661f140d83a872ac7a1477b94",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "article_id",
+                                    "tag_id"
+                                ],
+                                "properties": {
+                                    "article_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "tag_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Tag linked successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Tag linked successfully"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Article or tag not found"
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "errors": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "ArticleInput": {
+                "required": [
+                    "title",
+                    "content"
+                ],
+                "properties": {
+                    "title": {
+                        "type": "string",
+                        "maxLength": 255
+                    },
+                    "content": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "Article": {
+                "title": "Article",
+                "description": "Article model",
+                "properties": {
+                    "id": {
+                        "description": "The unique identifier for the article",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "title": {
+                        "description": "The title of the article",
+                        "type": "string",
+                        "example": "Sample Article Title"
+                    },
+                    "content": {
+                        "description": "The content of the article",
+                        "type": "string",
+                        "example": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+                    },
+                    "created_at": {
+                        "description": "The timestamp when the article was created",
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2023-01-01 12:00:00"
+                    },
+                    "updated_at": {
+                        "description": "The timestamp when the article was last updated",
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2023-01-01 12:00:00"
+                    }
+                },
+                "type": "object"
+            },
+            "Contact": {
+                "title": "Contact",
+                "description": "Contact model",
+                "properties": {
+                    "id": {
+                        "description": "The unique identifier for the contact",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "name": {
+                        "description": "The name of the contact",
+                        "type": "string",
+                        "example": "John Doe"
+                    },
+                    "email": {
+                        "description": "The email address of the contact",
+                        "type": "string",
+                        "example": "john@example.com"
+                    },
+                    "phone_number": {
+                        "description": "The phone number of the contact",
+                        "type": "string",
+                        "example": "123456789",
+                        "nullable": true
+                    },
+                    "message": {
+                        "description": "The message sent by the contact",
+                        "type": "string",
+                        "example": "This is a sample message"
+                    },
+                    "is_done": {
+                        "description": "Indicates whether the contact is done or not",
+                        "type": "boolean",
+                        "example": false
+                    },
+                    "created_at": {
+                        "description": "The timestamp when the contact was created",
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2023-01-01 12:00:00"
+                    },
+                    "updated_at": {
+                        "description": "The timestamp when the contact was last updated",
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2023-01-01 12:00:00"
+                    }
+                },
+                "type": "object"
+            },
+            "Service": {
+                "title": "Service",
+                "description": "Service model",
+                "properties": {
+                    "id": {
+                        "description": "The unique identifier for the service",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "name": {
+                        "description": "The name of the service",
+                        "type": "string",
+                        "example": "Sample Service Name"
+                    },
+                    "description": {
+                        "description": "The description of the service",
+                        "type": "string",
+                        "example": "Sample service description"
+                    },
+                    "price": {
+                        "description": "The price of the service",
+                        "type": "number",
+                        "format": "float",
+                        "example": 100.5
+                    },
+                    "currency": {
+                        "description": "The currency used for the price",
+                        "type": "string",
+                        "example": "SAR"
+                    },
+                    "thumbnail": {
+                        "description": "The URL of the thumbnail image for the service",
+                        "type": "string",
+                        "example": "https://example.com/thumbnail.jpg"
+                    },
+                    "created_at": {
+                        "description": "The timestamp when the service was created",
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2023-01-01 12:00:00"
+                    },
+                    "updated_at": {
+                        "description": "The timestamp when the service was last updated",
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2023-01-01 12:00:00"
+                    }
+                },
+                "type": "object"
+            },
+            "ServiceCategory": {
+                "title": "ServiceCategory",
+                "description": "Service category model",
+                "properties": {
+                    "id": {
+                        "description": "The unique identifier for the service category",
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "name": {
+                        "description": "The name of the service category",
+                        "type": "string",
+                        "example": "Category Name"
+                    },
+                    "description": {
+                        "description": "The description of the service category",
+                        "type": "string",
+                        "example": "Category Description"
+                    },
+                    "thumbnail": {
+                        "description": "The thumbnail of the service category",
+                        "type": "string",
+                        "example": "thumbnail.jpg"
+                    }
+                },
+                "type": "object"
+            },
+            "Tag": {
+                "title": "Tag",
+                "description": "Tag model",
+                "properties": {
+                    "id": {
+                        "description": "The unique identifier for the tag",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "name": {
+                        "description": "The name of the tag",
+                        "type": "string",
+                        "example": "Sample Tag Name"
+                    },
+                    "created_at": {
+                        "description": "The timestamp when the tag was created",
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2023-01-01 12:00:00"
+                    },
+                    "updated_at": {
+                        "description": "The timestamp when the tag was last updated",
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2023-01-01 12:00:00"
+                    }
+                },
+                "type": "object"
+            },
+            "User": {
+                "title": "User",
+                "description": "User model",
+                "properties": {
+                    "id": {
+                        "description": "The unique identifier for the user",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "name": {
+                        "description": "The name of the user",
+                        "type": "string",
+                        "example": "John Doe"
+                    },
+                    "email": {
+                        "description": "The email address of the user",
+                        "type": "string",
+                        "format": "email",
+                        "example": "johndoe@example.com"
+                    },
+                    "email_verified_at": {
+                        "description": "The timestamp when the user's email was verified",
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2023-01-01 12:00:00",
+                        "nullable": true
+                    },
+                    "password": {
+                        "description": "The hashed password of the user",
+                        "type": "string",
+                        "format": "password",
+                        "example": "hashed_password_here"
+                    },
+                    "remember_token": {
+                        "description": "The remember token for the user",
+                        "type": "string",
+                        "example": "remember_token_here"
+                    },
+                    "created_at": {
+                        "description": "The timestamp when the user was created",
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2023-01-01 12:00:00"
+                    },
+                    "updated_at": {
+                        "description": "The timestamp when the user was last updated",
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2023-01-01 12:00:00"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    }
+}
