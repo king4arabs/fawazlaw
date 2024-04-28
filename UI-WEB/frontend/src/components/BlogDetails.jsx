@@ -15,7 +15,12 @@ const BlogDetails = () => {
         const response = await axios.get(
           "https://api.fawazlaw.sa/api/articles"
         );
-        setData(response.data);
+        const orderByDate =
+          response.data.sort(function (a, b) {
+            return new Date(b.created_at) - new Date(a.created_at);
+          })
+
+        setData(orderByDate);
         setIsLoading(false);
       } catch (error) {
         setError(error);
@@ -53,9 +58,8 @@ const BlogDetails = () => {
                   <div
                     className="w-[300px] h-[240px] rounded-xl"
                     style={{
-                      backgroundImage: `url("${
-                        shuffledImageUrls[id % shuffledImageUrls.length]
-                      }")`,
+                      backgroundImage: `url("${shuffledImageUrls[id % shuffledImageUrls.length]
+                        }")`,
                       backgroundSize: "cover",
                       backgroundPosition: "center",
                       backgroundRepeat: "no-repeat",

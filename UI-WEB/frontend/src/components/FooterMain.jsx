@@ -1,11 +1,12 @@
 import React from "react";
-import { BsTwitterX } from "react-icons/bs";
+import { BsSnapchat, BsTwitterX } from "react-icons/bs";
 import { CiFacebook, CiLinkedin, CiYoutube } from "react-icons/ci";
 import {
   IoLogoInstagram,
   IoMailOutline,
   IoPhonePortraitOutline,
 } from "react-icons/io5";
+import { PiTiktokLogo } from "react-icons/pi";
 
 const FooterMain = () => {
   return (
@@ -122,7 +123,7 @@ const FooterMain = () => {
                 شركة المحامي فواز الداهش
               </h1>
               <h1 className=" text-xl text-[#525A6A] text-end lg:w-[280px]">
-                شركة المحامي فواز الداهش
+                للمحاماة والاستشارات القانونية
               </h1>
             </div>
           </div>
@@ -132,7 +133,7 @@ const FooterMain = () => {
         <div className="w-[80%] flex lg:flex-row flex-col justify-between items-center">
           <div className=" flex lg:flex-row flex-col items-center gap-2 ">
             <div className="flex items-center gap-2">
-              <a href="#">
+              <a href="https://x.com/fawazaldahish1" target="_blank">
                 <BsTwitterX size={25} className="  text-[#000929]" />
               </a>
               <a href="#">
@@ -144,11 +145,14 @@ const FooterMain = () => {
               <a href="#" className=" flex">
                 <CiLinkedin size={30} className="  text-[#000929]" />
               </a>
-              <a href="#" className=" flex">
+              <a href="https://youtube.com/@user-wf5vr3ky7b?si=0m7Iwc7oJkb_EroL" target="_blank" className=" flex">
                 <CiYoutube size={30} className="  text-[#000929]" />
               </a>
-              <a href="#" className=" flex">
-                <IoLogoInstagram size={30} className="  text-[#000929]" />
+              <a href="https://t.snapchat.com/QK8qUvyl" target="_blank" className=" flex">
+                <BsSnapchat className="  text-[#000929]" size={30} />
+              </a>
+              <a href="https://www.tiktok.com/@lawyerfawaz?" target="_blank" className=" flex">
+                <PiTiktokLogo size={30} className="  text-[#000929]" />
               </a>
             </div>
             <div className=" flex items-center gap-2 ">

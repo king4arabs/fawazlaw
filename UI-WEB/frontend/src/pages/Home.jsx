@@ -7,10 +7,15 @@ import HomeSection3 from "../components/HomeSection3";
 import Whatwedo from "../components/Whatwedo";
 import HomwBlogSection from "../components/HomwBlogSection";
 import PeopleAtTheCenter from "../components/PeopleAtTheCenter";
+import { Helmet } from 'react-helmet';
 
 const Home = () => {
   return (
     <>
+      <Helmet>
+        <title>الرئيسية
+        </title>
+      </Helmet>
       <Hero />
       <HomeSection1 />
       <Truts />
@@ -18,7 +23,7 @@ const Home = () => {
       <HomeSection3 />
       <Whatwedo />
       <HomwBlogSection />
-      <PeopleAtTheCenter />x
+      <PeopleAtTheCenter />
     </>
   );
 };

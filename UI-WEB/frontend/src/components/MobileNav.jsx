@@ -5,7 +5,7 @@ const MobileNav = () => {
   const location = useLocation();
   return (
     <div className=" w-full bg-white z-50 absolute">
-      <div className=" justify-center items-center w-52 mx-auto flex flex-col gap-10 ">
+      <div className="my-5 justify-center items-center w-52 mx-auto flex flex-col-reverse gap-10 ">
         <a
           href="/contacts"
           className={`flex px-1 py-[1px] hover:bg-[#ecedee] rounded-lg transition ${

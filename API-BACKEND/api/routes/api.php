@@ -7,6 +7,7 @@ use App\Http\Controllers\categoryController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ImageUpload;
 use App\Http\Controllers\MyFatoorahController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ServiceCategoryController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\TestController;
@@ -38,6 +39,7 @@ Route::get('services/category/{category_id}', [ServicesController::class, 'servi
 Route::post('/process-payment', [MyFatoorahController::class, 'index']);
 Route::get('/myfatoorah-callback', [MyFatoorahController::class, 'callback']);
 
+Route::post('payment',[PaymentController::class,'executePayment']);
 
 Route::post('contact-us', [ContactController::class, 'store']);
 Route::middleware(['auth:sanctum'])->group(function () {
