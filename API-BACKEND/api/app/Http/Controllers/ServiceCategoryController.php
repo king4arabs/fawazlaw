@@ -8,16 +8,56 @@ use Illuminate\Http\Request;
 class ServiceCategoryController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * @OA\Get(
+     *     path="/service-categories",
+     *     summary="Get a list of service categories",
+     *     tags={"Service Categories"},
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful operation",
+     *         @OA\JsonContent(
+     *             type="array",
+     *             @OA\Items(ref="#/components/schemas/ServiceCategory")
+     *         ),
+     *     ),
+     * )
      */
     public function index()
     {
         $serviceCategories = ServiceCategory::all();
         return response()->json($serviceCategories);
     }
-
     /**
      * Store a newly created resource in storage.
+     *
+     * @OA\Post(
+     *     path="/service-categories",
+     *     summary="Create a new service category",
+     *     tags={"Service Categories"},
+     *     @OA\RequestBody(
+     *         required=true,
+     *         description="Service category data",
+     *         @OA\JsonContent(
+     *             required={"name"},
+     *             @OA\Property(property="name", type="string", example="Category Name"),
+     *             @OA\Property(property="description", type="string", example="Category Description"),
+     *             @OA\Property(property="thumbnail", type="string", example="thumbnail.jpg"),
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=201,
+     *         description="Service category created successfully",
+     *         @OA\JsonContent(ref="#/components/schemas/ServiceCategory")
+     *     ),
+     *     @OA\Response(
+     *         response=422,
+     *         description="Validation error",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(property="errors", type="object", example={"name": {"The name field is required."}})
+     *         )
+     *     ),
+     * )
      */
     public function store(Request $request)
     {
@@ -37,7 +77,28 @@ class ServiceCategoryController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * @OA\Get(
+     *     path="/service-categories/{serviceCategory}",
+     *     summary="Get a specific service category",
+     *     tags={"Service Categories"},
+     *     @OA\Parameter(
+     *         name="serviceCategory",
+     *         in="path",
+     *         required=true,
+     *         description="ID of the service category",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful operation",
+     *         @OA\JsonContent(ref="#/components/schemas/ServiceCategory")
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Service category not found",
+     *         @OA\JsonContent(type="object", example={"error": "Service category not found"})
+     *     ),
+     * )
      */
     public function show(ServiceCategory $serviceCategory)
     {
@@ -46,6 +107,47 @@ class ServiceCategoryController extends Controller
 
     /**
      * Update the specified resource in storage.
+     *
+     * @OA\Put(
+     *     path="/service-categories/{serviceCategory}",
+     *     summary="Update a specific service category",
+     *     tags={"Service Categories"},
+     *     @OA\Parameter(
+     *         name="serviceCategory",
+     *         in="path",
+     *         required=true,
+     *         description="ID of the service category",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\RequestBody(
+     *         required=true,
+     *         description="Service category data",
+     *         @OA\JsonContent(
+     *             required={"name"},
+     *             @OA\Property(property="name", type="string", example="Updated Category Name"),
+     *             @OA\Property(property="description", type="string", example="Updated Category Description"),
+     *             @OA\Property(property="thumbnail", type="string", example="updated_thumbnail.jpg"),
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Service category updated successfully",
+     *         @OA\JsonContent(ref="#/components/schemas/ServiceCategory")
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Service category not found",
+     *         @OA\JsonContent(type="object", example={"error": "Service category not found"})
+     *     ),
+     *     @OA\Response(
+     *         response=422,
+     *         description="Validation error",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(property="errors", type="object", example={"name": {"The name field is required."}})
+     *         )
+     *     ),
+     * )
      */
     public function update(Request $request, ServiceCategory $serviceCategory)
     {
@@ -66,7 +168,28 @@ class ServiceCategoryController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * @OA\Delete(
+     *     path="/service-categories/{id}",
+     *     summary="Delete a specific service category",
+     *     tags={"Service Categories"},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         description="ID of the service category",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Service category deleted successfully",
+     *         @OA\JsonContent(type="object", example={"message": "Service category deleted successfully"})
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Service category not found",
+     *         @OA\JsonContent(type="object", example={"error": "Service category not found"})
+     *     ),
+     * )
      */
     public function destroy($id)
     {
@@ -78,11 +201,10 @@ class ServiceCategoryController extends Controller
             return response()->json(['error' => 'Service category not found'], 404);
         }
         $delete = $serviceCategory->delete();
-        
-        if($delete) {
+
+        if ($delete) {
             return response()->json(['message' => 'Service category deleted successfully'], 200);
         }
         return response()->json(['error' => 'Failed to delete service category'], 500);
-
     }
 }

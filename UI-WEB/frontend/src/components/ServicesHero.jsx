@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { AiOutlineHome } from "react-icons/ai";
 import { FaAngleLeft } from "react-icons/fa6";
 import OrderForm from "./OrderForm";
+import { Link } from "react-router-dom";
 
 const ServicesHero = () => {
   const [services, setServices] = useState([]);
@@ -77,9 +78,14 @@ const ServicesHero = () => {
       <div className=" w-full lg:-mt-20 -z-50  ">
         <div className=" w-[80%] overflow-hidden -z-40 flex justify-center items-center lg:flex-row flex-col mx-auto gap-6  ">
           {services.map((service) => (
-            <div
-              key={service.id}
-              className=" w-[370px] h-[330px] bg-white z-50 py-8 px-5 border rounded-lg gap-10 group flex flex-col  hover:shadow-2xl"
+            // <div
+            //   key={service.id}
+            //   className="cursor-pointer w-[370px] h-[330px] bg-white z-50 py-8 px-5 border rounded-lg gap-10 group flex flex-col  hover:shadow-2xl"
+            //   onClick={() => handleOrderClick(service.id)}
+            // >
+            <Link
+              to={`/services/${service.id}`}
+              className="cursor-pointer w-[370px] h-[330px] bg-white z-50 py-8 px-5 border rounded-lg gap-10 group flex flex-col  hover:shadow-2xl h-fit"
             >
               <div className=" flex flex-col items-end gap-5">
                 <img src="\Images\Circleidk.png" alt="" />
@@ -96,14 +102,11 @@ const ServicesHero = () => {
                 </div>
               </div>
               <div className=" justify-end items-end hidden group-hover:flex w-full opacity-0 group-hover:opacity-100 transition duration-[500ms] ">
-                <button
-                  onClick={() => handleOrderClick(service.id)}
-                  className="px-5 py-2 flex border rounded-lg  text-[#3E4450] items-center gap-[1px]"
-                >
+                <button className="px-5 py-2 flex border rounded-lg  text-[#3E4450] items-center gap-[1px]">
                   اطلب الان
                 </button>
               </div>
-            </div>
+            </Link>
           ))}
         </div>  
       </div>

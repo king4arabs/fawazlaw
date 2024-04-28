@@ -4,18 +4,54 @@ import { IoMenuOutline } from "react-icons/io5";
 // import { TbBurger } from "react-icons/tb";
 import { useLocation } from "react-router-dom";
 import MobileNav from "./MobileNav";
+import { LuShoppingCart } from "react-icons/lu";
+import Drawer from "react-modern-drawer";
+
+//import styles 👇
+import "react-modern-drawer/dist/index.css";
+import DrawerContent from "./DrawerContent";
 
 const NavHeader = () => {
   const location = useLocation();
+  const [isCartOpen, setIsCartOpen] = useState(false);
   const [showNav, setShowNav] = useState(false);
   return (
     <>
       <div className=" w-[100%] flex h-20 bg-[#FFFFFF] justify-center items-center border-b relative">
-        <div className="w-[80%] flex justify-between items-center">
+        <div className="relative w-[80%] flex justify-between items-center">
+          <button
+            onClick={() => {
+              setIsCartOpen(true);
+            }}
+            className="absolute top-1/2 left-[60px] md:-left-[70px] -translate-y-1/2"
+          >
+            <div className="relative">
+              <LuShoppingCart size={30} />
+              <p
+                id="cartCount"
+                className="absolute -top-[5px] -right-[5px] w-[20px] h-[20px] rounded-full text-[12px] text-white bg-[#1f436a] flex justify-center items-center"
+              >
+                0
+              </p>
+            </div>
+          </button>
+          {/* <Drawer
+            size={'40vw'}
+            direction='right'
+            className='bla bla bla'
+            open={isCartOpen}
+            onClose={() => setIsCartOpen(prev => !prev)}
+          >
+            <div>Hello World</div>
+          </Drawer> */}
           <div className=" flex items-center gap-">
-            <button className="px-5 py-2 hidden lg:flex border rounded-lg text-[#3E4450] border-[#C8CBD3] items-center gap-[1px]">
+            <a
+              href="https://calendly.com/fawaz-cvx5/30min"
+              target="_blank"
+              className="cursor-pointer px-5 py-2 hidden lg:flex border rounded-lg text-[#3E4450] border-[#C8CBD3] items-center gap-[1px]"
+            >
               <p>احجز اجتماع</p>
-            </button>
+            </a>
             <button
               onClick={() => setShowNav(!showNav)}
               className=" lg:hidden flex"
@@ -92,7 +128,17 @@ const NavHeader = () => {
           </div>
         </div>
       </div>
-
+      <Drawer
+        direction="left"
+        className="!w-full mad:!w-[60%] max-w-[700px]"
+        open={isCartOpen}
+        onClose={() => setIsCartOpen((prev) => !prev)}
+      >
+        <DrawerContent
+          isOpen={isCartOpen}
+          onClose={() => setIsCartOpen((prev) => !prev)}
+        />
+      </Drawer>
       {showNav && <MobileNav />}
     </>
   );

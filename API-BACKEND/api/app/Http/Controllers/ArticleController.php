@@ -6,15 +6,34 @@ use App\Models\Article;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-
+/**
+ * @OA\Schema(
+ *     schema="ArticleInput",
+ *     required={"title", "content"},
+ *     @OA\Property(property="title", type="string", maxLength=255),
+ *     @OA\Property(property="content", type="string")
+ * )
+ */
 class ArticleController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * @OA\Get(
+     *     path="/articles",
+     *     summary="Get all articles",
+     *     tags={"Articles"},
+     *     @OA\Response(
+     *         response=200,
+     *         description="List of articles",
+     *         @OA\JsonContent(
+     *             type="array",
+     *             @OA\Items(ref="#/components/schemas/Article")
+     *         ),
+     *     ),
+     * )
      */
     public function index()
     {
-        $articles = Article::with('tags', 'images')->get();
+        $articles = Article::with('tags')->get();
         return response()->json($articles);
     }
 
@@ -25,10 +44,33 @@ class ArticleController extends Controller
     {
         //
     }
-
-    /**
-     * Store a newly created resource in storage.
-     */
+/**
+ * Store a newly created resource in storage.
+ *
+ * @OA\Post(
+ *     path="/articles",
+ *     summary="Create a new article",
+ *     tags={"Articles"},
+ *     @OA\RequestBody(
+ *         required=true,
+ *         @OA\JsonContent(ref="#/components/schemas/ArticleInput")
+ *     ),
+ *     @OA\Response(
+ *         response=201,
+ *         description="Article created successfully",
+ *         @OA\JsonContent(ref="#/components/schemas/Article")
+ *     ),
+ *     @OA\Response(
+ *         response=422,
+ *         description="Validation error",
+ *         @OA\JsonContent(
+ *             type="object",
+ *             @OA\Property(property="errors", type="object", example={"title": {"The title field is required."}})
+ *         )
+ *     ),
+ *     security={{"bearerAuth": {}}}
+ * )
+ */
     public function store(Request $request)
     {
         // Validate the incoming request data
@@ -48,14 +90,35 @@ class ArticleController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * @OA\Get(
+     *     path="/articles/{id}",
+     *     summary="Get a specific article",
+     *     tags={"Articles"},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         description="ID of the article",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Article found",
+     *         @OA\JsonContent(ref="#/components/schemas/Article")
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Article not found",
+     *         @OA\JsonContent(type="object", example={"error": "Article not found"})
+     *     ),
+     * )
      */
     public function show(string $id)
     {
         try {
             // Find the article by its ID
             $article = Article::findOrFail($id);
-    
+
             // Return the article as a JSON response
             return response()->json($article);
         } catch (\Exception $e) {
@@ -80,7 +143,40 @@ class ArticleController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * @OA\Put(
+     *     path="/articles/{id}",
+     *     summary="Update a specific article",
+     *     tags={"Articles"},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         description="ID of the article",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(ref="#/components/schemas/ArticleInput")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Article updated successfully",
+     *         @OA\JsonContent(ref="#/components/schemas/Article")
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Article not found",
+     *         @OA\JsonContent(type="object", example={"error": "Article not found"})
+     *     ),
+     *     @OA\Response(
+     *         response=422,
+     *         description="Validation error",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(property="errors", type="object", example={"title": {"The title field is required."}})
+     *         )
+     *     ),
+     * )
      */
     public function update(Request $request, string $id)
     {
@@ -112,7 +208,28 @@ class ArticleController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * @OA\Delete(
+     *     path="/articles/{id}",
+     *     summary="Delete a specific article",
+     *     tags={"Articles"},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         description="ID of the article",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Article deleted successfully",
+     *         @OA\JsonContent(type="object", example={"message": "Article deleted successfully"})
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Article not found",
+     *         @OA\JsonContent(type="object", example={"error": "Article not found"})
+     *     ),
+     * )
      */
     public function destroy($id)
     {

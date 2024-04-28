@@ -15,7 +15,7 @@ import Login from "./pages/Login";
 import AddArticle from "./components/dashboard/AddArticle";
 import AdminLayout from "./components/dashboard/AdminLayout";
 import { Toaster } from "react-hot-toast";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ProtectedRoute from "./components/ProtectedRoute";
 import NotFound from "./components/NotFound";
 import AddServices from "./components/dashboard/AddServices";
@@ -23,10 +23,20 @@ import ManageServices from "./components/dashboard/ManageServices";
 import ManageArticles from "./components/dashboard/ManageArticles";
 import ArticleDetails from "./components/ArticleDetails";
 import AllServices from "./components/AllServices";
+import ServiceDetails from "./components/ServiceDetails";
 
 function App() {
   // const user = JSON.parse(localStorage.getItem("token"));
   const [isLoggedin, setIsLoggedin] = useState(false);
+
+  useEffect(() => {
+    const existCart = JSON.parse(localStorage.getItem("cartItems"));
+    const count = document.getElementById("cartCount");
+    if (count) {
+      count.innerHTML = existCart?.length ?? 0;
+    }
+  }, []);
+
   return (
     <>
       <Toaster />
@@ -36,6 +46,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/whatwedo" element={<WhatWeDo />} />
           <Route path="/services" element={<Services />} />
+          <Route path="/services/:id" element={<ServiceDetails />} />
           <Route path="/allServices" element={<AllServices />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:id" element={<ArticleDetails />} />
