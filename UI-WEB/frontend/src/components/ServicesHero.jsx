@@ -85,7 +85,7 @@ const ServicesHero = () => {
             // >
             <Link
               to={`/services/${service.id}`}
-              className="cursor-pointer w-[370px] h-[330px] bg-white z-50 py-8 px-5 border rounded-lg gap-10 group flex flex-col  hover:shadow-2xl h-fit"
+              className="cursor-pointer w-[370px] h-[330px] bg-white z-50 py-8 px-5 border rounded-lg gap-10 group flex flex-col  hover:shadow-2xl "
             >
               <div className=" flex flex-col items-end gap-5">
                 <img src="\Images\Circleidk.png" alt="" />
@@ -108,7 +108,7 @@ const ServicesHero = () => {
               </div>
             </Link>
           ))}
-        </div>  
+        </div>
       </div>
       {selectedServiceId && (
         <OrderForm
