@@ -18,7 +18,7 @@ const DarkblueSection = () => {
           <BsArrowLeftCircle size={25} />
           <p>كل الخدمات</p>
         </a>
-        <div className=" lg:text-[48px] text-3xl font-bold text-white text-end">
+        <div className=" lg:text-[48px] text-3xl font-bold gap-6 flex flex-col text-white text-end">
           <h1>خدمات تتناسب مع طبيعة عملك</h1>
           <p className=" text-[16px] font-medium text-end">
             تتسم خدماتنا القانونية بالتنوع مستندين على منهجية قانونية تتماشى مع
@@ -26,7 +26,7 @@ const DarkblueSection = () => {
           </p>
         </div>
       </div>
-      <div className=" flex flex-row gap-9 relative justify-end lg:mr-32 mr-16 ">
+      <div className=" flex flex-row gap-5 relative justify-end lg:mr-32 mr-10 ">
         <Swiper
           // modules={[Navigation, Pagination, Ally]}
           className="mb-16"

@@ -20,7 +20,12 @@ const Truts = () => {
         </h6>
       </div>
       <div className="flex flex-row w-full gap-7 justify-center items-center">
-        <Marquee pauseOnClick={true} pauseOnHover={true} speed={100}>
+        <Marquee
+          pauseOnClick={true}
+          pauseOnHover={true}
+          speed={100}
+          direction="right"
+        >
           {logos.map((logo, index) => {
             return (
               <div
