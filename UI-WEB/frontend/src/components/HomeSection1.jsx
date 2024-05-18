@@ -1,13 +1,25 @@
 import React from "react";
+import { FaRegArrowAltCircleLeft } from "react-icons/fa";
 
 const HomeSection1 = () => {
   return (
-    <div className="w-full my-14">
-      <div className=" mx-auto w-[80%] flex flex-col justify-between items-center">
-        <h1 className="lg:text-[50px] text-4xl font-bold w-fit justify-between text-end pb-3">
-          المحاماة وقاية لا علاج
+    <div className="w-full my-20 px-14">
+      <div className="w-[100%]">
+      <div className="w-full flex flex-col">
+      <div className="subsection flex justify-between items-start">
+        <div className="arrowAndbutton flex items-center gap-1">
+          <FaRegArrowAltCircleLeft size={23} />
+          <p className="lg:text-[14px] font-bold">كل الخدمات</p>
+        </div>
+        <h1 className="lg:text-[35px] text-4xl font-bold w-fit pb-3">
+          خدمات تتناسب مع طبيعة عملك
         </h1>
-        <p className=" text-[16px] xl:mt-4">خدمات قانونية رائدة منذ 15 عاما</p>
+      </div>
+      <p className="text-[16px] xl:mt-4 mt-1 ml-auto">
+        تتسم خدماتنا القانونية بالتنوع مستندين على منهجية قانونية تتماشى مع المتغيرات والتطورات الحديثة
+      </p>
+    </div>
+
         <div className="  flex lg:flex-row flex-col gap-3 justify-center items-center my-16 lg:h-[400px]">
           <div className=" w-[370px] py-8 px-5 border rounded-lg gap-10  flex flex-col items-end hover:shadow-2xl">
             <div className=" flex flex-col items-end gap-5">
