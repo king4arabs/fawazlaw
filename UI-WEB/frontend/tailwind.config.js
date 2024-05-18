@@ -6,7 +6,11 @@ module.exports = {
       backgroundImage: {
         bggradient: "var(--gradirnt)",
         bggradient2: "var(--gradirnt2)",
+        'custom-gradient': 'linear-gradient(to bottom, #EEF3FE, #fff)'
       },
+      boxShadow: {
+        'top': '0 -5px 0px rgba(255, 0, 0)', // Adjust values as needed
+      }
     },
   },
   // plugins: [],
