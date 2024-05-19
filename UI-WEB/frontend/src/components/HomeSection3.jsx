@@ -22,19 +22,19 @@ const HomeSection3 = () => {
         </div>
       </div>
       <div className=" flex flex-col lg:flex-row gap-10 ">
-        <div className=" lg:w-[40%] items-center  bg-[gradientbg] bg-bggradient flex flex-col h-[504px] border-[3px] rounded border-[#7AB4E2] pt-16 ">
+        <div className=" lg:w-[40%] items-center  bg-[gradientbg] bg-bggradient flex flex-col border-[3px] rounded border-[#7AB4E2] pt-16 ">
           <div
             className="  bg-[gradientbg] bg-bggradient w-full h-full flex flex-col gap-2 "
             style={{
               backgroundImage: `url("/Images/building2323.png")`,
               backgroundRepeat: "no-repeat",
               backgroundSize: 250,
-              backgroundPositionY: 184,
+              backgroundPositionY: 140,
             }}
           >
-            <div className=" w-full flex flex-col justify-center items-center gap-9 mx-auto ">
-              <div className=" w-[260px] flex flex-col justify-center  gap-4">
-                <h1 className=" lg:text-3xl text-[24px]  font-bold text-end">
+            <div className=" w-full flex flex-col items-center mx-auto h-full">
+              <div className=" w-[340px] flex flex-col justify-center  gap-4">
+                <h1 className=" lg:text-3xl text-[24px]  font-extrabold text-end">
                  1200
                  </h1>
                  <div className="flex justify-end gap-2">
@@ -43,13 +43,13 @@ const HomeSection3 = () => {
 
               </div>
               </div>
-              <div className=" w-[65%] justify-end flex">
-                <button className="px-5 py-2 flex border rounded-lg bg-[#003E6F]  text-white items-center gap-[1px]">
+              <div className=" w-[73%] justify-end flex pt-7">
+                <button className="px-5 py-2 flex border rounded-lg bg-[#003E6F]  text-white items-center gap-[1px] font-thin">
                   اطلب الان
                 </button>
               </div>
-              <div className=" w-[80%] justify-end flex mt-24">
-                <img src="\Logo (2).png" className=" w-16" alt="" />
+              <div className=" w-[87%] flex justify-end items-end mt-[150px]">
+                <img src="\Logo (2).png" className=" w-16" alt=""/>
               </div>
             </div>
           </div>

@@ -35,4 +35,18 @@ body {
 @font-face {
   font-family: Montserrat;
   src: url(./fonts/Montserrat-Arabic-Light.otf);
+  font-weight: 200;
+
+}
+
+@font-face {
+  font-family: Montserrat;
+  src: url(./fonts/Montserrat-Arabic\ ExtraBold\ 800.otf);
+  font-weight: 800;
+}
+
+@font-face {
+  font-family: Montserrat;
+  src: url(./fonts/Montserrat-Arabic\ Medium\ 500.otf);
+  font-weight: 500;
 }

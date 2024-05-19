@@ -8,6 +8,7 @@ import Whatwedo from "../components/Whatwedo";
 import HomwBlogSection from "../components/HomwBlogSection";
 import PeopleAtTheCenter from "../components/PeopleAtTheCenter";
 import { Helmet } from 'react-helmet';
+import WeDefendSection from "../components/WeDefend";
 
 const Home = () => {
   return (
@@ -25,6 +26,7 @@ const Home = () => {
       <HomwBlogSection />
       </div>
       {/* <DarkblueSection /> */}
+      <WeDefendSection />
       
       <PeopleAtTheCenter />
     </>
