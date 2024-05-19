@@ -70,10 +70,10 @@ const ContactForm = () => {
           <p className="text-lg font-normal">اهم المزايا التي تقدمها المنصة</p>
         </div>
         <div className=" flex flex-col w-[90%] items-end border rounded-md px-4 py-4">
-          <div className=" w-full items-end justify-end flex flex-col">
+          <div className=" w-full items-end justify-end flex flex-col pb-5">
             <h1>تحدث مع فريق الاتصال الخاص بنا</h1>
           </div>
-          <h1>الاسم بالكامل</h1>
+          <h1 className="pb-1">الاسم بالكامل</h1>
           <div className="w-full gap-2 flex flex-col">
             <form
               onSubmit={handleSubmit}

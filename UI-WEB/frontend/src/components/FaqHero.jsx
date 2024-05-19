@@ -1,4 +1,6 @@
 import React from "react";
+import { AiOutlineHome } from "react-icons/ai";
+import { FaAngleLeft } from "react-icons/fa6";
 
 const FaqHero = () => {
   return (
@@ -10,12 +12,19 @@ const FaqHero = () => {
       />
       <div className=" w-[80%] flex h-full lg:flex-row mx-auto lg:justify-end z-10 flex-col lg:items-center">
         <div className=" gap-2 lg:w-[65%]  flex flex-col z-10">
-          <div className=" lg:w-[660px]">
-            {/* <h3 className=" text-[24px] text-[#003E6F] font-medium text-end">
-                شركة
-              </h3> */}
-            <h1 className=" lg:text-[50px] text-4xl text-[#003E6F] text-end font-bold">
-              الخدمات
+        <div className=" flex flex-row gap-2 items-center text-end justify-end pr-6 ">
+              <a
+                href="/faq"
+                className="flex w-fit flex-row gap-2 items-center text-end justify-end  "
+              >
+                <h1> الاسئلة الشائعة</h1>
+                <FaAngleLeft />
+                <AiOutlineHome />
+              </a>
+            </div>
+          <div className=" lg:w-[660px] pt-4">
+            <h1 className=" lg:text-[50px] text-4xl text-[#003E6F] text-end font-bold pb-2">
+              الاسئلة الشائعة
             </h1>
           </div>
           <div className=" lg:w-[660px] justify-end text-end">
@@ -25,7 +34,6 @@ const FaqHero = () => {
           </div>
         </div>
       </div>
-      {/* hereeeeeeeeeeeeeeeeeeeee */}
     </div>
   );
 };
