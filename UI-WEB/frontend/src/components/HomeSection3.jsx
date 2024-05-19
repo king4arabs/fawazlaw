@@ -2,7 +2,7 @@ import React from "react";
 
 const HomeSection3 = () => {
   return (
-    <div className="w-[100%] px-10 py-[90px] flex flex-col gap-10 my-16">
+    <div className="w-[100%] px-10 py-[90px] flex flex-col gap-10 my-16 bg-gradient-to-b from-[#EEF3FE] to-[#fff]">
       <div className=" flex lg:flex-row gap-2 flex-col justify-between">
         <div className=" flex flex-row items-center gap-2">
           <img

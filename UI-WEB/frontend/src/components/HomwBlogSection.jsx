@@ -25,7 +25,7 @@ const HomwBlogSection = () => {
           <div
             className=" w-[352px] h-[240px] rounded-xl"
             style={{
-              backgroundImage: `url("/Images/judg222.png")`,
+              backgroundImage: `url("/Images/blog1.png")`,
               backgroundSize: "cover",
               backgroundPosition: "center",
               backgroundRepeat: "no-repeat",
@@ -50,7 +50,7 @@ const HomwBlogSection = () => {
           <div
             className=" w-[352px] h-[240px] rounded-xl"
             style={{
-              backgroundImage: `url("/Images/judg111.png")`,
+              backgroundImage: `url("/Images/blog2.png")`,
               backgroundSize: "cover",
               backgroundPosition: "center",
               backgroundRepeat: "no-repeat",
@@ -75,7 +75,7 @@ const HomwBlogSection = () => {
           <div
             className=" w-[352px] h-[240px] rounded-xl"
             style={{
-              backgroundImage: `url("/Images/judg333.png")`,
+              backgroundImage: `url("/Images/blog3.png")`,
               backgroundSize: "cover",
               backgroundPosition: "center",
               backgroundRepeat: "no-repeat",

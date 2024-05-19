@@ -20,11 +20,9 @@ const Home = () => {
       <Hero />
       <HomeSection1 />
       <Truts />
-      <div className="sub bg-custom-gradient">
       <HomeSection3 />
       {/* <Whatwedo /> */}
       <HomwBlogSection />
-      </div>
       {/* <DarkblueSection /> */}
       <WeDefendSection />
       

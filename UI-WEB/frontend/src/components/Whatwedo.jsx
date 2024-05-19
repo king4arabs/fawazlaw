@@ -5,7 +5,7 @@ const Whatwedo = () => {
   return (
     <div className="w-full flex-col flex px-12 py-10 justify-center items-center bg-[#003E6F] gap-16 ">
       <div className=" lg:w-[80%] text-white flex flex-col justify-end gap-3 items-end text-end">
-        <h1 className=" lg:text-5xl text-xl text-end font-bold">
+        <h1 className=" lg:text-5xl text-[28px] text-end font-bold">
           ندافع عنكم ونقدم النصيحة
         </h1>
         <p className=" lg:text-[20px] text-sm text-end ">
