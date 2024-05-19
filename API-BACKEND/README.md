@@ -31,3 +31,4 @@ This folder contains the backend files for the project. It is responsible for im
 - [Laravel Documentation](https://laravel.com/docs)
 - [RESTful API Design](https://restfulapi.net/)
 - [PHPUnit Documentation](https://phpunit.readthedocs.io/en/9.5/)
+- figma : https://www.figma.com/design/J9ltH6Y3X35S0SZEWoHAoK/Fawaz----UI-Design?node-id=117%3A113918&t=jAucJWJpZygdhXVB-1 
