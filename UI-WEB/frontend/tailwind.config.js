@@ -10,7 +10,8 @@ module.exports = {
       },
       boxShadow: {
         'top': '0 -5px 0px rgba(255, 0, 0)',
-        'top-blue': '0 -5px 0px rgba(0, 0, 255)', // Adjust values as needed
+        'top-blue': '0 -5px 0px rgba(0, 0, 255)', 
+        'top-darkRed': '0 -5px 0px #B60C0C'// Adjust values as needed
       },
     },
   },

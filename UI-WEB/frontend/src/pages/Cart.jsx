@@ -1,6 +1,7 @@
 import React from "react";
 import { Helmet } from 'react-helmet';
 import CartHero from "../components/CartHero";
+import CartBody from "../components/CartBody";
 
 const Cart = () => {
   return (
@@ -10,6 +11,7 @@ const Cart = () => {
         </title>
       </Helmet>
       <CartHero />
+      <CartBody />
       </>
   );
 };
