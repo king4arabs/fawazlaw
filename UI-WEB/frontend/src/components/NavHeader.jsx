@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-// import { CiMenuBurger } from "react-icons/ci";
 import { IoMenuOutline } from "react-icons/io5";
-// import { TbBurger } from "react-icons/tb";
 import { useLocation } from "react-router-dom";
 import MobileNav from "./MobileNav";
 import { LuShoppingCart } from "react-icons/lu";
 import Drawer from "react-modern-drawer";
+import { useNavigate } from 'react-router-dom';
 
 //import styles 👇
 import "react-modern-drawer/dist/index.css";
@@ -13,44 +12,32 @@ import DrawerContent from "./DrawerContent";
 
 const NavHeader = () => {
   const location = useLocation();
+  const navigate = useNavigate(); 
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [showNav, setShowNav] = useState(false);
   return (
     <>
       <div className=" w-[100%] flex h-20 bg-[#FFFFFF] justify-center items-center border-b relative">
-        <div className="relative w-[80%] flex justify-between items-center">
-          <button
-            onClick={() => {
-              setIsCartOpen(true);
-            }}
-            className="absolute top-1/2 left-[60px] md:-left-[70px] -translate-y-1/2"
-          >
-            <div className="relative">
-              <LuShoppingCart size={30} />
-              <p
-                id="cartCount"
-                className="absolute -top-[5px] -right-[5px] w-[20px] h-[20px] rounded-full text-[12px] text-white bg-[#1f436a] flex justify-center items-center"
-              >
-                0
-              </p>
-            </div>
-          </button>
-          {/* <Drawer
-            size={'40vw'}
-            direction='right'
-            className='bla bla bla'
-            open={isCartOpen}
-            onClose={() => setIsCartOpen(prev => !prev)}
-          >
-            <div>Hello World</div>
-          </Drawer> */}
+        <div className="relative w-[90%] flex justify-between items-center">
+        <button
+    onClick={() => {
+      navigate('/cart'); 
+    }}
+    className="absolute top-1/2 left-[70px] md:-left-[30px] -translate-y-1/2 cursor-pointer px-3 py-2 hidden lg:flex border rounded-lg text-[#3E4450] border-[#C8CBD3] items-center"
+>
+    <div className="relative flex items-center space-x-1"> 
+        <p className="font-semibold text-sm">خدمات</p>
+        <span className="font-semibold text-sm">(0)</span> 
+        <LuShoppingCart size={15} />
+    </div>
+</button>
           <div className=" flex items-center gap-">
             <a
               href="https://calendly.com/fawaz-cvx5/30min"
               target="_blank"
-              className="cursor-pointer px-5 py-2 hidden lg:flex border rounded-lg text-[#3E4450] border-[#C8CBD3] items-center gap-[1px]"
+              className="absolute top-1/2 left-[70px] md:-left-[-90px] -translate-y-1/2 cursor-pointer px-5 py-2 hidden lg:flex border rounded-lg text-[#3E4450] border-[#C8CBD3] items-center gap-[1px]"
             >
-              <p>احجز اجتماع</p>
+              <p className="font-semibold text-sm">احجز اجتماع</p>
             </a>
             <button
               onClick={() => setShowNav(!showNav)}
@@ -66,7 +53,7 @@ const NavHeader = () => {
                 className={`flex px-1 py-[1px] hover:bg-[#ecedee] rounded-lg transition hover:border ${
                   location.pathname === "/contacts"
                     ? "text-[#003E6F] font-bold "
-                    : " font-normal"
+                    : " font-semibold text-sm"
                 }`}
               >
                 تواصل معنا
@@ -76,7 +63,7 @@ const NavHeader = () => {
                 className={`flex px-1 py-[1px] hover:bg-[#ecedee] rounded-lg transition hover:border ${
                   location.pathname === "/faq"
                     ? "text-[#003E6F] font-bold "
-                    : " font-normal"
+                    : " font-semibold text-sm"
                 }`}
               >
                 الاسئلة الشائعة
@@ -86,7 +73,7 @@ const NavHeader = () => {
                 className={`flex px-1 py-[1px] hover:bg-[#ecedee] rounded-lg transition hover:border ${
                   location.pathname === "/blog"
                     ? "text-[#003E6F] font-bold"
-                    : " font-normal"
+                    : " font-semibold text-sm"
                 }`}
               >
                 المدونة
@@ -96,7 +83,7 @@ const NavHeader = () => {
                 className={`flex px-1 py-[1px] hover:bg-[#ecedee] rounded-lg transition hover:border ${
                   location.pathname === "/services"
                     ? "text-[#003E6F] font-bold "
-                    : " font-normal"
+                    : " font-semibold text-sm"
                 }`}
               >
                 الخدمات
@@ -106,7 +93,7 @@ const NavHeader = () => {
                 className={`flex px-1 py-[1px] hover:bg-[#ecedee] rounded-lg transition hover:border ${
                   location.pathname === "/whatwedo"
                     ? "text-[#003E6F] font-bold "
-                    : " font-normal"
+                    : " font-semibold text-sm"
                 }`}
               >
                 من نحن
@@ -116,7 +103,7 @@ const NavHeader = () => {
                 className={`flex px-1 py-[1px] hover:bg-[#ecedee] rounded-lg transition hover:border ${
                   location.pathname === "/"
                     ? "text-[#003E6F] font-bold "
-                    : " font-normal"
+                    : " font-semibold text-sm"
                 }`}
               >
                 الرئيسية
