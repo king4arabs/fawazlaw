@@ -1,19 +1,18 @@
 import React from "react";
 import Marquee from "react-fast-marquee";
 
-const Whatwedo = () => {
+const WeDefendSection = () => {
   return (
-    <div className="w-full flex-col flex px-12 py-10 justify-center items-center bg-[#003E6F] gap-16 ">
-      <div className=" lg:w-[80%] text-white flex flex-col justify-end gap-3 items-end text-end">
-        <h1 className=" lg:text-5xl text-[28px] text-end font-bold">
-          ندافع عنكم ونقدم النصيحة
-        </h1>
-        <p className=" lg:text-[20px] text-sm text-end ">
-          استشارات قانونية متخصصة مصممة خصيصًا لتلبية احتياجاتك بمختلف وسائل
-          التواصل
+    <div className=" w-full my-[40px] bg-[#003E6F]">
+      <div className=" flex flex-col justify-end mx-auto pt-12 px-12 text-white text-end" >
+        <h1 className="font-bold text-[28px] text-3xl">ندافع عنكم ونقدم النصيحة</h1>
+        <p className=" text-[16px] text-end pt-3">
+          استشارات قانونية متخصصة مصممة خصيصًا لتلبية احتياجاتك بمختلف وسائل التواصل
         </p>
       </div>
-      <div className=" w-full justify-end lg:mr-60 gap-7 flex flex-row">
+
+      {/* 2 cards */}
+      <div className=" w-full justify-end lg:mr-60 gap-7 flex flex-row mx-5 pt-9">
         <Marquee
           pauseOnClick={true}
           pauseOnHover={true}
@@ -64,29 +63,36 @@ const Whatwedo = () => {
           </div>
         </Marquee>
       </div>
-      <div className=" lg:w-[80%] w-full text-white flex flex-row justify-center items-center gap-3 text-end border-t border-gray-500">
-        <div className=" lg:w-[60%] w-full flex flex-row mx-auto justify-between items-center py-11">
-          <div className=" flex flex-col justify-center items-center w-full  ">
-            <h1 className=" lg:text-[40px] text-lg  text-white font-bold ">
-              {" "}
-              8,943
-            </h1>
-            <p className=" lg:text-base text-sm text-white ">قضية مغلقة</p>
-          </div>
-          <div className="border-r h-12 items-cente"></div>
-          <div className="  text-white flex flex-col justify-center items-center w-full  ">
-            <h1 className=" lg:text-[40px] text-lg font-bold "> 3,856</h1>
-            <p className=" lg:text-base text-sm text-nowrap ">عميل سعيد</p>
-          </div>
-          <div className="border-r h-12 items-center"></div>
-          <div className="  text-white flex flex-col justify-center items-center w-full  ">
-            <h1 className=" lg:text-[40px] text-lg font-bold "> 15</h1>
-            <p className=" lg:text-base text-sm text-nowrap ">عام من الخبرة</p>
-          </div>
-        </div>
+
+      {/* divider */}
+      <div className="flex items-center justify-center h-[1px] pt-[60px]">
+        <div class="border-b border-white w-[70%] border-opacity-25"></div>
       </div>
+
+     {/* figures */}
+    <div className="figures flex justify-center items-center gap-[60px] pt-7 pb-[70px]">
+        <div className="num  flex flex-col justify-center items-center">
+            <div className="number text-[30px] text-white font-extrabold">8,943</div>
+            <div className="detail text-[14px] text-white text-opacity-[70%] ">قضية مغلقة</div>
+        </div>
+        <div className="flex items-center justify-center w-[1.5px]">
+            <div class="border-l-[1.5px] border-white h-[60px] "></div>
+        </div>
+        <div className="num  flex flex-col justify-center items-center">
+            <div className="number text-[30px] text-white font-extrabold">3,856</div>
+            <div className="detail text-[14px] text-white text-opacity-[70%] ">عميل سعيد</div>
+            <div className="detail text-[14px] text-white text-opacity-[70%] "></div>
+        </div>
+        <div className="flex items-center justify-center w-[1.5px]">
+            <div class="border-l-[1.5px] border-white h-[60px] "></div>
+        </div>
+        <div className="num flex flex-col justify-center items-center">
+            <div className="number text-[30px] text-white font-extrabold">15</div>
+            <div className="detail text-[14px] text-white text-opacity-[70%] ">عام من الخبرة</div>
+        </div>
+    </div>
     </div>
   );
 };
 
-export default Whatwedo;
+export default WeDefendSection;

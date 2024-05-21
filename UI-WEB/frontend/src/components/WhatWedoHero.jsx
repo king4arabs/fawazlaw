@@ -44,7 +44,7 @@ const WhatWedoHero = () => {
           </div>
         </div>
       </div>
-      <div className=" flex flex-row gap-6 mx-auto justify-center items-center lg:-mt-40 -mt-20 z-50  ml-16 pb-10 ">
+      <div className=" flex flex-row gap-6 mx-auto justify-center items-center lg:-mt-40 -mt-20 z-50  ml-16 pb-10 pt-16">
         <Marquee
           className=""
           pauseOnClick={true}

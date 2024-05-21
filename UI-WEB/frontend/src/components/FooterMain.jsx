@@ -1,6 +1,8 @@
 import React from "react";
 import { BsSnapchat, BsTwitterX } from "react-icons/bs";
 import { CiFacebook, CiLinkedin, CiYoutube } from "react-icons/ci";
+import { MdOutlineMailOutline } from "react-icons/md";
+import BottomNavNew from "../components/BottomNavNew";
 import {
   IoLogoInstagram,
   IoMailOutline,
@@ -11,7 +13,7 @@ import { PiTiktokLogo } from "react-icons/pi";
 const FooterMain = () => {
   return (
     <div className="w-full flex flex-col justify-center items-center ">
-      <div className=" w-full flex py-6 border-b">
+      <div className=" w-full flex py-6 bg-gradient-to-b from-[#ECF2FF] to-[#fff]">
         <div className=" mx-auto w-[80%] flex lg:flex-row gap-2 flex-col justify-between items-center">
           <div className=" flex flex-row gap-3">
             <button className="btn  bg-[#003E6F] text-white hover:bg-[#b6953e]">
@@ -20,18 +22,10 @@ const FooterMain = () => {
             <label className=" justify-end text-end lg:w-[300px] flex items-center gap-2 hover:border px-4 py-2 active:border rounded-lg outline outline-1">
               <input
                 type="text"
-                className="grow outline-none bg-transparent border-none text-end justify-end"
+                className="grow outline-none bg-transparent border-none text-end justify-end pr-2 "
                 placeholder="البريد الالكتروني"
               />
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 16 16"
-                fill="currentColor"
-                className="w-4 h-4 opacity-70"
-              >
-                <path d="M2.5 3A1.5 1.5 0 0 0 1 4.5v.793c.026.009.051.02.076.032L7.674 8.51c.206.1.446.1.652 0l6.598-3.185A.755.755 0 0 1 15 5.293V4.5A1.5 1.5 0 0 0 13.5 3h-11Z" />
-                <path d="M15 6.954 8.978 9.86a2.25 2.25 0 0 1-1.956 0L1 6.954V11.5A1.5 1.5 0 0 0 2.5 13h11a1.5 1.5 0 0 0 1.5-1.5V6.954Z" />
-              </svg>
+              <MdOutlineMailOutline size={22}/>
             </label>
           </div>
           <div>
@@ -49,7 +43,7 @@ const FooterMain = () => {
               <div className=" flex flex-row gap-2">
                 <div>
                   <p className=" text-base font-bold text-end">الرياض</p>
-                  <p className=" text-base text-end">
+                  <p className=" text-base text-end opacity-55">
                     الملقا - طريق أنس بن مالك مركز وادي الأعمال
                   </p>
                 </div>
@@ -62,7 +56,7 @@ const FooterMain = () => {
               <div className=" flex flex-row gap-2">
                 <div>
                   <p className=" text-base font-bold text-end">جدة</p>
-                  <p className=" text-base text-end">
+                  <p className=" text-base text-end opacity-55">
                     شارع الامير محمد بن عبد العزيز مركز الباشا الدور
                   </p>
                 </div>
@@ -77,21 +71,21 @@ const FooterMain = () => {
               <h1 className=" text-2xl font-bold text-[#000929] text-end">
                 العنوان
               </h1>
-              <p className=" text-[#000929] text-end text-lg font-semibold opacity-55">
+              <p className=" text-[#000929] text-end text-lg font-medium opacity-55">
                 تواصل معنا
               </p>
-              <p className=" text-[#000929] text-end text-lg font-semibold opacity-55">
+              <p className=" text-[#000929] text-end text-lg font-medium opacity-55">
                 الاسئلة الشائعة
               </p>
               <a
                 href="/contacts/tandc"
-                className=" text-[#000929] text-end text-lg font-semibold opacity-55"
+                className=" text-[#000929] text-end text-lg font-medium opacity-55"
               >
                 الشروط والاحكام
               </a>
               <a
                 href="/contacts/privacyPolicy"
-                className=" text-[#000929] text-end text-lg font-semibold opacity-55"
+                className=" text-[#000929] text-end text-lg font-medium opacity-55"
               >
                 سياسية الخصوصية
               </a>
@@ -100,16 +94,16 @@ const FooterMain = () => {
               <h1 className=" text-2xl font-bold text-[#000929] text-end">
                 عن الشركة
               </h1>
-              <p className=" text-[#000929] text-end text-lg font-semibold opacity-55">
+              <p className=" text-[#000929] text-end text-lg font-medium opacity-55">
                 الرئيسية
               </p>
-              <p className=" text-[#000929] text-end text-lg font-semibold opacity-55">
+              <p className=" text-[#000929] text-end text-lg font-medium opacity-55">
                 عن الشركة
               </p>
-              <p className=" text-[#000929] text-end text-lg font-semibold opacity-55">
+              <p className=" text-[#000929] text-end text-lg font-medium opacity-55">
                 الخدمات
               </p>
-              <p className=" text-[#000929] text-end text-lg font-semibold opacity-55">
+              <p className=" text-[#000929] text-end text-lg font-medium opacity-55">
                 المدونة
               </p>
             </div>
@@ -129,30 +123,25 @@ const FooterMain = () => {
           </div>
         </div>
       </div>
-      <div className=" w-[100%] flex lg:h-12 bg-[#F8F8F9] py-2 justify-center items-center border-t-2">
-        <div className="w-[80%] flex lg:flex-row flex-col justify-between items-center">
+      <BottomNavNew />
+      <div className=" w-[100%] flex lg:h-12 bg-[##F3F4F5] py-2 justify-center items-center ">
+        <div className="w-[90%] flex lg:flex-row flex-col justify-between items-center">
           <div className=" flex lg:flex-row flex-col items-center gap-2 ">
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-4">
               <a href="https://x.com/fawazaldahish1" target="_blank">
-                <BsTwitterX size={25} className="  text-[#000929]" />
+                <BsTwitterX size={20} className="  text-[#000929]" />
               </a>
               <a href="#">
-                <CiFacebook size={30} className="  text-[#000929]" />
+                <CiFacebook size={25} className="  text-[#000929]" />
               </a>
               <a href="#">
-                <IoLogoInstagram size={30} className="  text-[#000929]" />
+                <IoLogoInstagram size={25} className="  text-[#000929]" />
               </a>
               <a href="#" className=" flex">
-                <CiLinkedin size={30} className="  text-[#000929]" />
+                <CiLinkedin size={25} className="  text-[#000929]" />
               </a>
               <a href="https://youtube.com/@user-wf5vr3ky7b?si=0m7Iwc7oJkb_EroL" target="_blank" className=" flex">
-                <CiYoutube size={30} className="  text-[#000929]" />
-              </a>
-              <a href="https://t.snapchat.com/QK8qUvyl" target="_blank" className=" flex">
-                <BsSnapchat className="  text-[#000929]" size={30} />
-              </a>
-              <a href="https://www.tiktok.com/@lawyerfawaz?" target="_blank" className=" flex">
-                <PiTiktokLogo size={30} className="  text-[#000929]" />
+                <CiYoutube size={25} className="  text-[#000929]" />
               </a>
             </div>
             <div className=" flex items-center gap-2 ">
@@ -161,15 +150,15 @@ const FooterMain = () => {
                   size={20}
                   className="  text-[#000929]"
                 />
-                <p className=" text-[#000929]">+966920013767</p>
+                <p className=" text-[#000929] text-[14px]">+966920013767</p>
               </a>
               <a href="#" className=" flex items-center gap-1 pl-2">
                 <IoMailOutline size={20} className="  text-[#000929]" />
-                <p className=" text-[#000929]">info@fawazlaw.sa</p>
+                <p className=" text-[#000929] text-[14px]">info@fawazlaw.sa</p>
               </a>
             </div>
           </div>
-          <div className=" items-center lg:text-base text-sm gap-2 text-end lg:flex">
+          <div className=" items-center lg:text-base text-sm gap-2 text-end lg:flex text-[#3E4450]">
             &#x202e;© جميع الحقوق محفوظة لشركة فواز الداهش للمحاماة{" "}
           </div>
         </div>

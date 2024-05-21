@@ -6,15 +6,15 @@ const PeopleAtTheCenter = () => {
       <div className=" flex flex-col justify-center items-center w-[80%] gap-7  bg-transparent mx-auto  py-10 ">
         <div className=" items-center">
           <h1 className=" text-[48px] text-center">آراء عملائنا</h1>
-          <p className=" text base">تعرف على ما يقوله العملاء لدينا</p>
+          <p className=" text base text-[#667085]">تعرف على ما يقوله العملاء لدينا</p>
         </div>
-        <div className=" text-center text-base lg:w-[600px]">
+        <div className=" text-center text-base lg:w-[600px] text-[#000929] font-thin">
           " فواز هي الشركة التي أذهب إليها دون تردد لحل امور شركتي القانونية
           تقريبًا. يتسم فريق العمل بسرعة الاستجابة والامانه والرد على جميع
           استفساراتي دون كلل او ملل، هم نعم الناصح والامين “
         </div>
-        <p className=" font-bold">
-          محمد السلمي, <span className=" font-thin">معلومة </span>
+        <p className=" font-medium text-[#000929]">
+          محمد السلمي, <span className=" font-thin text-[#667085]">معلومة </span>
         </p>
         <div className="flex flex-row gap-4 justify-center items-center">
           <img src="\Images\Imageman.png" alt="" />

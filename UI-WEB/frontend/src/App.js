@@ -24,6 +24,7 @@ import ManageArticles from "./components/dashboard/ManageArticles";
 import ArticleDetails from "./components/ArticleDetails";
 import AllServices from "./components/AllServices";
 import ServiceDetails from "./components/ServiceDetails";
+import Cart from "./pages/Cart";
 
 function App() {
   // const user = JSON.parse(localStorage.getItem("token"));
@@ -51,6 +52,7 @@ function App() {
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:id" element={<ArticleDetails />} />
           <Route path="/faq" element={<Faq />} />
+          <Route path="/cart" element={<Cart />} />
           <Route
             path="/login"
             element={

@@ -5,74 +5,67 @@ import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import { useNavigate } from "react-router-dom";
 
-const ContactForm = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone_number: "",
-    message: "",
-  });
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const navigate = useNavigate();
-
-  const handleChange = (e) => {
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      [e.target.name]: e.target.value,
-    }));
-  };
-
-  const handlePhoneChange = (value, data) => {
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      phone_number: value,
-    }));
-  };
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    setIsLoading(true);
-    setError(null);
-
-    try {
-      const response = await axios.post(
-        "https://api.fawazlaw.sa/api/contact-us",
-        formData,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
+const CartForm = () => {
+    const [formData, setFormData] = useState({
+        name: "",
+        email: "",
+        phone_number: "",
+        message: "",
+      });
+      const [isLoading, setIsLoading] = useState(false);
+      const [error, setError] = useState(null);
+      const navigate = useNavigate();
+    
+      const handleChange = (e) => {
+        setFormData((prevFormData) => ({
+          ...prevFormData,
+          [e.target.name]: e.target.value,
+        }));
+      };
+    
+      const handlePhoneChange = (value, data) => {
+        setFormData((prevFormData) => ({
+          ...prevFormData,
+          phone_number: value,
+        }));
+      };
+    
+      const handleSubmit = async (event) => {
+        event.preventDefault();
+        setIsLoading(true);
+        setError(null);
+    
+        try {
+          const response = await axios.post(
+            "https://api.fawazlaw.sa/api/contact-us",
+            formData,
+            {
+              headers: {
+                "Content-Type": "application/json",
+              },
+            }
+          );
+    
+          // Handle successful response
+          console.log("Contact sent successfully:", response.data);
+          toast.success("Contact Sent");
+          // Reset form data or navigate to a different route
+          setFormData({ name: "", email: "", phone_number: "", message: "" });
+          // navigate("/articles");
+        } catch (error) {
+          console.error("Error sending contact", error);
+          setError(error.response.data.message || "Failed to send contact.");
+        } finally {
+          setIsLoading(false);
         }
-      );
-
-      // Handle successful response
-      console.log("Contact sent successfully:", response.data);
-      toast.success("Contact Sent");
-      // Reset form data or navigate to a different route
-      setFormData({ name: "", email: "", phone_number: "", message: "" });
-      // navigate("/articles");
-    } catch (error) {
-      console.error("Error sending contact", error);
-      setError(error.response.data.message || "Failed to send contact.");
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  return (
-    <div className=" w-full lg:py-16">
-      <div className=" lg:w-[60%] w-[100%] mx-auto justify-center items-center flex flex-col gap-4 ">
-        <div className=" flex flex-col lg:gap-4 gap-2 justify-center items-center">
-          <h1 className="font-bold text-[24px] lg:text-[50px] ">
-            ارسل لنا رسالة
-          </h1>
-          <p className="text-lg font-normal">اهم المزايا التي تقدمها المنصة</p>
-        </div>
-        <div className=" flex flex-col w-[90%] items-end border rounded-md px-4 py-4">
-          <div className=" w-full items-end justify-end flex flex-col pb-5">
-            <h1>تحدث مع فريق الاتصال الخاص بنا</h1>
-          </div>
+      };
+    
+    
+    
+    return (
+        <div className=" w-full lg:py-16">
+            <h1 className="w-[90%] text-end pb-5 font-bold text-[22px]">برجاء ادخال البيانات الخاصة بك</h1>
+        <div className=" flex flex-col w-[90%] items-end border rounded-md py-4 mx-4 px-4">
           <h1 className="pb-1">الاسم بالكامل</h1>
           <div className="w-full gap-2 flex flex-col">
             <form
@@ -129,19 +122,6 @@ const ContactForm = () => {
                   </div>
                 </label>
               </div>
-              <div className=" w-full gap-2 flex flex-col">
-                <p>الرسالة</p>
-                <label className=" justify-end text-end w-full flex items-center gap-2 hover:border px-4 py-2 active:border rounded-lg outline outline-1">
-                  <textarea
-                    name="message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    className="grow lg:max-h-[200px] outline-none bg-transparent border-none text-end justify-end w-full"
-                    placeholder="الرسالة"
-                    required
-                  />
-                </label>
-              </div>
               {error && <p className="text-red-500">{error}</p>}
               <button
                 type="submit"
@@ -153,9 +133,9 @@ const ContactForm = () => {
             </form>
           </div>
         </div>
-      </div>
+      
     </div>
-  );
-};
+    )
+}
 
-export default ContactForm;
+export default CartForm

@@ -10,12 +10,12 @@ const Truts = () => {
     "/Images/ima99.png",
   ];
   return (
-    <div className=" w-full my-14">
+    <div className=" w-full my-14 pb-14 pt-6">
       <div className=" mx-auto w-[80%] gap-2 flex flex-col justify-between items-center">
-        <h1 className="lg:text-[50px] text-4xl font-bold w-fit justify-between text-end">
+        <h1 className="lg:text-[45px] pb-4 text-4xl font-bold w-fit justify-between text-end">
           جهات نفخر بهم
         </h1>
-        <h6 className="text-[14px]">
+        <h6 className="text-[18px]">
           الشركات والهيئات والمؤسسات التي نتعامل معاها
         </h6>
       </div>

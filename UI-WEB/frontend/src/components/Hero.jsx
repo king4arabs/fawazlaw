@@ -8,16 +8,16 @@ const Hero = () => {
         alt=""
         className=" absolute z-0 bottom-0 opacity-5"
       />
-      <div className=" w-[80%] flex h-full lg:flex-row mx-auto lg:justify-between z-10 flex-col lg:items-center">
+      <div className=" w-[90%] flex h-full lg:flex-row mx-auto lg:justify-between z-10 flex-col lg:items-center">
         <div className=" flex z-10">
           <img src="\Images\herolawer.png" alt="lawerPhoto" />
         </div>
         <div className=" gap-9 lg:w-[65%]  flex flex-col z-10">
           <div>
-            <h3 className=" text-[24px] text-[#003E6F] font-medium text-end">
+            <h3 className=" text-right text-[24px] text-[#003E6F] font-medium">
               شركة
             </h3>
-            <h1 className=" lg;text-[50px] text-4xl text-[#003E6F] text-end font-bold">
+            <h1 className=" lg:text-[50px] mt-4 text-4xl text-[#003E6F] text-end font-black">
               فواز الداهش للمحاماة
             </h1>
           </div>

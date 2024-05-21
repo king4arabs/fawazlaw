@@ -51,11 +51,11 @@ const EachFaq = ({ title, answer }) => {
       <div
         className={`grid overflow-hidden justify-end transition-all duration-300 ease-in-out text-slate-600 text-sm ${
           accordionOpen
-            ? "grid-rows-[1fr] opacity-100 bg-[#E7E9EC]"
+            ? "grid-rows-[1fr] opacity-100 bg-[##E7E9EC] pb-2 pr-2"
             : "grid-rows-[0fr] opacity-0 "
         }`}
       >
-        <div className="overflow-hidden text-end mt-4 border-t-2">{answer}</div>
+        <div className="overflow-hidden text-end mt-4 border-t-2 ">{answer}</div>
       </div>
     </div>
   );

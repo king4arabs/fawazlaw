@@ -4,6 +4,7 @@ import DarkblueSection from "../components/DarkblueSection";
 import HomeSection3 from "../components/HomeSection3";
 import Truts from "../components/Truts";
 import PeopleAtTheCenter from "../components/PeopleAtTheCenter";
+import ServiceCards from "../components/ServiceCards";
 import { Helmet } from 'react-helmet';
 
 const Services = () => {
@@ -14,8 +15,9 @@ const Services = () => {
         </title>
       </Helmet>
       <ServicesHero />
+      <ServiceCards />
       <HomeSection3 />
-      <DarkblueSection />
+      {/* <DarkblueSection /> */}
       <Truts />
       <PeopleAtTheCenter />
     </>

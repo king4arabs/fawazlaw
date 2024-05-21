@@ -1,37 +1,46 @@
 import React from "react";
+import { AiOutlineHome } from "react-icons/ai";
+import { FaAngleLeft } from "react-icons/fa6";
 
 const ContactHero = () => {
   return (
-    <div className=" overflow-hidden w-full bg-bggradient justify-center items-center relative  lg:pb-28 lg:pt-10 py-9 ">
-      <div className=" overflow-hidden w-full bg-bggradient justify-center items-center relative lg:h-[50vh] lg:pb-28 lg:pt-10 py-9 ">
-        <img
-          src="\Images\bgservices.png"
-          alt=""
-          className=" absolute z-0 bottom-0 opacity-5"
-        />
-        <div className=" w-[80%] flex h-full lg:flex-row mx-auto lg:justify-end z-10 flex-col lg:items-center">
-          <div className=" gap-2 lg:w-[65%]  flex flex-col z-10">
-            <div className=" lg:w-[660px]">
-              {/* <h3 className=" text-[24px] text-[#003E6F] font-medium text-end">
-                شركة
-              </h3> */}
-              <h1 className=" lg:text-[50px] text-4xl text-[#003E6F] text-end font-bold">
-                الخدمات
-              </h1>
+    <div className="">
+      <div className="hello overflow-hidden w-full bg-bggradient justify-center items-center relative  lg:pb-10 lg:pt-10">
+      <img
+        src="\Images\bgservices.png"
+        alt=""
+        className=" absolute z-0 bottom-0 opacity-5"
+      />
+      <div className=" w-[80%] flex h-full lg:flex-row mx-auto lg:justify-end z-10 flex-col lg:items-center">
+        <div className=" gap-2 lg:w-[65%]  flex flex-col z-10 pb-9">
+        <div className=" flex flex-row gap-2 items-center text-end justify-end pr-6 ">
+              <a
+                href="/contacts"
+                className="flex w-fit flex-row gap-2 items-center text-end justify-end  "
+              >
+                <h1>  تواصل معنا</h1>
+                <FaAngleLeft />
+                <AiOutlineHome />
+              </a>
             </div>
-            <div className=" lg:w-[660px] justify-end text-end">
-              <p className=" text-end text-[20px] leading-10 font-normal">
-                شركة المحامي فواز محمد الداهش للمحاماة والاستشارات القانونية
-              </p>
-            </div>
+          <div className=" lg:w-[660px] pt-4">
+            <h1 className=" lg:text-[50px] text-4xl text-[#003E6F] text-end font-bold pb-2">
+            تواصل معنا
+            </h1>
+          </div>
+          <div className=" lg:w-[660px] justify-end text-end">
+            <p className=" text-end text-[20px] leading-10 font-normal">
+              شركة المحامي فواز محمد الداهش للمحاماة والاستشارات القانونية
+            </p>
           </div>
         </div>
       </div>
-      {/* hereeeeeeeeeeeeeeeeeeeee */}
+      </div>
+      
       <div className="w-full mx-auto">
-        <div className=" border w-full mx-auto flex flex-col justify-center items-center relative lg:pb-28 lg:pt-10 py-9 ">
-          <div className="w-full">
-            <img src="\Images\Container (1).png" alt="" className="" />
+        <div className=" w-full mx-auto flex flex-col justify-center items-center relative lg:pb-16 lg:pt-10">
+          <div className="w-[80%]">
+            <img src="\Images\mapback.png" alt="" className="" />
           </div>
         </div>
       </div>
@@ -40,7 +49,7 @@ const ContactHero = () => {
           <div className=" gap-2 text-end flex flex-col w-full justify-center items-center">
             <div className=" w-fit items-end">
               <h1 className=" font-bold text-2xl">مساعدة؟</h1>
-              <p>فريقنا الودود هنا للمساعدة.</p>
+              <p className="py-2">فريقنا الودود هنا للمساعدة.</p>
               <h4 className=" text-xl font-bold text-[#003E6F] ">
                 info@fawazlaw.sa
               </h4>
@@ -78,7 +87,7 @@ const ContactHero = () => {
           <div className=" gap-2 text-end flex flex-col w-full justify-center items-center">
             <div className=" w-[230px] items-end">
               <h1 className=" font-bold text-2xl">الجوال</h1>
-              <p className="">
+              <p className="py-2">
                 من السبت إلى الخميس من الساعة 8 صباحًا حتى 5 مساءً.
               </p>
               <h4 className=" text-xl font-bold text-[#003E6F] ">

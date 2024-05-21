@@ -3,7 +3,8 @@ import EachFaq from "./EachFaq";
 
 const FaqComonent = () => {
   return (
-    <div className=" w-full flex justify-center items-center my-28">
+    <div className=" w-full my-16">
+      <h1 className="flex justify-center text-[30px] font-bold pb-5">الاسئلة الأكثر شيوعا عن شركة فواز للمحاماة</h1>
       <div className=" flex flex-col justify-center mx-auto lg:w-[60%] w-[80%] gap-2 py-5 px-5 border rounded-lg">
         <EachFaq
           title={"ما هي الخدمات القانونية التي تقدمها شركة فواز للمحاماة؟"}

@@ -8,10 +8,10 @@ const WhatweDoSection2 = () => {
   return (
     <>
       <div className=" w-full flex my-9">
-        <div className=" w-[80%] justify-between mx-auto items-center flex lg:flex-row flex-col-reverse gap-9">
+        <div className=" w-[90%] justify-between mx-auto items-center flex lg:flex-row flex-col-reverse gap-16 pb-11">
           <div className=" flex flex-col lg:w-[550px] gap-6">
             <h1 className=" font-bold text-4xl text-end">نبذة عن الشركة</h1>
-            <p className=" text-end lg:w-[550px] text-[24px]">
+            <p className=" text-end lg:w-[550px] text-[20px]">
               شركة فواز الداهش للمحاماة والاستشارات القانونية تم إنشاءها بعام
               (.) من قبل المحامي فواز بن محمد بن مسفر ال الداهش، و التي تتميز
               بالاستشارات القانونية و التوثيق والتحكيم، والتسوية الودية، و كذلك
@@ -19,7 +19,7 @@ const WhatweDoSection2 = () => {
               وزارة العجل على منصة تراضي
             </p>
           </div>
-          <div className="flex">
+          <div className="flex pl-9">
             <img src="\Images\Illustration.png" alt="" />
           </div>
         </div>
@@ -28,7 +28,7 @@ const WhatweDoSection2 = () => {
       {/* another section here */}
 
       <div className=" w-full flex my-9">
-        <div className=" w-[80%] justify-between mx-auto items-center flex lg:flex-row flex-col gap-9">
+        <div className=" w-[90%] justify-between mx-auto items-center flex lg:flex-row flex-col gap-9">
           <div className="flex">
             <img src="\Images\Mask Group.png" alt="" />
           </div>
@@ -36,7 +36,7 @@ const WhatweDoSection2 = () => {
             <h1 className=" font-bold text-4xl text-end">
               نبذة عن مؤسس الشركة
             </h1>
-            <p className=" text-end lg:w-[550px] text-[24px]">
+            <p className=" text-end lg:w-[550px] text-[20px]">
               المحامي فواز الداهش كمؤسس للشركة يتمتع بخبرة تزيد عن 15 عاما في
               المجال القانوني و الاستشارات، حيث عمل لدى رئيس المحكمة الجزائية
               بجدة لعدة سنوات، و كمستشار قانوني للشركات المحلية و العالمية.
@@ -47,19 +47,19 @@ const WhatweDoSection2 = () => {
 
       {/* another section here */}
 
-      <div className="w-full flex py-5 my-20">
-        <div className=" w-[80%] flex lg:flex-row flex-col gap-5 mx-auto justify-center items-center">
+      <div className="w-full flex py-20 my-20">
+        <div className=" w-[90%] flex lg:flex-row flex-col gap-8 mx-auto justify-center items-center">
           <div className="gap-3 flex flex-col w-[308px] items-center justify-center">
             <img src="\Images\Iconsave.png" alt="" className=" w-14 h-14" />
             <h1 className=" text-2xl font-bold">خدمات قانونية</h1>
-            <p className=" text-[16px] text-center flex text-[#525A6A]">
+            <p className=" text-[14px] text-center flex text-[#525A6A]">
               تقديم خدمات قانونية متميزة في سائر التخصصات 
             </p>
           </div>
           <div className="gap-3 flex flex-col w-[308px] items-center justify-center">
             <img src="/Images/Iconbook.png" alt="" className=" w-14 h-14" />
             <h1 className=" text-2xl font-bold">جودة الخدمات</h1>
-            <p className=" text-[16px] text-center flex text-[#525A6A]">
+            <p className=" text-[14px] text-center flex text-[#525A6A]">
               حفظ مصالح وحقوق عملائنا المشروعة من خلالف تقديم خدمات قانونية ذات
               نوعية وجوده عالية
             </p>
@@ -67,7 +67,7 @@ const WhatweDoSection2 = () => {
           <div className="gap-3 flex flex-col w-[308px] items-center justify-center">
             <img src="\Images\Iconlawbook.png" alt="" className=" w-14 h-14" />
             <h1 className=" text-2xl font-bold">الدستور والمواثيق</h1>
-            <p className=" text-[16px] text-center flex text-[#525A6A]">
+            <p className=" text-[14px] text-center flex text-[#525A6A]">
               تقديم الحماية القانونية لعملائنا بما يكفله القانون والدستور
               والمواثيق والمعاهدات الدولية 
             </p>
@@ -121,17 +121,6 @@ const WhatweDoSection2 = () => {
         </div>
       </div>
 
-      {/* another section here */}
-
-      <Truts />
-
-      {/* another section here */}
-
-      <PeopleAtTheCenter />
-
-      {/* another section here */}
-
-      <Whatwedo />
     </>
   );
 };
