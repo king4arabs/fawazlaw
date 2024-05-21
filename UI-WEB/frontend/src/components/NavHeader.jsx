@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-// import { CiMenuBurger } from "react-icons/ci";
 import { IoMenuOutline } from "react-icons/io5";
-// import { TbBurger } from "react-icons/tb";
 import { useLocation } from "react-router-dom";
 import MobileNav from "./MobileNav";
 import { LuShoppingCart } from "react-icons/lu";
 import Drawer from "react-modern-drawer";
+import { useNavigate } from 'react-router-dom';
 
 //import styles 👇
 import "react-modern-drawer/dist/index.css";
@@ -13,6 +12,7 @@ import DrawerContent from "./DrawerContent";
 
 const NavHeader = () => {
   const location = useLocation();
+  const navigate = useNavigate(); 
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [showNav, setShowNav] = useState(false);
   return (
@@ -21,7 +21,7 @@ const NavHeader = () => {
         <div className="relative w-[90%] flex justify-between items-center">
         <button
     onClick={() => {
-        setIsCartOpen(true);
+      navigate('/cart'); 
     }}
     className="absolute top-1/2 left-[70px] md:-left-[30px] -translate-y-1/2 cursor-pointer px-3 py-2 hidden lg:flex border rounded-lg text-[#3E4450] border-[#C8CBD3] items-center"
 >
