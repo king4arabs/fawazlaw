@@ -33,22 +33,20 @@ const ServiceDetails = () => {
     };
 
     fetchServices();
-  }, []);
+  }, [serviceId]);
 
-
+  const [cartCount, setCartCount] = useState(0);
   const addToCart = () => {
-    const existCart = JSON.parse(localStorage.getItem('cartItems'));
-    const newVal = { ...serviceData, quantity: quantity }
-    const count = document.getElementById('cartCount')
-    if (existCart) {
-      const val = consolidateObjects([...existCart, newVal])
-      count.innerHTML = val.length
-      localStorage.setItem('cartItems', JSON.stringify(val))
-    } else {
-      count.innerHTML = 1
-      localStorage.setItem('cartItems', JSON.stringify([newVal]))
-    }
-    setQuantity(1)
+    const existCart = JSON.parse(localStorage.getItem('cartItems')) || [];
+  const newVal = {...serviceData, quantity: quantity };
+  const updatedCart = [...existCart, newVal];
+  localStorage.setItem('cartItems', JSON.stringify(updatedCart));
+
+  // Update cart count in state
+  setCartCount(prevCount => prevCount + 1); // Increment the count
+
+  // Reset quantity to 1 after adding to cart
+  setQuantity(1);
   }
 
   if (error) return <NotFound titleText={'Product not found !!'} />

@@ -1,9 +1,47 @@
-import React from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { TiTick } from "react-icons/ti";
 
 
 
+const CartItems = () => {
+    const [cartData, setCartData] = useState([]);
+    useEffect(() => {
+        const existCart = JSON.parse(localStorage.getItem("cartItems"));
+        const filteredData = consolidateObjects(existCart ?? []);
+        setCartData(filteredData);
+      });
 
+      const onRemove = (service) => {
+        const tmp = [...cartData];
+        const elementIdx = tmp.findIndex((itm) => itm.id === service.id);
+        tmp.splice(elementIdx, 1);
+        localStorage.setItem("cartItems", JSON.stringify(tmp));
+        setCartData(tmp);
+      };
+    
+      const TotalAmount = useMemo(() => {
+        const amtArr = cartData.map((itm) => itm.price * itm.quantity);
+        return amtArr.reduce((a, b) => a + b, 0);
+      }, [cartData]);
+    
+      const ServiceCount = cartData.length;
+    
+    
+    return (
+        <div className="flex flex-col gap-[20px] h-full overflow-y-auto pt-8 pb-10">
+            {cartData.map((itm, idx) => (
+                <ul
+                key={idx}
+                className="relative w-full flex items-center flex-col-reverse sm:flex-row gap-[20px] px-[40px] sm:px-[50px] "
+              >
+                <CartCard/>
+              </ul>
+            ))}
+        </div>
+    )
+}
+
+export default CartItems
 
 const CartCard = () => {
     return (
@@ -37,4 +75,17 @@ const CartCard = () => {
     )
 }
 
-export default CartCard
+export function consolidateObjects(objects) {
+    const consolidated = {};
+  
+    objects.forEach((obj) => {
+      if (consolidated[obj.id]) {
+        consolidated[obj.id].quantity += obj.quantity;
+      } else {
+        consolidated[obj.id] = { ...obj };
+      }
+    });
+  
+    return Object.values(consolidated);
+  }
+  
