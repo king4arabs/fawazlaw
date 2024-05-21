@@ -34,7 +34,7 @@ const CartItems = () => {
                 key={idx}
                 className="relative w-full flex items-center flex-col-reverse sm:flex-row gap-[20px] px-[40px] sm:px-[50px] "
               >
-                <CartCard title={itm.name} price={itm.price}/>
+                <CartCard title={itm.name} price={itm.price} onRemove={onRemove} itm={itm}/>
               </ul>
             ))}
         </div>
@@ -43,7 +43,7 @@ const CartItems = () => {
 
 export default CartItems
 
-const CartCard = ({ title, price }) => {
+const CartCard = ({ title, price, onRemove, itm }) => {
     return (
         <div className=" w-[90%] shadow-top-darkRed py-8 pr-10 border-2 rounded-lg flex flex-col items-end justify-end">
             <div className=" flex flex-col items-end gap-5 pt-4">
@@ -68,7 +68,7 @@ const CartCard = ({ title, price }) => {
               <span className="text-[18px] text-[#667085] font-black">SAR</span>
               <span className="text-[23px] text-[#081F2F] font-black">{price}</span>
             </div>
-            <button className="pt-4">
+            <button className="pt-4" onClick={() => onRemove(itm)}>
             <p className="border border-[#F04438] text-[#F04438] font-bold text-[18 px] rounded-[8px] px-[45px] py-[16px]">حذف</p>
             </button>
           </div>
