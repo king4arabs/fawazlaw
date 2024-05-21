@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { IoMenuOutline } from "react-icons/io5";
 import { useLocation } from "react-router-dom";
 import MobileNav from "./MobileNav";
@@ -15,6 +15,13 @@ const NavHeader = () => {
   const navigate = useNavigate(); 
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [showNav, setShowNav] = useState(false);
+  const [cartData, setCartData] = useState([]);
+
+  useEffect(() => {
+    const existCart = JSON.parse(localStorage.getItem("cartItems"));
+    const filteredData = consolidateObjects(existCart ?? []);
+    setCartData(filteredData);
+  },[cartData]);
   return (
     <>
       <div className=" w-[100%] flex h-20 bg-[#FFFFFF] justify-center items-center border-b relative">
@@ -27,7 +34,7 @@ const NavHeader = () => {
 >
     <div className="relative flex items-center space-x-1"> 
         <p className="font-semibold text-sm">خدمات</p>
-        <span className="font-semibold text-sm">(0)</span> 
+        <span className="font-semibold text-sm">({cartData.length})</span> 
         <LuShoppingCart size={15} />
     </div>
 </button>
@@ -132,3 +139,16 @@ const NavHeader = () => {
 };
 
 export default NavHeader;
+export function consolidateObjects(objects) {
+  const consolidated = {};
+
+  objects.forEach((obj) => {
+    if (consolidated[obj.id]) {
+      consolidated[obj.id].quantity += obj.quantity;
+    } else {
+      consolidated[obj.id] = { ...obj };
+    }
+  });
+
+  return Object.values(consolidated);
+}
