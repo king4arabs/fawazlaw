@@ -15,7 +15,6 @@ router.get('/:id', articleController.show);
 // PUT /articles/:id - Update an existing article by ID
 router.put('/:id', articleController.update);
 
-// DELETE /articles/:id - Delete an article by ID
 router.delete('/:id', articleController.destroy);
 
 module.exports = router;

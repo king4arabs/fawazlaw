@@ -44,7 +44,6 @@ const AddArticle = () => {
         setIsLoading(false);
         return;
       }
-
       const apiMethod = location.state?.article ? "put" : "post";
       const apiUrl = location.state?.article
         ? `http://localhost:3001/api/articles/${location.state.article.id}`

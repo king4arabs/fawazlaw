@@ -25,8 +25,19 @@ exports.show = async (req, res) => {
 
 exports.update = async (req, res) => {
   try {
-    const article = await Article.findByIdAndUpdate(req.params.id, req.body, { new: true }).populate('tags').exec();
+    // Find the article by title
+    const article = await Article.findOne({ id: req.params.id });
+
     if (!article) throw new Error('Article not found');
+
+    // Update the article with new content
+    article.content = req.body.content;
+    article.title = req.body.title;
+    // Add other fields you want to update similarly
+
+    // Save the updated article
+    await article.save();
+
     res.json(article);
   } catch (err) {
     if (err.name === 'ValidationError') {
@@ -39,7 +50,7 @@ exports.update = async (req, res) => {
 
 exports.destroy = async (req, res) => {
   try {
-    const article = await Article.findByIdAndRemove(req.params.id);
+    const article = await Article.findOneAndDelete({id: req.params.id});
     if (!article) throw new Error('Article not found');
     res.json({ message: 'Article deleted successfully' });
   } catch (err) {

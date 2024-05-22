@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { IoMenuOutline } from "react-icons/io5";
 import { useLocation } from "react-router-dom";
 import MobileNav from "./MobileNav";
@@ -12,32 +12,35 @@ import DrawerContent from "./DrawerContent";
 
 const NavHeader = () => {
   const location = useLocation();
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [showNav, setShowNav] = useState(false);
   const [cartData, setCartData] = useState([]);
+  const cartDataRef = useRef(cartData); // Use a ref to track changes
 
   useEffect(() => {
     const existCart = JSON.parse(localStorage.getItem("cartItems"));
     const filteredData = consolidateObjects(existCart ?? []);
     setCartData(filteredData);
-  },[]);
+
+    cartDataRef.current = filteredData;
+  }, []);
   return (
     <>
       <div className=" w-[100%] flex h-20 bg-[#FFFFFF] justify-center items-center border-b relative">
         <div className="relative w-[90%] flex justify-between items-center">
-        <button
-    onClick={() => {
-      navigate('/cart'); 
-    }}
-    className="absolute top-1/2 left-[70px] md:-left-[30px] -translate-y-1/2 cursor-pointer px-3 py-2 hidden lg:flex border rounded-lg text-[#3E4450] border-[#C8CBD3] items-center"
->
-    <div className="relative flex items-center space-x-1"> 
-        <p className="font-semibold text-sm">خدمات</p>
-        <span className="font-semibold text-sm">({cartData.length})</span> 
-        <LuShoppingCart size={15} />
-    </div>
-</button>
+          <button
+            onClick={() => {
+              navigate('/cart');
+            }}
+            className="absolute top-1/2 left-[70px] md:-left-[30px] -translate-y-1/2 cursor-pointer px-3 py-2 hidden lg:flex border rounded-lg text-[#3E4450] border-[#C8CBD3] items-center"
+          >
+            <div className="relative flex items-center space-x-1">
+              <p className="font-semibold text-sm">خدمات</p>
+              <span className="font-semibold text-sm">({cartData.length})</span>
+              <LuShoppingCart size={15} />
+            </div>
+          </button>
           <div className=" flex items-center gap-">
             <a
               href="https://calendly.com/fawaz-cvx5/30min"
@@ -57,61 +60,55 @@ const NavHeader = () => {
             <div className=" hidden lg:flex items-center gap-5 text-[#858D9D]">
               <a
                 href="/contacts"
-                className={`flex px-1 py-[1px] hover:bg-[#ecedee] rounded-lg transition hover:border ${
-                  location.pathname === "/contacts"
+                className={`flex px-1 py-[1px] hover:bg-[#ecedee] rounded-lg transition hover:border ${location.pathname === "/contacts"
                     ? "text-[#003E6F] font-bold "
                     : " font-semibold text-sm"
-                }`}
+                  }`}
               >
                 تواصل معنا
               </a>
               <a
                 href="/faq"
-                className={`flex px-1 py-[1px] hover:bg-[#ecedee] rounded-lg transition hover:border ${
-                  location.pathname === "/faq"
+                className={`flex px-1 py-[1px] hover:bg-[#ecedee] rounded-lg transition hover:border ${location.pathname === "/faq"
                     ? "text-[#003E6F] font-bold "
                     : " font-semibold text-sm"
-                }`}
+                  }`}
               >
                 الاسئلة الشائعة
               </a>
               <a
                 href="/blog"
-                className={`flex px-1 py-[1px] hover:bg-[#ecedee] rounded-lg transition hover:border ${
-                  location.pathname === "/blog"
+                className={`flex px-1 py-[1px] hover:bg-[#ecedee] rounded-lg transition hover:border ${location.pathname === "/blog"
                     ? "text-[#003E6F] font-bold"
                     : " font-semibold text-sm"
-                }`}
+                  }`}
               >
                 المدونة
               </a>
               <a
                 href="/services"
-                className={`flex px-1 py-[1px] hover:bg-[#ecedee] rounded-lg transition hover:border ${
-                  location.pathname === "/services"
+                className={`flex px-1 py-[1px] hover:bg-[#ecedee] rounded-lg transition hover:border ${location.pathname === "/services"
                     ? "text-[#003E6F] font-bold "
                     : " font-semibold text-sm"
-                }`}
+                  }`}
               >
                 الخدمات
               </a>
               <a
                 href="/whatwedo"
-                className={`flex px-1 py-[1px] hover:bg-[#ecedee] rounded-lg transition hover:border ${
-                  location.pathname === "/whatwedo"
+                className={`flex px-1 py-[1px] hover:bg-[#ecedee] rounded-lg transition hover:border ${location.pathname === "/whatwedo"
                     ? "text-[#003E6F] font-bold "
                     : " font-semibold text-sm"
-                }`}
+                  }`}
               >
                 من نحن
               </a>
               <a
                 href="/"
-                className={`flex px-1 py-[1px] hover:bg-[#ecedee] rounded-lg transition hover:border ${
-                  location.pathname === "/"
+                className={`flex px-1 py-[1px] hover:bg-[#ecedee] rounded-lg transition hover:border ${location.pathname === "/"
                     ? "text-[#003E6F] font-bold "
                     : " font-semibold text-sm"
-                }`}
+                  }`}
               >
                 الرئيسية
               </a>

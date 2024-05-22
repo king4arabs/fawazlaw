@@ -25,6 +25,7 @@ const ManageArticles = () => {
         Authorization: `Bearer ${token}`,
       },}
       );
+      console.log("The articles are as follow: ", response.data);
       setArticles(response.data);
     } catch (error) {
       setError("Error fetching articles");
@@ -35,9 +36,10 @@ const ManageArticles = () => {
   };
 
   const deleteArticle = async (id) => {
+    console.log("id: ", id);
     const token = localStorage.getItem("token");
     try {
-      await axios.delete(`https://api.fawazlaw.sa/api/articles/${id}`, {
+      await axios.delete(`http://localhost:3001/api/articles/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -70,7 +72,7 @@ const ManageArticles = () => {
       <div className=" grid grid-cols-3 gap-6 w-full justify-center items-center col-auto">
         {articles.map((article) => (
           <div
-            key={article._id}
+            key={article.id}
             className=" col-span-1 justify-center items-center flex flex-col gap-3 "
           >
             <h3>{article.title}</h3>
