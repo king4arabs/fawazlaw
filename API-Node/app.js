@@ -2,8 +2,9 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
-const adminAuthRoutes = require('./routes/adminAuth'); // Adjust the path as needed
-const bcrypt = require('bcryptjs');
+const adminAuthRoutes = require('./routes/adminAuth'); 
+const articleRoutes = require('./routes/articleRoutes');
+const authMiddleware = require('./middlewares/authMiddleware');
 const app = express();
 
 
@@ -17,7 +18,8 @@ mongoose.connect(process.env.MONGODB_URI)
  .catch(err => console.log(err));
 
 // Routes
-app.use('/api/admin', adminAuthRoutes); // Adjust the prefix as needed
+app.use('/api/admin', adminAuthRoutes); 
+app.use('/api/articles', authMiddleware.authenticate, articleRoutes);
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

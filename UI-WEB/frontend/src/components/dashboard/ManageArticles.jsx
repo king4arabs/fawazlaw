@@ -15,7 +15,16 @@ const ManageArticles = () => {
 
   const fetchArticles = async () => {
     try {
-      const response = await axios.get("https://api.fawazlaw.sa/api/articles");
+      const token = localStorage.getItem("token");
+      if (!token) {
+        setError("No token found. Access denied.");
+        return;
+      }
+      const response = await axios.get("http://localhost:3001/api/articles",
+      {headers: {
+        Authorization: `Bearer ${token}`,
+      },}
+      );
       setArticles(response.data);
     } catch (error) {
       setError("Error fetching articles");
@@ -61,7 +70,7 @@ const ManageArticles = () => {
       <div className=" grid grid-cols-3 gap-6 w-full justify-center items-center col-auto">
         {articles.map((article) => (
           <div
-            key={article.id}
+            key={article._id}
             className=" col-span-1 justify-center items-center flex flex-col gap-3 "
           >
             <h3>{article.title}</h3>

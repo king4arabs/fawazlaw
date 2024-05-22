@@ -47,8 +47,8 @@ const AddArticle = () => {
 
       const apiMethod = location.state?.article ? "put" : "post";
       const apiUrl = location.state?.article
-        ? `https://api.fawazlaw.sa/api/articles/${location.state.article.id}`
-        : "https://api.fawazlaw.sa/api/articles";
+        ? `http://localhost:3001/api/articles/${location.state.article.id}`
+        : "http://localhost:3001/api/articles";
 
       const response = await axios[apiMethod](apiUrl, formData, {
         headers: {
