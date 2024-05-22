@@ -24,7 +24,8 @@ const Login = ({ isLoggedin, setIsLoggedin }) => {
 
     try {
       const response = await axios.post(
-        "https://api.fawazlaw.sa/api/admin/login",
+        // "https://api.fawazlaw.sa/api/admin/login",
+        "http://localhost:3001/api/admin/login",
         formData,
         {
           headers: {

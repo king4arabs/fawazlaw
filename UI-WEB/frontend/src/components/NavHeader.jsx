@@ -21,7 +21,7 @@ const NavHeader = () => {
     const existCart = JSON.parse(localStorage.getItem("cartItems"));
     const filteredData = consolidateObjects(existCart ?? []);
     setCartData(filteredData);
-  },[cartData]);
+  },[]);
   return (
     <>
       <div className=" w-[100%] flex h-20 bg-[#FFFFFF] justify-center items-center border-b relative">

@@ -12,7 +12,7 @@ const AdminNav = ({ isLoggedin, setIsLoggedin }) => {
     const token = localStorage.getItem("token");
     try {
       const responce = axios.post(
-        "https://api.fawazlaw.sa/api/admin/logout",
+        "https://localhost:3001/api/admin/logout",
         null,
         {
           headers: {
@@ -24,7 +24,7 @@ const AdminNav = ({ isLoggedin, setIsLoggedin }) => {
       console.log(responce);
       localStorage.removeItem("token");
       toast.success("Logged Out");
-      navigate("/login");
+      navigate("/");
     } catch (error) {
       console.log("error loging out:>>>>", error);
       // setIsLoggedin(false);
@@ -34,6 +34,7 @@ const AdminNav = ({ isLoggedin, setIsLoggedin }) => {
   };
   const location = useLocation();
   return (
+    <div className="main">
     <div className=" w-full shadow-sm top-20 border-b-[1px] pt-4">
       <div className="max-w-[1920px] mx-auto xl:px-20 md:px-2 px-4 ">
         <div className=" flex flex-row items-centrt justify-between md:justify-center gap-8 md:gap-12 overscroll-x-auto flex-nowrap ">
@@ -116,6 +117,10 @@ const AdminNav = ({ isLoggedin, setIsLoggedin }) => {
           </button>
         </div>
       </div>
+    </div>
+    {/* <div className=" w-full h-[300px] flex justify-center items-center text-[20px] font-regular">
+    Select from the menu to start working....
+  </div>; */}
     </div>
   );
 };
