@@ -24,7 +24,7 @@ const NavHeader = () => {
     setCartData(filteredData);
 
     cartDataRef.current = filteredData;
-  }, []);
+  }, [cartData.length]);
   return (
     <>
       <div className=" w-[100%] flex h-20 bg-[#FFFFFF] justify-center items-center border-b relative">

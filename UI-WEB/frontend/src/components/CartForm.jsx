@@ -10,7 +10,6 @@ const CartForm = () => {
         name: "",
         email: "",
         phone_number: "",
-        message: "",
       });
       const [isLoading, setIsLoading] = useState(false);
       const [error, setError] = useState(null);

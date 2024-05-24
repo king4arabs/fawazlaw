@@ -14,7 +14,7 @@ const ServicesHero = () => {
   useEffect(() => {
     const fetchServices = async () => {
       try {
-        const response = await axios.get("https://api.fawazlaw.sa/services", {
+        const response = await axios.get("http://localhost:3001/api/services", {
           headers: {
             "Content-Type": "application/json",
           },
@@ -44,7 +44,7 @@ const ServicesHero = () => {
   };
   return (
     <>
-      <div className=" overflow-hidden w-full bg-bggradient justify-center items-center relative lg:h-[50vh] z-0 lg:pb-28 lg:pt-10 py-9 ">
+      <div className=" overflow-hidden w-full bg-bggradient justify-center items-center relative lg:h-[50vh] z-0 lg:pb-[49px] lg:pt-10 py-9 ">
         <img
           src="\Images\bgservices.png"
           alt=""
@@ -75,18 +75,17 @@ const ServicesHero = () => {
           </div>
         </div>
       </div>
-      <div className=" w-full lg:-mt-20 -z-50  ">
-        <div className=" w-[80%] overflow-hidden -z-40 flex justify-center items-center lg:flex-row flex-col mx-auto gap-6  ">
+      <div className=" w-full lg:-mt-20 -z-50  pb-[43px]">
+        <div className=" w-[90%] flex justify-center items-center lg:flex-row flex-col mx-auto gap-2">
           {services.map((service) => (
-            // <div
-            //   key={service.id}
-            //   className="cursor-pointer w-[370px] h-[330px] bg-white z-50 py-8 px-5 border rounded-lg gap-10 group flex flex-col  hover:shadow-2xl"
-            //   onClick={() => handleOrderClick(service.id)}
-            // >
-            <Link
-              to={`/services/${service.id}`}
-              className="cursor-pointer w-[370px] h-[330px] bg-white z-50 py-8 px-5 border rounded-lg gap-10 group flex flex-col  hover:shadow-2xl "
+            <div
+              key={service.service_id}
+              className="cursor-pointer bg-white py-8 rounded-lg gap-10 group flex flex-col"
+              onClick={() => handleOrderClick(service.service_id)}
             >
+            <Link
+              to={`/services/${service.service_id}`}
+              className="cursor-pointer w-[370px] h-[330px] bg-white z-50 py-8 px-5 border rounded-lg gap-10 group flex flex-col  hover:shadow-2xl " >
               <div className=" flex flex-col items-end gap-5">
                 <img src="\Images\Circleidk.png" alt="" />
                 <div className=" justify-end items-end flex flex-col gap-3 w-full">
@@ -94,19 +93,14 @@ const ServicesHero = () => {
                     {service.title}
                   </h1>
                   <h3 className=" text-[16.9px] font-normal text-end">
-                    {service.description}
+                    {service.content}
                   </h3>
                   <h3 className=" text-[16.9px] font-normal text-end">
                     {service.price} {service.currency}
                   </h3>
                 </div>
               </div>
-              <div className=" justify-end items-end hidden group-hover:flex w-full opacity-0 group-hover:opacity-100 transition duration-[500ms] ">
-                <button className="px-5 py-2 flex border rounded-lg  text-[#3E4450] items-center gap-[1px]">
-                  اطلب الان
-                </button>
-              </div>
-            </Link>
+            </Link></div>
           ))}
         </div>
       </div>

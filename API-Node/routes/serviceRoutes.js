@@ -6,15 +6,15 @@ const serviceController = require('../controllers/servicesController'); // Adjus
 router.get('/', serviceController.getAllServices);
 
 // Create a new service
-router.post('/', serviceController.createService);
+// router.post('/', serviceController.createService);
 
 // Get a single service by ID
-router.get('/:id', serviceController.getServiceById);
+router.get('/:serviceId', serviceController.getServiceById);
 
-// Update a service by ID
-router.put('/:id', serviceController.updateService);
+// // Update a service by ID
+// router.put('/:id', serviceController.updateService);
 
-// Delete a service by ID
-router.delete('/:id', serviceController.deleteService);
+// // Delete a service by ID
+// router.delete('/:id', serviceController.deleteService);
 
 module.exports = router;

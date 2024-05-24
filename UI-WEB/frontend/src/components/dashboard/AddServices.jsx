@@ -52,20 +52,20 @@ const AddServices = () => {
       }
 
       const formDataWithFile = new FormData();
-      formDataWithFile.append("name", formData.name);
-      formDataWithFile.append("description", formData.description);
-      formDataWithFile.append("price", formData.price);
-      formDataWithFile.append("currency", formData.currency);
+    formDataWithFile.append("name", formData.name);
+    formDataWithFile.append("description", formData.description);
+    formDataWithFile.append("price", formData.price.toString()); // Ensure price is converted to string
+    formDataWithFile.append("currency", formData.currency);
 
-      if (formData.thumbnail) {
-        formDataWithFile.append("thumbnail", formData.thumbnail);
-      }
+    if (formData.thumbnail) {
+      formDataWithFile.append("thumbnail", formData.thumbnail); // Correctly appending the file
+    }
 
       let response;
       if (location.state && location.state.service) {
         // If editing existing service
         response = await axios.put(
-          `https://api.fawazlaw.sa/api/services/${location.state.service.id}`,
+          `http://localhost:3001/api/services/${location.state.service.id}`,
           formDataWithFile,
           {
             headers: {
@@ -79,8 +79,8 @@ const AddServices = () => {
       } else {
         // If adding new service
         response = await axios.post(
-          "https://api.fawazlaw.sa/api/services",
-          formDataWithFile,
+          "http://localhost:3001/api/services",
+          formData,
           {
             headers: {
               Authorization: `Bearer ${token}`,

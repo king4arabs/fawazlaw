@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const adminAuthRoutes = require('./routes/adminAuth'); 
 const articleRoutes = require('./routes/articleRoutes');
 const serviceRoutes = require('./routes/serviceRoutes');
+const paymentRoutes = require('./routes/paymentRoutes');
 const authMiddleware = require('./middlewares/authMiddleware');
 const app = express();
 
@@ -21,7 +22,8 @@ mongoose.connect(process.env.MONGODB_URI)
 // Routes
 app.use('/api/admin', adminAuthRoutes); 
 app.use('/api/articles', authMiddleware.authenticate, articleRoutes);
-app.use('/api/services', authMiddleware.authenticate, serviceRoutes);
+app.use('/api/services', serviceRoutes);
+app.use('/api/payment', authMiddleware.authenticate, paymentRoutes);
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

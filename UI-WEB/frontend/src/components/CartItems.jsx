@@ -13,14 +13,14 @@ const CartItems = () => {
 
       const onRemove = (service) => {
         const tmp = [...cartData];
-        const elementIdx = tmp.findIndex((itm) => itm.id === service.id);
+        const elementIdx = tmp.findIndex((itm) => itm.service_id === service.service_id);
         tmp.splice(elementIdx, 1);
         localStorage.setItem("cartItems", JSON.stringify(tmp));
         setCartData(tmp);
       };
     
       const TotalAmount = useMemo(() => {
-        const amtArr = cartData.map((itm) => itm.price * itm.quantity);
+        const amtArr = cartData.map((itm) => itm.price);
         return amtArr.reduce((a, b) => a + b, 0);
       }, [cartData]);
     
@@ -29,12 +29,13 @@ const CartItems = () => {
     
     return (
         <div className="flex flex-col gap-[20px] h-full overflow-y-auto pt-8 pb-10">
-            {cartData.map((itm, idx) => (
+          <h1 className="pl-[40px] text-[24px]">Total: SAR {TotalAmount} </h1>
+            {cartData.map((itm) => (
                 <ul
-                key={idx}
+                key={itm.service_id}
                 className="relative w-full flex items-center flex-col-reverse sm:flex-row gap-[20px] px-[40px] sm:px-[50px] "
               >
-                <CartCard title={itm.name} price={itm.price} onRemove={onRemove} itm={itm}/>
+                <CartCard title={itm.title} price={itm.price} content={itm.content} onRemove={onRemove} itm={itm}/>
               </ul>
             ))}
         </div>
@@ -43,7 +44,7 @@ const CartItems = () => {
 
 export default CartItems
 
-const CartCard = ({ title, price, onRemove, itm }) => {
+const CartCard = ({ title, content, price, onRemove, itm }) => {
     return (
         <div className=" w-[90%] shadow-top-darkRed py-8 pr-10 border-2 rounded-lg flex flex-col items-end justify-end">
             <div className=" flex flex-col items-end gap-5 pt-4">
@@ -53,7 +54,7 @@ const CartCard = ({ title, price, onRemove, itm }) => {
                 </h1>
                 <div className="w-full subsection flex gap-2">
                   <h3 className="text-[18px] text-end max-w-sm mx-auto break-words text-[#667085] font-medium pr-3">
-                  إستشارات قانونية لمدة سنة بالاتصال المباشر والدردشة الفورية (شات بوت)
+                  {content}
                 </h3>
                 <div className="w-5 h-5 flex items-center justify-center rounded-full bg-[#DAF4E8] mt-3">
                 <TiTick size={15} style={{ fill: 'green' }}/>
@@ -79,10 +80,10 @@ export function consolidateObjects(objects) {
     const consolidated = {};
   
     objects.forEach((obj) => {
-      if (consolidated[obj.id]) {
-        consolidated[obj.id].quantity += obj.quantity;
+      if (consolidated[obj.service_id]) {
+        consolidated[obj.service_id].quantity += obj.quantity;
       } else {
-        consolidated[obj.id] = { ...obj };
+        consolidated[obj.service_id] = { ...obj };
       }
     });
   
