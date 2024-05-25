@@ -4,6 +4,8 @@ import toast from "react-hot-toast";
 // import Container from "../Container";
 import { useLocation, useNavigate } from "react-router-dom";
 import { TbLogout2 } from "react-icons/tb";
+require('dotenv').config();
+
 
 const AdminNav = ({ isLoggedin, setIsLoggedin }) => {
   const navigate = useNavigate();
@@ -12,7 +14,7 @@ const AdminNav = ({ isLoggedin, setIsLoggedin }) => {
     const token = localStorage.getItem("token");
     try {
       const responce = axios.post(
-        "https://localhost:3001/api/admin/logout",
+        `${process.env.BACKEND_URL}api/admin/logout`,
         null,
         {
           headers: {

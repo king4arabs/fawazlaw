@@ -27,7 +27,7 @@ exports.sendPayment = async (req, res) => {
         };
 
         // Construct the API URL
-        const apiUrl = 'https://apitest.myfatoorah.com/v2/InitiateSession';
+        const apiUrl = `${process.env.MYFATOORAH_URL}InitiateSession`;
 
         // Set up the headers for the request
         const headers = {
@@ -74,7 +74,7 @@ exports.executePayment = async (req, res) => {
         
         console.log(details);
         // Construct the API URL
-        const apiUrl = 'https://apitest.myfatoorah.com/v2/ExecutePayment';
+        const apiUrl = `${process.env.MYFATOORAH_URL}ExecutePayment`;
 
         // Set up the headers for the request
         const headers = {

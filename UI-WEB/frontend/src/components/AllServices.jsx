@@ -4,6 +4,7 @@ import { AiOutlineHome } from "react-icons/ai";
 import { FaAngleLeft } from "react-icons/fa6";
 import OrderForm from "./OrderForm";
 import { Link } from "react-router-dom";
+require('dotenv').config();
 
 const AllServices = () => {
   const [services, setServices] = useState([]);
@@ -14,7 +15,7 @@ const AllServices = () => {
   useEffect(() => {
     const fetchServices = async () => {
       try {
-        const response = await axios.get("https://api.fawazlaw.sa/services", {
+        const response = await axios.get(`${process.env.MYFATOORAH_URL}services`, {
           headers: {
             "Content-Type": "application/json",
           },
