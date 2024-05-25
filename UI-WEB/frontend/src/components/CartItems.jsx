@@ -76,7 +76,7 @@ const CartCard = ({ title, content, price, onRemove, itm }) => {
     )
 }
 
-export function consolidateObjects(objects) {
+function consolidateObjects(objects) {
     const consolidated = {};
   
     objects.forEach((obj) => {

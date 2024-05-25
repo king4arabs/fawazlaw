@@ -4,5 +4,6 @@ const paymentController = require('../controllers/paymentController'); // Adjust
 
 // Get all services
 router.post('/', paymentController.sendPayment);
+router.post("/execute", paymentController.executePayment)
 
 module.exports = router;

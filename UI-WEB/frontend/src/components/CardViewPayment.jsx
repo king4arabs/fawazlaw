@@ -1,10 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import axios from "axios";
 
 const CardViewPayment = () => {
   const location = useLocation();
   const scriptRef = useRef(null);
   const [isMyFatoorahLoaded, setIsMyFatoorahLoaded] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false);
 
   useEffect(() => {
     if (!scriptRef.current) {
@@ -95,15 +97,40 @@ const CardViewPayment = () => {
   };
 
   const handleSubmit = () => {
-    if (window.myFatoorah) {
+    if (window.myFatoorah && isMyFatoorahLoaded) {
+      setIsProcessing(true);
       window.myFatoorah.submit()
-        .then(response => {
-          // Here you need to pass session id to your backend
-          const { sessionId, cardBrand, cardIdentifier } = response;
-          console.log(sessionId, cardBrand, cardIdentifier);
+       .then(async apiResponse => { // Renamed from 'response' to 'apiResponse'
+        const existCart = JSON.parse(localStorage.getItem("cartItems"));
+        const filteredData = consolidateObjects(existCart ?? []);
+          const { sessionId, cardBrand, cardIdentifier } = apiResponse;
+          console.log(sessionId); // Use 'apiResponse' instead of 'response'
+          const details = {
+            "sessionID": sessionId,
+            "price": location.state.price,
+            "id": location.state.id,
+            "services": filteredData
+          };
+          try {
+            console.log(details);
+            const postResponse = await axios.post("http://localhost:3001/api/payment/execute", details, {
+              headers: {
+                "Content-Type": "application/json",
+              },
+            });
+            setIsProcessing(false);
+            console.log(postResponse.data); 
+            const url = postResponse.data.paymentUrl; 
+            localStorage.setItem("cartItems", JSON.stringify([]));
+            window.location.href = url;
+          } catch (error) {
+            setIsProcessing(false);
+            console.error("Error fetching services:", error);
+          }
         })
-        .catch(error => {
-          console.error(error);
+       .catch(apiError => { 
+          console.error(apiError);
+          setIsProcessing(false);
         });
     }
   };
@@ -114,9 +141,24 @@ const CardViewPayment = () => {
       <div style={{ width: '400px' }}>
         <div id="card-element"></div>
       </div>
-      <button className="border rounded-[8px] px-6 py-3" onClick={handleSubmit}>Pay Now</button>
+      <button className="border rounded-[8px] px-6 py-3" onClick={handleSubmit}>{!isProcessing? "Pay Now": "Processing"}</button>
     </div>
   );
 };
 
 export default CardViewPayment;
+
+
+function consolidateObjects(objects) {
+  const consolidated = {};
+
+  objects.forEach((obj) => {
+    if (consolidated[obj.service_id]) {
+      consolidated[obj.service_id].quantity += obj.quantity;
+    } else {
+      consolidated[obj.service_id] = { ...obj };
+    }
+  });
+
+  return Object.values(consolidated);
+}

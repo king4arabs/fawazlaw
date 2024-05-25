@@ -19,6 +19,7 @@ const CartForm = () => {
 
       const [cartData, setCartData] = useState([]);
       useEffect(() => {
+        console.log(formData);
         const existCart = JSON.parse(localStorage.getItem("cartItems"));
         const filteredData = consolidateObjects(existCart?? []);
         setCartData(filteredData);
@@ -37,18 +38,13 @@ const CartForm = () => {
       };
     
       const handlePhoneChange = (value, data) => {
-        const countryCode = data.country;
-        console.log("Log from the phone handle change. the country code is: ", countryCode);
-      
-        // Assuming the phone number is stored in the `value` parameter
-        // You might need to adjust this depending on how the PhoneInput component structures its output
-        const phoneNumber = value; // Adjust this line if needed
         setFormData((prevFormData) => ({
          ...prevFormData,
-          countryCode: countryCode, // Save the country code
-          phoneNumber: phoneNumber, // Save the phone number
+          countryCode: data.dialCode, // Save the country code
+          phoneNumber: value.slice(data.dialCode.length), // Save the phone number without the country code
         }));
       };
+      
       
     
       const handleSubmit = async (event) => {
@@ -72,7 +68,9 @@ const CartForm = () => {
           // Extract sessionID from the response
           const sessionID = response.data.SessionId;
           const countryCode = response.data.CountryCode;
-          navigate('/payment', { state: { sessionId: sessionID, countryCode: countryCode  } });
+          const id = response.data.id;
+          const price = response.data.price;
+          navigate('/payment', { state: { sessionId: sessionID, countryCode: countryCode, price: price, id: id } });
       // Navigate to the CardViewPayment page and pass the sessionID
           
           // Reset form data or navigate to a different route
