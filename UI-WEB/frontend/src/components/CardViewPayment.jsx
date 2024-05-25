@@ -114,7 +114,7 @@ const CardViewPayment = () => {
           };
           try {
             console.log(details);
-            const postResponse = await axios.post("http://localhost:3001/api/payment/execute", details, {
+            const postResponse = await axios.post(`${process.env.BACKEND_URL}payment/execute`, details, {
               headers: {
                 "Content-Type": "application/json",
               },

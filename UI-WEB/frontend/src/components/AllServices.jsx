@@ -15,7 +15,7 @@ const AllServices = () => {
   useEffect(() => {
     const fetchServices = async () => {
       try {
-        const response = await axios.get(`${process.env.MYFATOORAH_URL}services`, {
+        const response = await axios.get(`${process.env.BACKEND_URL}services`, {
           headers: {
             "Content-Type": "application/json",
           },

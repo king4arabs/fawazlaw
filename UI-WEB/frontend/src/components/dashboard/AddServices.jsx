@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useDropzone } from "react-dropzone";
+require("dotenv").config();
 
 const AddServices = () => {
   const navigate = useNavigate();
@@ -65,7 +66,7 @@ const AddServices = () => {
       if (location.state && location.state.service) {
         // If editing existing service
         response = await axios.put(
-          `http://localhost:3001/api/services/${location.state.service.id}`,
+          `${process.env.BACKEND_URL}services/${location.state.service.id}`,
           formDataWithFile,
           {
             headers: {
@@ -79,7 +80,7 @@ const AddServices = () => {
       } else {
         // If adding new service
         response = await axios.post(
-          "http://localhost:3001/api/services",
+          `${process.env.BACKEND_URL}services`,
           formData,
           {
             headers: {

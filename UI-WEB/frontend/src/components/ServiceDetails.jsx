@@ -2,10 +2,9 @@ import axios from 'axios';
 import React, { useEffect, useState } from "react";
 import { Helmet } from 'react-helmet';
 import { useParams } from "react-router-dom";
-import { CounterComp } from "./CounterComp";
-import { consolidateObjects } from "./DrawerContent";
 import Loading from "./Loading";
 import NotFound from "./NotFound";
+require("dotenv").config();
 
 const ServiceDetails = () => {
   const [quantity, setQuantity] = useState(1);
@@ -19,7 +18,7 @@ const ServiceDetails = () => {
     setLoading(true);
     const fetchServices = async () => {
       try {
-        const response = await axios.get(`http://localhost:3001/api/services/${serviceId}`, {
+        const response = await axios.get(`${process.env.BACKEND_URL}services/${serviceId}`, {
           headers: {
             "Content-Type": "application/json",
           },
