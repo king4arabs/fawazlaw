@@ -25,6 +25,7 @@ import ArticleDetails from "./components/ArticleDetails";
 import AllServices from "./components/AllServices";
 import ServiceDetails from "./components/ServiceDetails";
 import Cart from "./pages/Cart";
+import CardViewPayment from "./components/CardViewPayment";
 
 function App() {
   // const user = JSON.parse(localStorage.getItem("token"));
@@ -53,6 +54,7 @@ function App() {
           <Route path="/blog/:id" element={<ArticleDetails />} />
           <Route path="/faq" element={<Faq />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/payment" element={<CardViewPayment />} />
           <Route
             path="/login"
             element={

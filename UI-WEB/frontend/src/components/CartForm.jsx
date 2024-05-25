@@ -9,7 +9,6 @@ const CartForm = () => {
     const [formData, setFormData] = useState({
         name: "",
         email: "",
-        phone_number: "",
         price: 0,
         countryCode: ""
       });
@@ -20,19 +19,15 @@ const CartForm = () => {
 
       const [cartData, setCartData] = useState([]);
       useEffect(() => {
-          const existCart = JSON.parse(localStorage.getItem("cartItems"));
-          const filteredData = consolidateObjects(existCart ?? []);
-          setCartData(filteredData);
-        });
+        const existCart = JSON.parse(localStorage.getItem("cartItems"));
+        const filteredData = consolidateObjects(existCart?? []);
+        setCartData(filteredData);
+      
+        // Calculate the total amount here and update the state
+        const totalAmount = filteredData.reduce((total, item) => total + item.price, 0);
+        setFormData(prevFormData => ({...prevFormData, price: totalAmount }));
+      }, []);
 
-      const TotalAmount = useMemo(() => {
-        const amtArr = cartData.map((itm) => itm.price);
-        return amtArr.reduce((a, b) => a + b, 0);
-      }, [cartData]);
-      setFormData((prevFormData) => ({
-        ...prevFormData,
-         price: TotalAmount,
-       }));
 
       const handleChange = (e) => {
         setFormData((prevFormData) => ({
@@ -74,6 +69,11 @@ const CartForm = () => {
     
           // Handle successful response
           console.log(response.data);
+          // Extract sessionID from the response
+          const sessionID = response.data.SessionId;
+          const countryCode = response.data.CountryCode;
+          navigate('/payment', { state: { sessionId: sessionID, countryCode: countryCode  } });
+      // Navigate to the CardViewPayment page and pass the sessionID
           
           // Reset form data or navigate to a different route
           // setFormData({ name: "", email: "", phone_number: ""});

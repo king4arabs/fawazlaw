@@ -23,7 +23,7 @@ mongoose.connect(process.env.MONGODB_URI)
 app.use('/api/admin', adminAuthRoutes); 
 app.use('/api/articles', authMiddleware.authenticate, articleRoutes);
 app.use('/api/services', serviceRoutes);
-app.use('/api/payment', authMiddleware.authenticate, paymentRoutes);
+app.use('/api/payment', paymentRoutes);
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
