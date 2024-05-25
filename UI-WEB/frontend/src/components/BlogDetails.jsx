@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import parse from "html-react-parser";
 import { Link, useLocation } from "react-router-dom";
-require("dotenv").config();
 
 const BlogDetails = () => {
   const [data, setData] = useState([]);
@@ -14,7 +13,7 @@ const BlogDetails = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `${process.env.BACKEND_URL}articles`
+          "https://api.fawazlaw.sa/api/articles"
         );
         const orderByDate =
           response.data.sort(function (a, b) {

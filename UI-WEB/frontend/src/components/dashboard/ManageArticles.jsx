@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-require("dotenv").config();
 
 const ManageArticles = () => {
   const [articles, setArticles] = useState([]);
@@ -21,7 +20,7 @@ const ManageArticles = () => {
         setError("No token found. Access denied.");
         return;
       }
-      const response = await axios.get(`${process.env.BACKEND_URL}articles`,
+      const response = await axios.get("http://localhost:3001/api/articles",
       {headers: {
         Authorization: `Bearer ${token}`,
       },}
@@ -40,7 +39,7 @@ const ManageArticles = () => {
     console.log("id: ", id);
     const token = localStorage.getItem("token");
     try {
-      await axios.delete(`${process.env.BACKEND_URL}articles/${id}`, {
+      await axios.delete(`http://localhost:3001/api/articles/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

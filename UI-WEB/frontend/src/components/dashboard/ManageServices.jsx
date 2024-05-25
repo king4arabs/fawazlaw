@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-require("dotenv").config();
 
 const ManageServices = () => {
   const [services, setServices] = useState([]);
@@ -20,7 +19,7 @@ const ManageServices = () => {
         }
 
         const response = await axios.get(
-          `${process.env.BACKEND_URL}services`,
+          "https://api.fawazlaw.sa/api/services",
           {
             headers: {
               Authorization: `Bearer ${token}`,

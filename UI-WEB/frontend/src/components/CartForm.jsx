@@ -1,9 +1,9 @@
 import axios from "axios";
 import React, { useEffect, useMemo, useState } from "react";
+import toast from "react-hot-toast";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import { useNavigate } from "react-router-dom";
-require("dotenv").config();
 
 const CartForm = () => {
     const [formData, setFormData] = useState({
@@ -54,7 +54,7 @@ const CartForm = () => {
     
         try {
           const response = await axios.post(
-            `${process.env.BACKEND_URL}payment`,
+            "http://localhost:3001/api/payment",
             formData,
             {
               headers: {

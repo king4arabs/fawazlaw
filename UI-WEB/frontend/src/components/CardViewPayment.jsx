@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import axios from "axios";
-require('dotenv').config();
 
 const CardViewPayment = () => {
   const location = useLocation();
@@ -12,7 +11,7 @@ const CardViewPayment = () => {
   useEffect(() => {
     if (!scriptRef.current) {
       const script = document.createElement('script');
-      script.src = process.env.MYFATOORAH_SCRIPT;
+      script.src = 'https://demo.myfatoorah.com/cardview/v2/session.js';
       script.async = true;
       script.onload = () => {
         setIsMyFatoorahLoaded(true);
@@ -114,7 +113,7 @@ const CardViewPayment = () => {
           };
           try {
             console.log(details);
-            const postResponse = await axios.post(`${process.env.BACKEND_URL}payment/execute`, details, {
+            const postResponse = await axios.post("http://localhost:3001/api/payment/execute", details, {
               headers: {
                 "Content-Type": "application/json",
               },

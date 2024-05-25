@@ -4,7 +4,6 @@ import toast from "react-hot-toast";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import { useNavigate } from "react-router-dom";
-require("dotenv").config();
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
@@ -38,7 +37,7 @@ const ContactForm = () => {
 
     try {
       const response = await axios.post(
-        `${process.env.BACKEND_URL}contact-us`,
+        "https://api.fawazlaw.sa/api/contact-us",
         formData,
         {
           headers: {

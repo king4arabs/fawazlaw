@@ -3,7 +3,6 @@ import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import RichTextEditor from "../TextEditor";
 import JoditEdito, { JoditEditorComponent } from "../JoditEditor";
-require("dotenv").config();
 
 const AddArticle = () => {
   const [formData, setFormData] = useState({ title: "", content: "" });
@@ -47,8 +46,8 @@ const AddArticle = () => {
       }
       const apiMethod = location.state?.article ? "put" : "post";
       const apiUrl = location.state?.article
-        ? `${process.env.BACKEND_URL}articles/${location.state.article.id}`
-        : `${process.env.BACKEND_URL}articles`;
+        ? `http://localhost:3001/api/articles/${location.state.article.id}`
+        : "http://localhost:3001/api/articles";
 
       const response = await axios[apiMethod](apiUrl, formData, {
         headers: {
