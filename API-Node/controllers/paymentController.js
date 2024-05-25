@@ -9,7 +9,7 @@ exports.sendPayment = async (req, res) => {
         MobileCountryCode: '+965',
         CustomerMobile: '12345678',
         CustomerEmail: req.email,
-        InvoiceValue: 100,
+        InvoiceValue: req.price,
         DisplayCurrencyIso: 'SAR',
         CallBackUrl: 'https://google.com',
         ErrorUrl: 'https://yahoo.com',
@@ -49,6 +49,7 @@ exports.sendPayment = async (req, res) => {
 
         // Extract the callback URL from the response
         const callbackUrl = response.data.callbackUrl;
+        console.log(callbackUrl);
 
         return callbackUrl;
     } catch (error) {

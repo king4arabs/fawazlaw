@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import toast from "react-hot-toast";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
@@ -10,11 +10,30 @@ const CartForm = () => {
         name: "",
         email: "",
         phone_number: "",
+        price: 0,
+        countryCode: ""
       });
       const [isLoading, setIsLoading] = useState(false);
       const [error, setError] = useState(null);
       const navigate = useNavigate();
     
+
+      const [cartData, setCartData] = useState([]);
+      useEffect(() => {
+          const existCart = JSON.parse(localStorage.getItem("cartItems"));
+          const filteredData = consolidateObjects(existCart ?? []);
+          setCartData(filteredData);
+        });
+
+      const TotalAmount = useMemo(() => {
+        const amtArr = cartData.map((itm) => itm.price);
+        return amtArr.reduce((a, b) => a + b, 0);
+      }, [cartData]);
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+         price: TotalAmount,
+       }));
+
       const handleChange = (e) => {
         setFormData((prevFormData) => ({
           ...prevFormData,
@@ -23,11 +42,19 @@ const CartForm = () => {
       };
     
       const handlePhoneChange = (value, data) => {
+        const countryCode = data.country;
+        console.log("Log from the phone handle change. the country code is: ", countryCode);
+      
+        // Assuming the phone number is stored in the `value` parameter
+        // You might need to adjust this depending on how the PhoneInput component structures its output
+        const phoneNumber = value; // Adjust this line if needed
         setFormData((prevFormData) => ({
-          ...prevFormData,
-          phone_number: value,
+         ...prevFormData,
+          countryCode: countryCode, // Save the country code
+          phoneNumber: phoneNumber, // Save the phone number
         }));
       };
+      
     
       const handleSubmit = async (event) => {
         event.preventDefault();
@@ -36,7 +63,7 @@ const CartForm = () => {
     
         try {
           const response = await axios.post(
-            "https://api.fawazlaw.sa/api/contact-us",
+            "http://localhost:3001/api/payment",
             formData,
             {
               headers: {
@@ -46,14 +73,14 @@ const CartForm = () => {
           );
     
           // Handle successful response
-          console.log("Contact sent successfully:", response.data);
-          toast.success("Contact Sent");
+          console.log(response.data);
+          
           // Reset form data or navigate to a different route
-          setFormData({ name: "", email: "", phone_number: "", message: "" });
+          // setFormData({ name: "", email: "", phone_number: ""});
           // navigate("/articles");
         } catch (error) {
-          console.error("Error sending contact", error);
-          setError(error.response.data.message || "Failed to send contact.");
+          console.error("Some error", error);
+          setError(error.response.data.message || "Some error");
         } finally {
           setIsLoading(false);
         }
@@ -127,7 +154,7 @@ const CartForm = () => {
                 className=" btn bg-[#003E6F] hover:bg-[#b6953e] w-full text-white "
                 disabled={isLoading}
               >
-                {isLoading ? "Loading..." : "إرسال"}
+                {isLoading ? "Loading..." : "الاستمرار في الدفع"}
               </button>
             </form>
           </div>
@@ -136,5 +163,20 @@ const CartForm = () => {
     </div>
     )
 }
+
+export function consolidateObjects(objects) {
+  const consolidated = {};
+
+  objects.forEach((obj) => {
+    if (consolidated[obj.service_id]) {
+      consolidated[obj.service_id].quantity += obj.quantity;
+    } else {
+      consolidated[obj.service_id] = { ...obj };
+    }
+  });
+
+  return Object.values(consolidated);
+}
+
 
 export default CartForm
