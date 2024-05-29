@@ -30,6 +30,12 @@ import CardViewPayment from "./components/CardViewPayment";
 function App() {
   // const user = JSON.parse(localStorage.getItem("token"));
   const [isLoggedin, setIsLoggedin] = useState(false);
+  const [language, setLanguage] = useState('en'); // Default to English
+
+  const changeLanguage = (lang) => {
+    setLanguage(lang);
+    // Optionally, save the language preference in localStorage or a backend
+  };
 
   useEffect(() => {
     const existCart = JSON.parse(localStorage.getItem("cartItems"));
@@ -43,7 +49,7 @@ function App() {
     <>
       <Toaster />
       <div className=" overflow-hidden">
-        <NavBar />
+      <NavBar changeLanguage={changeLanguage} />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/whatwedo" element={<WhatWeDo />} />

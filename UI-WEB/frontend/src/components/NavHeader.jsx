@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom';
 //import styles 👇
 import "react-modern-drawer/dist/index.css";
 import DrawerContent from "./DrawerContent";
+import { useTranslation } from 'react-i18next';
 
 const NavHeader = () => {
   const location = useLocation();
@@ -17,6 +18,8 @@ const NavHeader = () => {
   const [showNav, setShowNav] = useState(false);
   const [cartData, setCartData] = useState([]);
   const cartDataRef = useRef(cartData); // Use a ref to track changes
+  const { t, i18n } = useTranslation();
+  const activeLanguage = i18n.language; // 'en' or 'ar'
 
   useEffect(() => {
     const existCart = JSON.parse(localStorage.getItem("cartItems"));
@@ -25,29 +28,38 @@ const NavHeader = () => {
 
     cartDataRef.current = filteredData;
   }, [cartData.length]);
+
+  useEffect(() => {
+    const savedLanguage = localStorage.getItem('selectedLanguage');
+    if (savedLanguage) {
+      i18n.changeLanguage(savedLanguage);
+    }
+  }, []);
   return (
     <>
+  
       <div className=" w-[100%] flex h-20 bg-[#FFFFFF] justify-center items-center border-b relative">
-        <div className="relative w-[90%] flex justify-between items-center">
+        <div className={`relative w-[90%] flex justify-between items-center ${activeLanguage == "en"? 'flex-row-reverse': ''}`}>
+          <div className={`buttons flex gap-3`}>
           <button
             onClick={() => {
               navigate('/cart');
             }}
-            className="absolute top-1/2 left-[70px] md:-left-[30px] -translate-y-1/2 cursor-pointer px-3 py-2 hidden lg:flex border rounded-lg text-[#3E4450] border-[#C8CBD3] items-center"
+            className="cursor-pointer px-3 py-2 hidden lg:flex border rounded-lg text-[#3E4450] border-[#C8CBD3] items-center"
           >
             <div className="relative flex items-center space-x-1">
-              <p className="font-semibold text-sm">خدمات</p>
-              <span className="font-semibold text-sm">({cartData.length})</span>
+              <p className="font-regular text-sm">{t('services')}</p>
+              <span className="font-regular text-sm">({cartData.length})</span>
               <LuShoppingCart size={15} />
             </div>
           </button>
-          <div className=" flex items-center gap-">
+          <div className={`flex items-center gap`}>
             <a
               href="https://calendly.com/fawaz-cvx5/30min"
               target="_blank"
-              className="absolute top-1/2 left-[70px] md:-left-[-90px] -translate-y-1/2 cursor-pointer px-5 py-2 hidden lg:flex border rounded-lg text-[#3E4450] border-[#C8CBD3] items-center gap-[1px]"
+              className="cursor-pointer px-5 py-2 hidden lg:flex border rounded-lg text-[#3E4450] border-[#C8CBD3] items-center gap-[1px]"
             >
-              <p className="font-semibold text-sm">احجز اجتماع</p>
+              <p className="font-regular text-sm">{t('book meeting')}</p>
             </a>
             <button
               onClick={() => setShowNav(!showNav)}
@@ -56,61 +68,63 @@ const NavHeader = () => {
               <IoMenuOutline size={40} />
             </button>
           </div>
-          <div className="  lg:flex-row gap-2 lg:flex text-[16px]">
-            <div className=" hidden lg:flex items-center gap-5 text-[#858D9D]">
+          </div>
+          
+          <div className={`lg:flex-row gap-2 lg:flex text-[16px]`}>
+            <div className={`hidden lg:flex items-center gap-5 text-[#858D9D] ${activeLanguage == "en"? 'order-2 flex-row-reverse' :'order-0'}`}>
               <a
                 href="/contacts"
                 className={`flex px-1 py-[1px] hover:bg-[#ecedee] rounded-lg transition hover:border ${location.pathname === "/contacts"
-                    ? "text-[#003E6F] font-bold "
-                    : " font-semibold text-sm"
+                    ? "text-[#003E6F] text-sm font-semibold "
+                    : " font-medium text-sm"
                   }`}
               >
-                تواصل معنا
+                {t('contact us')}
               </a>
               <a
                 href="/faq"
                 className={`flex px-1 py-[1px] hover:bg-[#ecedee] rounded-lg transition hover:border ${location.pathname === "/faq"
-                    ? "text-[#003E6F] font-bold "
-                    : " font-semibold text-sm"
+                    ? "text-[#003E6F] text-sm font-semibold "
+                    : " font-medium text-sm"
                   }`}
               >
-                الاسئلة الشائعة
+                {t('faq')}
               </a>
               <a
                 href="/blog"
                 className={`flex px-1 py-[1px] hover:bg-[#ecedee] rounded-lg transition hover:border ${location.pathname === "/blog"
-                    ? "text-[#003E6F] font-bold"
-                    : " font-semibold text-sm"
+                    ? "text-[#003E6F] text-sm font-semibold"
+                    : " font-medium text-sm"
                   }`}
               >
-                المدونة
+                {t('blogs')}
               </a>
               <a
                 href="/services"
                 className={`flex px-1 py-[1px] hover:bg-[#ecedee] rounded-lg transition hover:border ${location.pathname === "/services"
-                    ? "text-[#003E6F] font-bold "
-                    : " font-semibold text-sm"
+                    ? "text-[#003E6F] text-sm font-semibold "
+                    : " font-medium text-sm"
                   }`}
               >
-                الخدمات
+                {t('services')}
               </a>
               <a
                 href="/whatwedo"
                 className={`flex px-1 py-[1px] hover:bg-[#ecedee] rounded-lg transition hover:border ${location.pathname === "/whatwedo"
-                    ? "text-[#003E6F] font-bold "
-                    : " font-semibold text-sm"
+                    ? "text-[#003E6F] text-sm font-semibold"
+                    : "font-medium text-sm"
                   }`}
               >
-                من نحن
+                {t('about us')}
               </a>
               <a
                 href="/"
                 className={`flex px-1 py-[1px] hover:bg-[#ecedee] rounded-lg transition hover:border ${location.pathname === "/"
-                    ? "text-[#003E6F] font-bold "
-                    : " font-semibold text-sm"
+                    ? "text-[#003E6F] text-sm font-semibold "
+                    : " font-medium text-sm"
                   }`}
               >
-                الرئيسية
+                {t('home')}
               </a>
             </div>
             <a href="/" className=" flex items-center gap-1 pl-2">

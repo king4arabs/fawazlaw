@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { BsSnapchat, BsTwitterX } from "react-icons/bs";
 import { CiFacebook, CiLinkedin, CiYoutube } from "react-icons/ci";
 import {
@@ -9,13 +9,22 @@ import {
 import { PiCaretDownBold, PiTiktokLogo } from "react-icons/pi";
 import { TbWorld } from "react-icons/tb";
 import NavHeader from "./NavHeader";
+import i18n from '../il8n';
 
 const NavBar = () => {
+  const [activeLanguage, setActiveLanguage] = useState(i18n.language);
+
+  const changeLanguage = (lng) => {
+    localStorage.setItem('selectedLanguage', lng);
+    i18n.changeLanguage(lng);
+    setActiveLanguage(lng);
+  };
+  
   return (
     <>
       <div className=" w-[100%] flex h-12 bg-[#003E6F] justify-center items-center overflow-x-auto no-scrollbar">
         <div className="w-[90%] flex justify-between items-center">
-          <div className=" flex flex-row items-center gap-3">
+          <div className={`flex flex-row items-center gap-3`}>
             <a href="https://x.com/fawazaldahish1" target="_blank">
               <BsTwitterX size={20} className="  text-white" />
             </a>
@@ -55,18 +64,23 @@ const NavBar = () => {
               <p className=" text-white text-sm">info@fawazlaw.sa</p>
             </a>
           </div>
-          <div className=" items-center gap-2 lg:flex hidden">
-            <div className="px-3 py-2 flex text-white items-center gap-[1px]">
-              <PiCaretDownBold />
-              <p>العربية</p>
-              <TbWorld />
+          {activeLanguage === "ar"? (
+            <div className="items-center gap-4 lg:flex hidden">
+              <div className="px-3 py-2 flex text-white items-center gap-[3px]" onClick={() => changeLanguage('en')}>
+                <PiCaretDownBold />
+                <p>EN</p>
+                <TbWorld />
+              </div>
             </div>
-            <div className="px-3 py-2 flex text-white items-center gap-[1px]">
-              <PiCaretDownBold />
-              <p>السعودية</p>
-              <img src="/Flags.png" alt="flag" />
+          ) : (
+            <div className="items-center gap-4 lg:flex hidden">
+              <div className="px-3 py-2 flex text-white items-center gap-[5px]" onClick={() => changeLanguage('ar')}>
+                <PiCaretDownBold />
+                <p>العربية</p>
+                <TbWorld />
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
       <NavHeader />
