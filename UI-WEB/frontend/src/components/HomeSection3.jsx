@@ -1,23 +1,30 @@
-import React from "react";
+import React, {useEffect} from "react";
+import { useTranslation } from 'react-i18next'; 
+import { FaRegArrowAltCircleLeft, FaRegArrowAltCircleRight } from "react-icons/fa";
 
 const HomeSection3 = () => {
+  const { t, i18n } = useTranslation();
+  const activeLanguage = i18n.language; // 'en' or 'ar'
+
+  useEffect(() => {
+    const savedLanguage = localStorage.getItem('selectedLanguage');
+    if (savedLanguage) {
+      i18n.changeLanguage(savedLanguage);
+    }
+  }, []);
   return (
     <div className="w-[100%] px-10 py-[90px] flex flex-col gap-10 my-16 bg-gradient-to-b from-[#EEF3FE] to-[#fff]">
-      <div className=" flex lg:flex-row gap-2 flex-col justify-between">
+      <div className={" flex lg:flex-row gap-2 flex-col justify-between"}>
         <div className=" flex flex-row items-center gap-2">
-          <img
-            src="\Images\Group 1000002977.svg"
-            className=" w-[28px]"
-            alt=""
-          />
-          <p className=" flex text-nowrap">اطلب الان</p>
+        {activeLanguage == 'ar' ?<FaRegArrowAltCircleLeft size={22} /> : <FaRegArrowAltCircleRight size={22} /> }
+          <p className={`flex text-nowrap ${activeLanguage == 'ar'? 'order-0' : 'order-2'}`}>{t('order now')}</p>
         </div>
-        <div className="text-end flex flex-col gap-6">
+        <div className={`text-end flex flex-col gap-6 `}>
           <h1 className="lg:text-[48px] text-2xl font-bold text-end ">
-            برنامج الحماية الوقائية
+       {t('section3Title')}
           </h1>
           <p className=" text-base text-end">
-            برنامج للحماية الوقائية الأكثر شمولية للشركات والمؤسسات
+          {t('section3Content')}
           </p>
         </div>
       </div>

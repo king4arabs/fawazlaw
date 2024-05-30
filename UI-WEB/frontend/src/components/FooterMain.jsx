@@ -1,4 +1,5 @@
-import React from "react";
+import React, {useEffect} from "react";
+import { useTranslation } from 'react-i18next';
 import { BsSnapchat, BsTwitterX } from "react-icons/bs";
 import { CiFacebook, CiLinkedin, CiYoutube } from "react-icons/ci";
 import { MdOutlineMailOutline } from "react-icons/md";
@@ -11,26 +12,36 @@ import {
 import { PiTiktokLogo } from "react-icons/pi";
 
 const FooterMain = () => {
+  const { t, i18n } = useTranslation();
+  const activeLanguage = i18n.language; // 'en' or 'ar'
+
+  useEffect(() => {
+    const savedLanguage = localStorage.getItem('selectedLanguage');
+    if (savedLanguage) {
+      i18n.changeLanguage(savedLanguage);
+    }
+  }, []);
   return (
     <div className="w-full flex flex-col justify-center items-center ">
       <div className=" w-full flex py-6 bg-gradient-to-b from-[#ECF2FF] to-[#fff]">
-        <div className=" mx-auto w-[80%] flex lg:flex-row gap-2 flex-col justify-between items-center">
-          <div className=" flex flex-row gap-3">
+        <div className={`" mx-auto w-[80%] flex ${activeLanguage == 'ar'? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-2 items-center flex-col justify-between " `}>
+          <div className={`${activeLanguage == 'ar'? 'flex flex-row gap-3' : 'flex flex-row-reverse gap-3'}`}>
             <button className="btn  bg-[#003E6F] text-white hover:bg-[#b6953e]">
-              اشتراك
+              {t('subscribe')}
             </button>
-            <label className=" justify-end text-end lg:w-[300px] flex items-center gap-2 hover:border px-4 py-2 active:border rounded-lg outline outline-1">
+            <label className={`" justify-end text-end lg:w-[300px] flex items-center gap-2 hover:border px-4 py-2 active:border rounded-lg outline outline-1" ${activeLanguage == 'ar'? '' : ''}`}>
+            <MdOutlineMailOutline size={22} className={`${activeLanguage == 'ar'? 'hidden' : ''}`}/>
               <input
                 type="text"
-                className="grow outline-none bg-transparent border-none text-end justify-end pr-2 "
-                placeholder="البريد الالكتروني"
+                className={`"grow outline-none bg-transparent border-none justify-end pr-2 " ${activeLanguage == 'ar'? 'text-end' : ''}`}
+                placeholder={t('email')}
               />
-              <MdOutlineMailOutline size={22}/>
+              <MdOutlineMailOutline size={22} className={`${activeLanguage == 'ar'? '' : 'hidden'}`}/>
             </label>
           </div>
           <div>
-            <h1 className=" font-bold text-end text-[20px]">
-              اشترك في النشرة البريدية لتصلك اخر الاخبار والتدوينات
+            <h1 className={`font-bold  ${activeLanguage == 'ar'? 'text-end text-[20px]' : 'text-[17px]'}`}>
+              {t("footerEmailText")}
             </h1>
           </div>
         </div>
@@ -128,13 +139,13 @@ const FooterMain = () => {
         <div className="w-[90%] flex lg:flex-row flex-col justify-between items-center">
           <div className=" flex lg:flex-row flex-col items-center gap-2 ">
             <div className="flex items-center gap-4">
-              <a href="https://x.com/fawazaldahish1" target="_blank">
+              <a href="https://twitter.com/fawazlawyer" target="_blank">
                 <BsTwitterX size={20} className="  text-[#000929]" />
               </a>
               <a href="#">
                 <CiFacebook size={25} className="  text-[#000929]" />
               </a>
-              <a href="#">
+              <a href="https://www.instagram.com/fawazlawyer_/">
                 <IoLogoInstagram size={25} className="  text-[#000929]" />
               </a>
               <a href="#" className=" flex">
@@ -159,7 +170,7 @@ const FooterMain = () => {
             </div>
           </div>
           <div className=" items-center lg:text-base text-sm gap-2 text-end lg:flex text-[#3E4450]">
-            &#x202e;© جميع الحقوق محفوظة لشركة فواز الداهش للمحاماة{" "}
+            {t("footerTerms")}
           </div>
         </div>
       </div>

@@ -25,14 +25,14 @@ const NavBar = () => {
       <div className=" w-[100%] flex h-12 bg-[#003E6F] justify-center items-center overflow-x-auto no-scrollbar">
         <div className="w-[90%] flex justify-between items-center">
           <div className={`flex flex-row items-center gap-3`}>
-            <a href="https://x.com/fawazaldahish1" target="_blank">
+            <a href="https://twitter.com/fawazlawyer" target="_blank">
               <BsTwitterX size={20} className="  text-white" />
             </a>
             <a href="#" target="_blank">
               <CiFacebook size={25} className="  text-white" />
             </a>
             <a
-              href="https://www.instagram.com/fawazlawyer_?igsh=MzRlODBiNWFlZA=="
+              href="https://www.instagram.com/fawazlawyer_/"
               target="_blank"
             >
               <IoLogoInstagram size={22} className="  text-white" />

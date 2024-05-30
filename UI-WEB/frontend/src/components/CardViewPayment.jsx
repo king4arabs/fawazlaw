@@ -11,7 +11,7 @@ const CardViewPayment = () => {
   useEffect(() => {
     if (!scriptRef.current) {
       const script = document.createElement('script');
-      script.src = 'https://demo.myfatoorah.com/cardview/v2/session.js';
+      script.src = 'https://sa.myfatoorah.com/cardview/v2/session.js';
       script.async = true;
       script.onload = () => {
         setIsMyFatoorahLoaded(true);

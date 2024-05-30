@@ -13,6 +13,7 @@
     "@tiptap/react": "^2.2.4",
     "@tiptap/starter-kit": "^2.2.4",
     "axios": "^1.6.8",
+    "dotenv": "^16.4.5",
     "draft-js": "^0.11.7",
     "draftjs-to-html": "^0.9.1",
     "fetch": "^1.1.0",

@@ -8,6 +8,8 @@ const serviceSchema = new mongoose.Schema({
   price: Number,
   currency: String,
   thumbnail: String,
+  content_en: String, 
+  title_en: String
 });
 
 

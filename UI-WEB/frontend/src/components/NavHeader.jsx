@@ -6,6 +6,7 @@ import { LuShoppingCart } from "react-icons/lu";
 import Drawer from "react-modern-drawer";
 import { useNavigate } from 'react-router-dom';
 
+
 //import styles 👇
 import "react-modern-drawer/dist/index.css";
 import DrawerContent from "./DrawerContent";
@@ -55,7 +56,8 @@ const NavHeader = () => {
           </button>
           <div className={`flex items-center gap`}>
             <a
-              href="https://calendly.com/fawaz-cvx5/30min"
+              href="https://sa.myfatoorah.com/SAU/le/06051007467895558"
+              // href="https://calendly.com/fawaz-cvx5/30min"
               target="_blank"
               className="cursor-pointer px-5 py-2 hidden lg:flex border rounded-lg text-[#3E4450] border-[#C8CBD3] items-center gap-[1px]"
             >

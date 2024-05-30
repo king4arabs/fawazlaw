@@ -22,7 +22,10 @@ const HomeSection1 = () => {
       <div className="w-[100%]">
       <div className="w-full flex flex-col">
       <div className={`subsection flex justify-between items-start`}>
-        <div className={`arrowAndbutton flex items-center gap-1 pt-2 pl-2 ${activeLanguage == "ar"? 'order-0' : 'order-2'}`}>
+        <div 
+        style={{ cursor: 'pointer' }} // Changes the cursor to a pointer on hover
+        onClick={() => navigate('/services')} // Navigates to /services on click
+        className={`arrowAndbutton flex items-center gap-1 pt-2 pl-2 ${activeLanguage == "ar"? 'order-0' : 'order-2'}`}>
           {activeLanguage == 'ar'? (<FaRegArrowAltCircleLeft size={23} className={`${activeLanguage == 'ar'? 'order-0' : 'order-2'}`} />) : (<FaRegArrowAltCircleRight size={23} className={`${activeLanguage == 'ar'? 'order-0' : 'order-2'}`} />)}
           <p className="lg:text-[14px] font-bold">{t('all services')}</p>
         </div>
@@ -30,7 +33,7 @@ const HomeSection1 = () => {
           {t('homeSection1Title')}
         </h1>
       </div>
-      <p className={`"text-[16px] xl:mt-4 mt-1" ${activeLanguage == "ar"? 'ml-auto' : ''}`}>
+      <p className={`text-[16px] xl:mt-4 mt-1 pb-5 ${activeLanguage == "ar"? 'ml-auto' : ''}`}>
         {t('homeSection1Description')}
       </p>
     </div>
