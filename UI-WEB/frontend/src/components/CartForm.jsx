@@ -1,11 +1,21 @@
 import axios from "axios";
 import React, { useEffect, useMemo, useState } from "react";
+import { useTranslation } from 'react-i18next';
 import toast from "react-hot-toast";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import { useNavigate } from "react-router-dom";
 
 const CartForm = () => {
+  const { t, i18n } = useTranslation();
+  const activeLanguage = i18n.language; // 'en' or 'ar'
+
+  useEffect(() => {
+    const savedLanguage = localStorage.getItem('selectedLanguage');
+    if (savedLanguage) {
+      i18n.changeLanguage(savedLanguage);
+    } 
+  }, []);
     const [formData, setFormData] = useState({
         name: "",
         email: "",
@@ -88,13 +98,13 @@ const CartForm = () => {
     
     return (
         <div className=" w-full lg:py-16">
-            <h1 className="w-[90%] text-end pb-5 font-bold text-[22px]">برجاء ادخال البيانات الخاصة بك</h1>
-        <div className=" flex flex-col w-[90%] items-end border rounded-md py-4 mx-4 px-4">
-          <h1 className="pb-1">الاسم بالكامل</h1>
+            <h1 className={`w-[90%] ${activeLanguage === 'ar' ? 'text-end' : 'pl-6'} pb-5 font-bold text-[22px]`}>{t('cartFormTitle')}</h1>
+        <div className= {`flex flex-col w-[90%] ${activeLanguage === 'ar' ? 'items-end' : ''}  border rounded-md py-4 mx-4 px-4`}>
+          <h1 className="pb-1">{t('fullName')}</h1>
           <div className="w-full gap-2 flex flex-col">
             <form
               onSubmit={handleSubmit}
-              className=" w-full flex justify-end items-end text-end flex-col gap-4"
+              className={`w-full flex ${activeLanguage === 'ar' ? 'justify-end items-end text-end' : ''} flex-col gap-4`}
             >
               <label className=" justify-end text-end w-full flex items-center gap-2 hover:border px-4 py-2 active:border rounded-lg outline outline-1">
                 <input
@@ -102,28 +112,28 @@ const CartForm = () => {
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
-                  className="grow outline-none bg-transparent border-none text-end justify-end w-full"
-                  placeholder="الاسم بالكامل"
+                  className={`grow outline-none bg-transparent border-none ${activeLanguage === 'ar' ? 'text-end justify-end' : ''}  w-full`}
+                  placeholder={t('fullName')}
                   required
                 />
               </label>
               <div className=" w-full gap-2 flex flex-col">
-                <p>البريد الالكتروني</p>
+                <p>{t('emailform')}</p>
                 <label className=" justify-end text-end w-full flex items-center gap-2 hover:border px-4 py-2 active:border rounded-lg outline outline-1">
                   <input
                     type="email"
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
-                    className="grow outline-none bg-transparent border-none text-end justify-end w-full"
-                    placeholder="البريد الالكتروني"
+                    className={`grow outline-none bg-transparent border-none ${activeLanguage === 'ar' ? 'text-end justify-end' : ''}  w-full`}
+                    placeholder={t('emailform')}
                     required
                   />
                 </label>
               </div>
 
               <div className="w-full gap-2 flex flex-col">
-                <p>رقم الجوال</p>
+                <p>{t('phone')}</p>
                 <label
                   htmlFor=""
                   className="justify-start text-end w-full flex items-center gap-2 hover:border px-4 py-2 active:border rounded-lg outline outline-1"
@@ -139,7 +149,7 @@ const CartForm = () => {
                         justifyContent: "start",
                         width: "200px",
                       }}
-                      className="grow outline-none bg-transparent border-none text-end justify-end w-full"
+                      className={`grow outline-none bg-transparent border-none ${activeLanguage === 'ar' ? 'text-end justify-end' : ''}  w-full`}
                       name="phone_number"
                       required
                     />
@@ -152,7 +162,7 @@ const CartForm = () => {
                 className=" btn bg-[#003E6F] hover:bg-[#b6953e] w-full text-white "
                 disabled={isLoading}
               >
-                {isLoading ? "Loading..." : "الاستمرار في الدفع"}
+                {isLoading ? "Loading..." : t('buy')}
               </button>
             </form>
           </div>
