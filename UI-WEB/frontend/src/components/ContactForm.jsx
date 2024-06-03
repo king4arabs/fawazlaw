@@ -1,11 +1,21 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useTranslation } from 'react-i18next';
 import toast from "react-hot-toast";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import { useNavigate } from "react-router-dom";
 
 const ContactForm = () => {
+  const { t, i18n } = useTranslation();
+  const activeLanguage = i18n.language; // 'en' or 'ar'
+
+  useEffect(() => {
+    const savedLanguage = localStorage.getItem('selectedLanguage');
+    if (savedLanguage) {
+      i18n.changeLanguage(savedLanguage);
+    } 
+  }, []);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -65,15 +75,15 @@ const ContactForm = () => {
       <div className=" lg:w-[60%] w-[100%] mx-auto justify-center items-center flex flex-col gap-4 ">
         <div className=" flex flex-col lg:gap-4 gap-2 justify-center items-center">
           <h1 className="font-bold text-[24px] lg:text-[50px] ">
-            ارسل لنا رسالة
+            {t('contactTitle')}
           </h1>
-          <p className="text-lg font-normal">اهم المزايا التي تقدمها المنصة</p>
+          <p className="text-lg font-normal">{t('contactSubtitle')}</p>
         </div>
         <div className=" flex flex-col w-[90%] items-end border rounded-md px-4 py-4">
           <div className=" w-full items-end justify-end flex flex-col pb-5">
-            <h1>تحدث مع فريق الاتصال الخاص بنا</h1>
+            <h1>{t('formTitle')}</h1>
           </div>
-          <h1 className="pb-1">الاسم بالكامل</h1>
+          <h1 className="pb-1">{t('fullName')}</h1>
           <div className="w-full gap-2 flex flex-col">
             <form
               onSubmit={handleSubmit}
@@ -86,12 +96,12 @@ const ContactForm = () => {
                   value={formData.name}
                   onChange={handleChange}
                   className="grow outline-none bg-transparent border-none text-end justify-end w-full"
-                  placeholder="الاسم بالكامل"
+                  placeholder={t('fullName')}
                   required
                 />
               </label>
               <div className=" w-full gap-2 flex flex-col">
-                <p>البريد الالكتروني</p>
+                <p>{t('emailForm')}</p>
                 <label className=" justify-end text-end w-full flex items-center gap-2 hover:border px-4 py-2 active:border rounded-lg outline outline-1">
                   <input
                     type="email"
@@ -99,14 +109,14 @@ const ContactForm = () => {
                     value={formData.email}
                     onChange={handleChange}
                     className="grow outline-none bg-transparent border-none text-end justify-end w-full"
-                    placeholder="البريد الالكتروني"
+                    placeholder={t('emailForm')}
                     required
                   />
                 </label>
               </div>
 
               <div className="w-full gap-2 flex flex-col">
-                <p>رقم الجوال</p>
+                <p>{t('phone')}</p>
                 <label
                   htmlFor=""
                   className="justify-start text-end w-full flex items-center gap-2 hover:border px-4 py-2 active:border rounded-lg outline outline-1"
@@ -130,14 +140,14 @@ const ContactForm = () => {
                 </label>
               </div>
               <div className=" w-full gap-2 flex flex-col">
-                <p>الرسالة</p>
+                <p>{t('message')}</p>
                 <label className=" justify-end text-end w-full flex items-center gap-2 hover:border px-4 py-2 active:border rounded-lg outline outline-1">
                   <textarea
                     name="message"
                     value={formData.message}
                     onChange={handleChange}
                     className="grow lg:max-h-[200px] outline-none bg-transparent border-none text-end justify-end w-full"
-                    placeholder="الرسالة"
+                    placeholder={t('message')}
                     required
                   />
                 </label>
@@ -148,7 +158,7 @@ const ContactForm = () => {
                 className=" btn bg-[#003E6F] hover:bg-[#b6953e] w-full text-white "
                 disabled={isLoading}
               >
-                {isLoading ? "Loading..." : "إرسال"}
+                {isLoading? "Loading..." : t('send')}
               </button>
             </form>
           </div>

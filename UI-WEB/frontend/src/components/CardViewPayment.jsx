@@ -97,6 +97,7 @@ const CardViewPayment = () => {
   };
 
   const handleSubmit = () => {
+    console.log("fuck me please");
     if (window.myFatoorah && isMyFatoorahLoaded) {
       setIsProcessing(true);
       window.myFatoorah.submit()

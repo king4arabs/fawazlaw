@@ -1,7 +1,8 @@
 import "swiper/css";
 // import { Swiper } from "swiper";
 import "swiper/css/pagination";
-import React from "react";
+import React, {useEffect} from "react";
+import { useTranslation } from 'react-i18next';
 import { BsArrowLeftCircle } from "react-icons/bs";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { PiCaretLeft, PiCaretRight } from "react-icons/pi";
@@ -9,14 +10,22 @@ import SwperController from "./SwperController";
 import SwperController2 from "./SwperController2";
 
 const LawServices = () => {
+  const { t, i18n } = useTranslation();
+  const activeLanguage = i18n.language; // 'en' or 'ar'
+
+  useEffect(() => {
+    const savedLanguage = localStorage.getItem('selectedLanguage');
+    if (savedLanguage) {
+      i18n.changeLanguage(savedLanguage);
+    } 
+  }, []);
   return (
     <div className=" w-full text-black my-14 gap-10 flex flex-col">
       <div className=" w-[80%] flex lg:flex-row flex-col  justify-end mx-auto pt-12 gap-4  ">
-        <div className=" lg:text-[48px] text-3xl font-bold text-black text-end">
-          <h1>أعضاء الشركة</h1>
-          <p className=" text-[16px] font-normal text-end">
-            تتسم خدماتنا القانونية بالتنوع مستندين على منهجية قانونية تتماشى مع
-            المتغيرات والتطورات الحديثة
+        <div className={`lg:text-[48px] text-3xl font-bold text-black ${activeLanguage === 'ar'? 'text-end' : ''}`}>
+          <h1>{t('company members')}</h1>
+          <p className={`text-[16px] font-normal pt-2 ${activeLanguage === 'ar' ? 'text-end' : ''}`}>
+            {t('company mem details')}
           </p>
         </div>
       </div>

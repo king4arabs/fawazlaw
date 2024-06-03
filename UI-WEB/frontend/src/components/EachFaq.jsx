@@ -1,14 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useTranslation } from 'react-i18next';
 import { RxCaretDown } from "react-icons/rx";
 
 const EachFaq = ({ title, answer }) => {
+  const { t, i18n } = useTranslation();
+  const activeLanguage = i18n.language; // 'en' or 'ar'
+
+  useEffect(() => {
+    const savedLanguage = localStorage.getItem('selectedLanguage');
+    if (savedLanguage) {
+      i18n.changeLanguage(savedLanguage);
+    } 
+  }, []);
   const [accordionOpen, setAccordionOpen] = useState(false);
 
   return (
     <div className="w-full  rounded gap-2 ">
       <button
         onClick={() => setAccordionOpen(!accordionOpen)}
-        className={`flex justify-between flex-row-reverse w-full gap-3 py-3 px-3 border-b border-b-black ${
+        className={`flex justify-between  ${activeLanguage === 'ar' ? 'flex-row-reverse' : 'flex-row'} w-full gap-3 py-3 px-3 border-b border-b-black ${
           accordionOpen && "bg-[#E7E9EC]"
         } `}
       >
@@ -55,7 +65,7 @@ const EachFaq = ({ title, answer }) => {
             : "grid-rows-[0fr] opacity-0 "
         }`}
       >
-        <div className="overflow-hidden text-end mt-4 border-t-2 ">{answer}</div>
+        <div className={`overflow-hidden ${activeLanguage === 'ar' ? 'text-end' : ''} mt-4 border-t-2`}>{answer}</div>
       </div>
     </div>
   );
