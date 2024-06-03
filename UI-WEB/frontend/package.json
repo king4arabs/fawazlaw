@@ -17,6 +17,7 @@
     "draft-js": "^0.11.7",
     "draftjs-to-html": "^0.9.1",
     "fetch": "^1.1.0",
+    "fs": "^0.0.1-security",
     "html-react-parser": "^5.1.9",
     "i18next": "^23.11.5",
     "jodit-react": "^4.0.15",
