@@ -1,0 +1,57 @@
+[
+  {
+    "service_id": 1,
+    "title": "طلبات التنفيذ الإلكتروني",
+    "content": "تتيح هذه الخدمة تقديم طلبات التنفيذ المختلفة سواء للأحكام النهائية الص…",
+    "price": 300,
+    "currency": "SAR",
+    "thumbnail": "service1.jpg",
+    "title_en": "Electronic execution requests",
+    "content_en": "This service allows the submission of various execution requests, whether for final rulings issued by courts or quasi-judicial committees, or regarding financial papers (check, promissory note, bill of exchange) without the need to visit the court. This service enables citizens to complete many governmental matters.",
+    "thumbnail_en": "service1_en.jpg"
+  },
+  {
+    "service_id": 2,
+    "title": "الطلبات الإنهائية والإثباتات",
+    "content": "وتتيح هذه الخدمة تقديم كافة الطلبات الانهائية والإثباتات وطلبات الإثبات الانهائية ليس فيها خصومة ابتداء وهي ذات طرف واحد وتنظر أمام المحكمة المختصة بحضور طرف واحد .الا لو رأت المحكمة خلاف ذلك وتتمثل هذه الطلبات لحفظ الدليل واثبات ما قد يزول مع الوقت",
+    "price": 300,
+    "currency": "SAR",
+    "thumbnail": "service2.jpg",
+    "title_en": "Final requests and proofs",
+    "content_en": "This service allows the submission of all final requests and evidence. Final evidence requests do not involve any dispute at the outset and are one-party and are heard before the competent court in the presence of one party, unless the court deems otherwise. These requests are intended to preserve evidence and prove what may disappear with time.",
+    "thumbnail_en": "service2_en.jpg"
+  },
+  {
+    "service_id": 3,
+    "title": "إصدار الوكالات",
+    "content": "وتتيح هذه الخدمة تقديم طلب إصدار الوكالات سواء الوكالات الخاصة بالمطالبات والمحاكم أو الوكالات الخاصة بالعقارات والبنوك ومراجعة الجهات الحكومية وغيرها.  اصدار الوكالات هو العلاقة التي تتم بها إدارة الأملاك من قبل طرف واحد لمصلحة الطرف",
+    "price": 200,
+    "currency": "SAR",
+    "thumbnail": "service3.jpg",
+    "content_en": "This service allows submitting a request to issue agencies, whether agencies for claims and courts or agencies for real estate, banks, reviewing government agencies, etc. Issuing agencies is the relationship in which properties are managed by one party for the benefit of the other party.",
+    "title_en": "Agencies Release",
+    "thumbnail_en": "service3_en.jpg"
+  },
+  {
+    "service_id": 4,
+    "title": "دعوى القضاء التجاري",
+    "content": "هي الدعاوى التي ترتكز على مجموعة من القواعد القانونية التي تحكم ممارسة الأعمال التجارية والتجار وتحديد النظام القانوني المطبق وتكون الدعاوى مكونة من أطرافها سواء التاجر مع التاجر أو التاجر مع الغير وكذلك تمكنك هذه الخدمة من تقديم طلب القيد إلكت",
+    "price": 1000,
+    "currency": "SAR",
+    "thumbnail": "service4.jpg",
+    "title_en": "Commercial litigation",
+    "content_en": "These are lawsuits that are based on a set of legal rules that govern the practice of business and merchants and determine the applicable legal system. The lawsuits are made up of parties, whether the merchant with the merchant or the merchant with others. This service also enables you to submit a registration request electronically.",
+    "thumbnail_en": "service4_en.jpg"
+  },
+  {
+    "service_id": 5,
+    "title": "تحديث الصكوك",
+    "content": "خدمة تتيح لمالك العقار تحويل صك الملكية الى صك الكتروني دون الحاجة لزيارة مكتب العدل والصكوك هي عبارة عن أي أداة قانونية مكتوبة تُصدِق أو تؤكد على وجود فائدة، حق، أو عقار مُوقًع، موثًق لدى السلطات ويمكن أن يكون الصك من جانب واحد أو ثنائي",
+    "cuurrency": "SAR",
+    "price": 500,
+    "thumbnail": "service5.jpg",
+    "title_en": "Update the instruments",
+    "content_en": "A service that allows the property owner to convert the title deed into an electronic instrument without the need to visit the justice office. Deeds are any written legal instrument that certifies or confirms the existence of a signed interest, right, or property, documented by the authorities. The instrument can be unilateral or bilateral.",
+    "thumbnail_en": "service5_en.jpg"
+  }
+]
