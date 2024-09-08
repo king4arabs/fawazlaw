@@ -1,0 +1,36 @@
+[
+    {
+      "_id": "665609397a55ca9104910986",
+      "service_id": 1,
+      "title": "باقة الشركات والأعمال",
+      "content": "إستشارات قانونيه لمدة سنه ميلاديهبالاتصال المباشر و الدردشة الفورية (...)",
+      "price": 3000,
+      "currency": "SAR",
+      "thumbnail": "service1.jpg",
+      "title_en": "Business and corporate package",
+      "content_en": "Legal consultations for one calendar year. Direct communications and i..."
+    },
+    {
+      "_id": "66560a977a55ca9104910987",
+      "service_id": 2,
+      "title": "باقة الأحوال الشخصيه والحقوقيه",
+      "content": "إستشارات قانونيه لمدة سنه ميلاديهبالاتصال المباشر و الدردشة الفورية (...)",
+      "price": 1200,
+      "currency": "SAR",
+      "thumbnail": "service2.jpg",
+      "title_en": "Personal and legal status package",
+      "content_en": "Legal consultations for one calendar year. Direct communications and i..."
+    },
+    {
+      "_id": "66560b237a55ca9104910988",
+      "service_id": 3,
+      "title": "باقة العقود العمالية",
+      "content": "إستشارات قانونيه لمدة سنه ميلاديهبالاتصال المباشر و الدردشة الفورية (...)",
+      "price": 365,
+      "currency": "SAR",
+      "thumbnail": "service3.jpg",
+      "title_en": "Group of employment contracts",
+      "content_en": "Legal consultations for one calendar year. Direct communications and i..."
+    }
+  ]
+  

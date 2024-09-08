@@ -1,0 +1,43 @@
+import React, { useEffect } from 'react';
+import Hero from '../components/Hero';
+import HomeSection1 from '../components/HomeSection1';
+import Truts from '../components/Truts';
+import DarkblueSection from '../components/DarkblueSection';
+import HomeSection3 from '../components/HomeSection3';
+import Whatwedo from '../components/Whatwedo';
+import HomwBlogSection from '../components/HomwBlogSection';
+import PeopleAtTheCenter from '../components/PeopleAtTheCenter';
+import { Helmet } from 'react-helmet';
+import WeDefendSection from '../components/WeDefend';
+import { useTranslation } from 'react-i18next';
+import NavBar from '../components/NavBar';
+
+const Home = () => {
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  }, []);
+  const { t, i18n } = useTranslation();
+  return (
+    <>
+      <Helmet>
+        <title>{t('home')}</title>
+      </Helmet>
+      {/* <NavBar /> */}
+      <Hero />
+      <HomeSection1 />
+      <Truts />
+      <HomeSection3 />
+      {/* <Whatwedo /> */}
+      <HomwBlogSection />
+      {/* <DarkblueSection /> */}
+      <WeDefendSection />
+
+      <PeopleAtTheCenter />
+    </>
+  );
+};
+
+export default Home;

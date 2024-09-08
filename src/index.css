@@ -1,0 +1,52 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+      display: none;
+  }
+ /* Hide scrollbar for IE, Edge and Firefox */
+  .no-scrollbar {
+      -ms-overflow-style: none;  /* IE and Edge */
+      scrollbar-width: none;  /* Firefox */
+}
+}
+
+body {
+  font-family: Montserrat;
+}
+
+:root {
+  --fallback-b1: white;
+  /* Change background color to white */
+  --fallback-bc: black;
+  /* Change text color to black */
+  --gradirnt: linear-gradient(180deg, #EEF3FE 0%, rgba(255, 255, 255, 0.38) 100%);
+  --gradirnt2: linear-gradient(0deg, rgba(236, 246, 255, 0.41) 0%, rgba(255, 255, 255, 0) 102.27%);
+}
+
+.gradientbg {
+  background: linear-gradient(180deg, #EEF3FE 0%, rgba(255, 255, 255, 0.38) 100%);
+
+}
+
+@font-face {
+  font-family: Montserrat;
+  src: url(./fonts/Montserrat-Arabic-Light.otf);
+  font-weight: 200;
+
+}
+
+@font-face {
+  font-family: Montserrat;
+  src: url(./fonts/Montserrat-Arabic\ ExtraBold\ 800.otf);
+  font-weight: 800;
+}
+
+@font-face {
+  font-family: Montserrat;
+  src: url(./fonts/Montserrat-Arabic\ Medium\ 500.otf);
+  font-weight: 500;
+}
