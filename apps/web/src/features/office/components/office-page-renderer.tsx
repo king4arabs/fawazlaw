@@ -27,8 +27,16 @@ import { CalendarPage } from "@/features/office/components/calendar-page";
 import { ClientsManagement } from "@/features/office/components/clients-management";
 import { ConsultationsManagement } from "@/features/office/components/consultations-management";
 import { DocumentsManagement } from "@/features/office/components/documents-management";
+import { AttendanceScheduleManagement } from "@/features/office/components/attendance-schedule-management";
+import { AttendanceRecordsManagement } from "@/features/office/components/attendance-records-management";
+import { EmployeesManagement } from "@/features/office/components/employees-management";
 import { HomeDashboard } from "@/features/office/components/home-dashboard";
+import { InvoicesManagement } from "@/features/office/components/invoices-management";
+import { LeaveRequestsManagement } from "@/features/office/components/leave-requests-management";
 import { OperationsManagement } from "@/features/office/components/operations-management";
+import { PayrollRunsManagement } from "@/features/office/components/payroll-runs-management";
+import { ServicesManagement } from "@/features/office/components/services-management";
+import { SubscriptionPlansManagement } from "@/features/office/components/subscription-plans-management";
 import { SupportChatsManagement } from "@/features/office/components/support-chats-management";
 import { SupportTicketsManagement } from "@/features/office/components/support-tickets-management";
 import { useOfficePreferences } from "@/features/office/components/office-preferences-provider";
@@ -770,6 +778,38 @@ export function OfficePageRenderer({ page }: Readonly<{ page: OfficePageData }>)
 
   if (page.path === "/office/operations") {
     return <OperationsManagement page={page} />;
+  }
+
+  if (page.path === "/office/services") {
+    return <ServicesManagement page={page} />;
+  }
+
+  if (page.path === "/office/subscription-plans") {
+    return <SubscriptionPlansManagement page={page} />;
+  }
+
+  if (page.path === "/office/employees") {
+    return <EmployeesManagement page={page} />;
+  }
+
+  if (page.path === "/office/attendance-matrix") {
+    return <AttendanceScheduleManagement page={page} />;
+  }
+
+  if (page.path === "/office/attendance-records") {
+    return <AttendanceRecordsManagement page={page} />;
+  }
+
+  if (page.path === "/office/leave-requests") {
+    return <LeaveRequestsManagement page={page} />;
+  }
+
+  if (page.path === "/office/payroll-runs") {
+    return <PayrollRunsManagement page={page} />;
+  }
+
+  if (page.path === "/office/finance/invoices") {
+    return <InvoicesManagement page={page} />;
   }
 
   if (page.path === "/office/consultations") {
