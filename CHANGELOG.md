@@ -4,6 +4,36 @@ All notable changes to Fawazlaw.sa are documented here. This project follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v0.3.0] - 2026-05-17 — Production Build & Deployment
+### Added
+- `docs/releases/v0.3.0.md` release notes for the fawazlaw.sa production cut.
+- Explicit production-build and deployment posture for all three components (frontend, Node API, Laravel API) referenced from a single release note.
+
+### Changed
+- `UI-WEB/frontend/package.json` `version` bumped `0.1.0` → `0.3.0` to align the frontend package version with the repository release version.
+- `VERSION.md` updated to `v0.3.0` with new upgrade notes section.
+- `PROJECT_STATUS.md` "Last updated" header advanced to v0.3.0.
+
+### Fixed
+- None. No source-level bug fixes in this release — this is a release-cut + build-verification release.
+
+### Security
+- Re-verified `npm audit --audit-level=moderate` on `API-Node` and `npm audit --audit-level=high` on `UI-WEB/frontend` as part of the release checklist (both non-blocking per CI policy).
+
+### Deprecated
+- None.
+
+### Removed
+- None. No code, pages, components, routes, or content were deleted.
+
+### Internal
+- Confirmed `CI=false npm run build` produces a deployable artifact from `UI-WEB/frontend/build`.
+- Confirmed `npm ci` + tests pass on `UI-WEB/frontend` with `--passWithNoTests`.
+
+### Documentation
+- Added `docs/releases/v0.3.0.md`.
+- Updated `CHANGELOG.md` and `VERSION.md`.
+
 ## [v0.2.0] - 2026-05-17 — Repository Operating System
 ### Added
 - Full root documentation set: `ARCHITECTURE.md`, `DEPLOYMENT.md`, `TESTING.md`, `SECURITY.md`, `OPERATIONS.md`, `BUSINESS_CONTEXT.md`, `MARKETING_GROWTH.md`, `BENCHMARK.md`, `ROADMAP.md`, `PROJECT_STATUS.md`, `DECISIONS.md`, `TODO.md`, `VERSION.md` expanded to production-grade depth.

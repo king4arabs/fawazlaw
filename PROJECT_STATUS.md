@@ -1,6 +1,6 @@
 # Project Status
 
-_Last updated: 2026-05-17 (v0.2.0)_
+_Last updated: 2026-05-17 (v0.3.0)_
 
 ## Repository Health
 | Area                  | Status        | Notes |
