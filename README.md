@@ -58,14 +58,18 @@ php artisan serve
 ```
 
 ## Available Scripts
-Frontend:
-- `npm start`
-- `npm run build`
-- `npm test`
+Frontend (`UI-WEB/frontend`):
+- `npm start` — local dev server.
+- `npm run build` — production build (use `CI=false` until CRA lint warnings are remediated; see `TODO.md`).
+- `npm test` — Jest test runner.
 
-Root Vite package:
-- `npm run dev`
-- `npm run build`
+Node API (`API-Node`):
+- `node index.js` — start the API (no `npm start` script defined yet).
+
+Laravel API (`API-BACKEND/api`):
+- `php artisan serve` — start the API.
+- `php artisan migrate` — run database migrations.
+- `php artisan test` — run the test suite (once added).
 
 ## Environment Variables
 Review `.env.example` files before deployment. Expected categories include API URLs, database connection strings, JWT/secrets, mail settings, and payment gateway configuration. Do not commit real secrets.
@@ -95,7 +99,23 @@ The frontend includes page metadata, structured data, local Saudi targeting, sit
 See `ARCHITECTURE.md`, `DEPLOYMENT.md`, `TESTING.md`, `SECURITY.md`, `OPERATIONS.md`, `BUSINESS_CONTEXT.md`, `MARKETING_GROWTH.md`, `ROADMAP.md`, `PROJECT_STATUS.md`, `DECISIONS.md`, `TODO.md`, `BENCHMARK.md`, and `SKILLS/`.
 
 ## Versioning
-Current release: `v0.1.0`. Use semantic versioning.
+Current release: `v0.2.0`. Use semantic versioning (MAJOR.MINOR.PATCH). See `VERSION.md` and `CHANGELOG.md`.
+
+## Benchmarks
+Repository quality is benchmarked against Vercel, Stripe, Linear, GitHub, OpenAI, and Supabase-grade standards. See `BENCHMARK.md` for current scores and improvement targets.
+
+## Repository Operating System
+This repo follows a documented operating system: every standard concern (architecture, security, testing, deployment, operations, business, marketing, compliance) has a dedicated root document and a matching SKILLS playbook. Deep guides live in `docs/`. See `docs/wiki/README.md` for the index.
 
 ## Contribution Workflow
-Create a branch, make focused commits, run available validation, document user-facing changes in `CHANGELOG.md`, and request review before production deployment.
+1. Create a feature branch off `main`.
+2. Make focused, logically grouped commits with professional messages (`docs:`, `feat:`, `fix:`, `chore:`, `security:`, `ci:`, `test:`).
+3. Run available validation (see Testing and Validation).
+4. Update `CHANGELOG.md` and, if applicable, `DECISIONS.md`, `ROADMAP.md`, `TODO.md`, and `VERSION.md`.
+5. Open a pull request, request review, and only deploy after approval.
+
+## Maintainer Notes
+- Primary maintainer: Fawazlaw.sa engineering team.
+- Treat all client data, legal documents, and case context as confidential by default.
+- Do not add unverified licenses, awards, certifications, or regulatory claims to public copy.
+- Keep Arabic primary; expand languages only after approved translations.
