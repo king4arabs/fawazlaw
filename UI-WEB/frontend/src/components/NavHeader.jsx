@@ -40,7 +40,7 @@ const NavHeader = () => {
     <>
   
       <div className=" w-[100%] flex h-20 bg-[#FFFFFF] justify-center items-center border-b relative">
-        <div className={`relative w-[90%] flex justify-between items-center ${activeLanguage == "en"? 'flex-row-reverse': ''}`}>
+        <div className={`relative w-[90%] flex justify-between items-center ${activeLanguage === "en"? 'flex-row-reverse': ''}`}>
           <div className={`buttons flex gap-3`}>
           <button
             onClick={() => {
@@ -59,6 +59,7 @@ const NavHeader = () => {
               href="https://sa.myfatoorah.com/SAU/le/06051007467895558"
               // href="https://calendly.com/fawaz-cvx5/30min"
               target="_blank"
+              rel="noreferrer"
               className="cursor-pointer px-5 py-2 hidden lg:flex border rounded-lg text-[#3E4450] border-[#C8CBD3] items-center gap-[1px]"
             >
               <p className="font-regular text-sm">{t('book meeting')}</p>
@@ -73,7 +74,7 @@ const NavHeader = () => {
           </div>
           
           <div className={`lg:flex-row gap-2 lg:flex text-[16px]`}>
-            <div className={`hidden lg:flex items-center gap-5 text-[#858D9D] ${activeLanguage == "en"? 'order-2 flex-row-reverse' :'order-0'}`}>
+            <div className={`hidden lg:flex items-center gap-5 text-[#858D9D] ${activeLanguage === "en"? 'order-2 flex-row-reverse' :'order-0'}`}>
               <a
                 href="/contacts"
                 className={`flex px-1 py-[1px] hover:bg-[#ecedee] rounded-lg transition hover:border ${location.pathname === "/contacts"
@@ -100,6 +101,15 @@ const NavHeader = () => {
                   }`}
               >
                 {t('blogs')}
+              </a>
+              <a
+                href="/platform"
+                className={`flex px-1 py-[1px] hover:bg-[#ecedee] rounded-lg transition hover:border ${location.pathname === "/platform"
+                    ? "text-[#003E6F] text-sm font-semibold "
+                    : " font-medium text-sm"
+                  }`}
+              >
+                المنصة الرقمية
               </a>
               <a
                 href="/services"
@@ -130,7 +140,7 @@ const NavHeader = () => {
               </a>
             </div>
             <a href="/" className=" flex items-center gap-1 pl-2">
-              <img src="/images/lllll.png" className=" w-10 h-10" alt="logo" />
+              <img src="/images/lllll.png" className=" w-10 h-10" alt="شعار شركة فواز للمحاماة" />
             </a>
           </div>
         </div>
