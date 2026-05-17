@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import axios from "axios";
 
 const OrderForm = ({ serviceId, onClose }) => {
   const [formData, setFormData] = useState({
@@ -7,7 +6,7 @@ const OrderForm = ({ serviceId, onClose }) => {
     customerEmail: "",
     service_id: serviceId,
   });
-  const [invoiceUrl, setInvoiceUrl] = useState("");
+  const [invoiceUrl] = useState("");
 
   const handleChange = (e) => {
     setFormData({
@@ -27,6 +26,7 @@ const OrderForm = ({ serviceId, onClose }) => {
     }
 
     try {
+      // eslint-disable-next-line no-unused-vars
       const apiParams = {
         customerName,
         customerEmail,

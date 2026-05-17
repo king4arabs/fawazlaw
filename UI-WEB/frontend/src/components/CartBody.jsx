@@ -4,7 +4,7 @@ import CartForm from "./CartForm";
 import CartItems from "./CartItems";
 
 const CartBody = () => {
-    const { t, i18n } = useTranslation();
+    const { i18n } = useTranslation();
   const activeLanguage = i18n.language; // 'en' or 'ar'
 
   useEffect(() => {

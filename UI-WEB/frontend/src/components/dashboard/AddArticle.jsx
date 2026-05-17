@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
-import RichTextEditor from "../TextEditor";
-import JoditEdito, { JoditEditorComponent } from "../JoditEditor";
+import { JoditEditorComponent } from "../JoditEditor";
 
 const AddArticle = () => {
   const [formData, setFormData] = useState({ title: "", content: "" });
   const [isLoading, setIsLoading] = useState(false);
-  const [content, setContent] = useState(null);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
   const location = useLocation();

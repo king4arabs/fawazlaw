@@ -1,9 +1,6 @@
 import React, {useEffect} from "react";
 import { useTranslation } from 'react-i18next';
 import LawServices from "./LawServices";
-import Truts from "./Truts";
-import PeopleAtTheCenter from "./PeopleAtTheCenter";
-import Whatwedo from "./Whatwedo";
 
 const WhatweDoSection2 = () => {
   const { t, i18n } = useTranslation();

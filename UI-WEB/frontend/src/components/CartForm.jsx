@@ -1,7 +1,6 @@
 import axios from "axios";
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from 'react-i18next';
-import toast from "react-hot-toast";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import { useNavigate } from "react-router-dom";
@@ -27,7 +26,7 @@ const CartForm = () => {
       const navigate = useNavigate();
     
 
-      const [cartData, setCartData] = useState([]);
+      const [, setCartData] = useState([]);
       useEffect(() => {
         console.log(formData);
         const existCart = JSON.parse(localStorage.getItem("cartItems"));

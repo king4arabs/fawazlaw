@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { RxCaretDown } from "react-icons/rx";
 
 const EachFaq = ({ title, answer }) => {
-  const { t, i18n } = useTranslation();
+  const { i18n } = useTranslation();
   const activeLanguage = i18n.language; // 'en' or 'ar'
 
   useEffect(() => {

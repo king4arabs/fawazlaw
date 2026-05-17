@@ -14,10 +14,10 @@ const BottomNewNav = () => {
 
   return (
     <div className="main bg-[#F8F8F9] w-full pb-12">
-        <div className={`"text pt-12 pb-5 text-[16px]" ${activeLanguage == "ar"? 'text-right  pr-16' : 'pl-16'}`}>
+        <div className={`"text pt-12 pb-5 text-[16px]" ${activeLanguage === "ar"? 'text-right  pr-16' : 'pl-16'}`}>
         {t("bottomNavNewTitle")}
         </div>
-        <div className={`"logos flex gap-3 w-full pt-9" ${activeLanguage == "ar" ? 'justify-end  pr-16' : "justify-start pl-16"}`}>
+        <div className={`"logos flex gap-3 w-full pt-9" ${activeLanguage === "ar" ? 'justify-end  pr-16' : "justify-start pl-16"}`}>
             <div className="box w-[90px] h-[80px] object-cover">
                 <img src="/images/paymentIcon1.png" alt=""  />
             </div>
@@ -37,10 +37,10 @@ const BottomNewNav = () => {
                 <img src="/images/paymentIcon6.png" alt=""  />
             </div>
         </div>
-        <div className={`"text pr-16 text-[16px] ${activeLanguage == "ar"? 'text-right  pr-16' : 'pl-16'}`}>
+        <div className={`"text pr-16 text-[16px] ${activeLanguage === "ar"? 'text-right  pr-16' : 'pl-16'}`}>
         {t("bottomNavNewPayment")}
         </div>
-        <div className={`"paymentmethods logos flex gap-3 w-full pt-6 pr-16" ${activeLanguage == "ar" ? 'justify-end  pr-16' : "justify-start pl-16"}`}>
+        <div className={`"paymentmethods logos flex gap-3 w-full pt-6 pr-16" ${activeLanguage === "ar" ? 'justify-end  pr-16' : "justify-start pl-16"}`}>
         <div className="box w-[50px] h-[40px] object-cover">
                 <img src="/images/paymet1.png" alt=""  />
             </div>

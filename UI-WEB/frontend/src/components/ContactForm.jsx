@@ -4,11 +4,9 @@ import { useTranslation } from 'react-i18next';
 import toast from "react-hot-toast";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
-import { useNavigate } from "react-router-dom";
 
 const ContactForm = () => {
   const { t, i18n } = useTranslation();
-  const activeLanguage = i18n.language; // 'en' or 'ar'
 
   useEffect(() => {
     const savedLanguage = localStorage.getItem('selectedLanguage');
@@ -24,7 +22,6 @@ const ContactForm = () => {
   });
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData((prevFormData) => ({

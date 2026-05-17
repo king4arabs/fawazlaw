@@ -1,6 +1,6 @@
 import React, {useEffect} from "react";
 import { useTranslation } from 'react-i18next';
-import { BsSnapchat, BsTwitterX } from "react-icons/bs";
+import { BsTwitterX } from "react-icons/bs";
 import { CiFacebook, CiLinkedin, CiYoutube } from "react-icons/ci";
 import { MdOutlineMailOutline } from "react-icons/md";
 import BottomNavNew from "../components/BottomNavNew";
@@ -9,7 +9,6 @@ import {
   IoMailOutline,
   IoPhonePortraitOutline,
 } from "react-icons/io5";
-import { PiTiktokLogo } from "react-icons/pi";
 
 const FooterMain = () => {
   const { t, i18n } = useTranslation();
@@ -24,23 +23,23 @@ const FooterMain = () => {
   return (
     <div className="w-full flex flex-col justify-center items-center ">
       <div className=" w-full flex py-6 bg-gradient-to-b from-[#ECF2FF] to-[#fff]">
-        <div className={`" mx-auto w-[80%] flex ${activeLanguage == 'ar'? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-2 items-center flex-col justify-between " `}>
-          <div className={`${activeLanguage == 'ar'? 'flex flex-row gap-3' : 'flex flex-row-reverse gap-3'}`}>
+        <div className={`" mx-auto w-[80%] flex ${activeLanguage === 'ar'? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-2 items-center flex-col justify-between " `}>
+          <div className={`${activeLanguage === 'ar'? 'flex flex-row gap-3' : 'flex flex-row-reverse gap-3'}`}>
             <button className="btn  bg-[#003E6F] text-white hover:bg-[#b6953e]">
               {t('subscribe')}
             </button>
-            <label className={`" justify-end text-end lg:w-[300px] flex items-center gap-2 hover:border px-4 py-2 active:border rounded-lg outline outline-1" ${activeLanguage == 'ar'? '' : ''}`}>
-            <MdOutlineMailOutline size={22} className={`${activeLanguage == 'ar'? 'hidden' : ''}`}/>
+            <label className={`" justify-end text-end lg:w-[300px] flex items-center gap-2 hover:border px-4 py-2 active:border rounded-lg outline outline-1" ${activeLanguage === 'ar'? '' : ''}`}>
+            <MdOutlineMailOutline size={22} className={`${activeLanguage === 'ar'? 'hidden' : ''}`}/>
               <input
                 type="text"
-                className={`"grow outline-none bg-transparent border-none justify-end pr-2 " ${activeLanguage == 'ar'? 'text-end' : ''}`}
+                className={`"grow outline-none bg-transparent border-none justify-end pr-2 " ${activeLanguage === 'ar'? 'text-end' : ''}`}
                 placeholder={t('email')}
               />
-              <MdOutlineMailOutline size={22} className={`${activeLanguage == 'ar'? '' : 'hidden'}`}/>
+              <MdOutlineMailOutline size={22} className={`${activeLanguage === 'ar'? '' : 'hidden'}`}/>
             </label>
           </div>
           <div>
-            <h1 className={`font-bold  ${activeLanguage == 'ar'? 'text-end text-[20px]' : 'text-[17px]'}`}>
+            <h1 className={`font-bold  ${activeLanguage === 'ar'? 'text-end text-[20px]' : 'text-[17px]'}`}>
               {t("footerEmailText")}
             </h1>
           </div>
@@ -49,7 +48,7 @@ const FooterMain = () => {
       <div className=" w-full flex">
         <div className=" w-[80%] flex flex-col mx-auto">
           <div className=" w-full grid lg:grid-cols-5 grid-cols-2 gap-5 py-20">
-          {activeLanguage == 'ar'? (
+          {activeLanguage === 'ar'? (
               <><div className=" flex flex-col gap-4">
                 <h1 className=" text-2xl font-bold text-end">العنوان</h1>
                 <div className=" flex flex-row gap-2">
@@ -215,23 +214,26 @@ const FooterMain = () => {
         <div className="w-[90%] flex lg:flex-row flex-col justify-between items-center">
           <div className=" flex lg:flex-row flex-col items-center gap-2 ">
             <div className="flex items-center gap-4">
-              <a href="https://twitter.com/fawazlawyer" target="_blank">
+              <a href="https://twitter.com/fawazlawyer" target="_blank" rel="noreferrer">
                 <BsTwitterX size={20} className="  text-[#000929]" />
               </a>
+              {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
               <a href="#">
                 <CiFacebook size={25} className="  text-[#000929]" />
               </a>
               <a href="https://www.instagram.com/fawazlawyer_/">
                 <IoLogoInstagram size={25} className="  text-[#000929]" />
               </a>
+              {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
               <a href="#" className=" flex">
                 <CiLinkedin size={25} className="  text-[#000929]" />
               </a>
-              <a href="https://youtube.com/@user-wf5vr3ky7b?si=0m7Iwc7oJkb_EroL" target="_blank" className=" flex">
+              <a href="https://youtube.com/@user-wf5vr3ky7b?si=0m7Iwc7oJkb_EroL" target="_blank" rel="noreferrer" className=" flex">
                 <CiYoutube size={25} className="  text-[#000929]" />
               </a>
             </div>
             <div className=" flex items-center gap-2 ">
+              {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
               <a href="#" className=" flex items-center gap-1 pl-2">
                 <IoPhonePortraitOutline
                   size={20}
@@ -239,6 +241,7 @@ const FooterMain = () => {
                 />
                 <p className=" text-[#000929] text-[14px]">+966920013767</p>
               </a>
+              {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
               <a href="#" className=" flex items-center gap-1 pl-2">
                 <IoMailOutline size={20} className="  text-[#000929]" />
                 <p className=" text-[#000929] text-[14px]">info@fawazlaw.sa</p>

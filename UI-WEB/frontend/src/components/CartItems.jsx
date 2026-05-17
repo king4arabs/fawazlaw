@@ -5,8 +5,7 @@ import { TiTick } from "react-icons/ti";
 
 
 const CartItems = () => {
-  const { t, i18n } = useTranslation();
-  const activeLanguage = i18n.language; // 'en' or 'ar'
+  const { i18n } = useTranslation();
 
   useEffect(() => {
     const savedLanguage = localStorage.getItem('selectedLanguage');
@@ -34,6 +33,7 @@ const CartItems = () => {
         return amtArr.reduce((a, b) => a + b, 0);
       }, [cartData]);
     
+      // eslint-disable-next-line no-unused-vars
       const ServiceCount = cartData.length;
     
     

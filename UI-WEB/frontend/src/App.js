@@ -1,4 +1,4 @@
-import { Navigate, Route, Router, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import FooterMain from "./components/FooterMain";
 
 import NavBar from "./components/NavBar";
@@ -32,7 +32,7 @@ import CardViewPayment from "./components/CardViewPayment";
 function App() {
   // const user = JSON.parse(localStorage.getItem("token"));
   const [isLoggedin, setIsLoggedin] = useState(false);
-  const [language, setLanguage] = useState('en'); // Default to English
+  const [, setLanguage] = useState('en'); // Default to English
 
   const changeLanguage = (lang) => {
     setLanguage(lang);

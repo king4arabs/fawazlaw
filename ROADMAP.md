@@ -5,10 +5,10 @@ _Living document. Reviewed monthly._
 ## Immediate Fixes (this sprint)
 - [x] Repository operating system docs (root + SKILLS + `docs/`).
 - [x] Fix CI workflow to target `UI-WEB/frontend`.
-- [ ] Resolve CRA lint warnings to restore `CI=true npm run build`.
-- [ ] Enable Dependabot at the org level for this repo.
-- [ ] Add Gitleaks scan to CI.
-- [ ] Add link checker to CI for the marketing site.
+- [x] Resolve CRA lint warnings to restore `CI=true npm run build`.
+- [x] Enable Dependabot at the org level for this repo.
+- [x] Add Gitleaks scan to CI.
+- [x] Add link checker to CI for the marketing site.
 
 ## Short-Term Roadmap (0–3 months)
 - [ ] Sentry + structured logging across frontend, Laravel API, Node API.

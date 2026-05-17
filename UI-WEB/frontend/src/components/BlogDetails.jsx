@@ -6,7 +6,7 @@ import { Link, useLocation } from "react-router-dom";
 
 const BlogDetails = () => {
   const [data, setData] = useState([]);
-  const [error, setError] = useState(null);
+  const [, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -92,6 +92,7 @@ const BlogDetails = () => {
   );
 };
 
+// eslint-disable-next-line no-unused-vars
 const ArticleDetails = () => {
   const location = useLocation();
   const { data } = location.state;

@@ -7,8 +7,8 @@ import { Link } from "react-router-dom";
 
 const AllServices = () => {
   const [services, setServices] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [, setLoading] = useState(true);
+  const [, setError] = useState(null);
   const [selectedServiceId, setSelectedServiceId] = useState(null);
 
   useEffect(() => {
@@ -31,7 +31,7 @@ const AllServices = () => {
     fetchServices();
   }, []);
 
-  const handleOrderClick = (serviceId) => {
+  const handleOrderClick = (serviceId) => { // eslint-disable-line no-unused-vars
     setSelectedServiceId(serviceId);
   };
   return (
