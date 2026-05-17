@@ -114,7 +114,7 @@ Run available checks per subproject. Current baseline has frontend lint warnings
 - `docs/wiki/README.md`, `docs/api/README.md`, `docs/sdk/README.md` — expandable knowledge base.
 
 ## Current version
-v0.1.0 — Foundation Release, 2026-05-17.
+v0.1.1 — Dependency Maintenance Patch, 2026-05-17 (foundation release v0.1.0 also dated 2026-05-17).
 
 ## Maintainer notes
 Prioritize build stability, dependency hygiene, bilingual UX quality, Saudi/GCC compliance readiness, and high-trust legal service content before adding large new features.

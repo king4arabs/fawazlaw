@@ -2,6 +2,18 @@
 
 All notable changes to this project are documented in this file. Format follows Keep a Changelog categories.
 
+## [v0.1.1] - 2026-05-17
+### Security
+- Upgraded Node API `multer` from vulnerable `1.4.5-lts.1` to `^2.0.2` to remediate multiple denial-of-service advisories (GHSA-g5hg-p3ph-g8qg, GHSA-44fp-w29j-9vj5, GHSA-4pg4-qvpc-4q3h, GHSA-fjgf-rc76-4x9p).
+- Upgraded frontend `swiper` from `12.1.2` to `^12.1.4` to stay on the latest patched release.
+
+### Changed
+- Refreshed Node API dependencies to latest patch/minor versions within compatible ranges: `cors` `^2.8.6`, `dotenv` `^16.6.1`, `jsonwebtoken` `^9.0.3`.
+- Regenerated `API-Node/package-lock.json` and `UI-WEB/frontend/package-lock.json` / `yarn.lock`.
+
+### Internal
+- Re-ran `npm audit` for `API-Node` (0 vulnerabilities) and `UI-WEB/frontend` (33 remaining transitive vulnerabilities, all gated behind a breaking `react-scripts` upgrade tracked as roadmap work).
+
 ## [v0.1.0] - 2026-05-17
 ### Added
 - Established repository operating system documentation across README, architecture, deployment, testing, security, operations, business, growth, roadmap, status, TODO, benchmark, and decisions files.
