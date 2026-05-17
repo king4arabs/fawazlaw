@@ -20,6 +20,7 @@ All notable changes to this project are documented in this file. Format follows 
 - Reduced sensitive logging in Node admin/payment flows.
 
 ### Security
+- Upgraded frontend `swiper` from vulnerable 11.x resolution to patched `12.1.2` for prototype pollution remediation.
 - Documented threat model, PDPL considerations, incident response, secrets handling, and dependency scanning expectations.
 - Added baseline dependency audit findings to project status.
 

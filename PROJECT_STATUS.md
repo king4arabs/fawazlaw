@@ -55,7 +55,7 @@ Conceptually aligned. Needs legal terminology review, Arabic-first UX QA, PDPL c
 - Frontend `npm ci`: passed.
 - Frontend `npm run build`: failed because Create React App treats existing lint warnings as errors in CI. Remaining warnings include unused imports/state, `==` comparisons, missing React hook dependencies, and target blank rel issues outside the small navbar fix.
 - Frontend `CI=true npm test -- --watchAll=false`: not reached in the combined command because the build failed first.
-- Frontend `npm audit --audit-level=moderate`: failed with 34 remaining vulnerabilities, including transitive CRA-era vulnerabilities and editor libraries that require breaking upgrades or replacement.
+- Frontend `npm audit --audit-level=moderate`: initially failed with 34 remaining vulnerabilities, including a critical `swiper` prototype pollution advisory. `swiper` was upgraded to patched `12.1.2`, reducing the frontend audit to 33 remaining non-swiper vulnerabilities that require breaking upgrades or replacement.
 - Node API `npm ci`: passed.
 - Node API `npm audit --audit-level=moderate`: passed after package-lock remediation; 0 vulnerabilities reported.
 - Node API syntax checks for changed files: passed.
