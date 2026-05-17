@@ -49,3 +49,15 @@ Conceptually aligned. Needs legal terminology review, Arabic-first UX QA, PDPL c
 1. Fix frontend lint/build warnings.
 2. Upgrade vulnerable Node/frontend dependencies safely.
 3. Select primary backend strategy and document migration/retirement path for the other implementation.
+
+## Validation results for v0.1.0
+- Root `npm ci`: failed because the repository has no root `package-lock.json`; CI was updated to run subproject checks instead.
+- Frontend `npm ci`: passed.
+- Frontend `npm run build`: failed because Create React App treats existing lint warnings as errors in CI. Remaining warnings include unused imports/state, `==` comparisons, missing React hook dependencies, and target blank rel issues outside the small navbar fix.
+- Frontend `CI=true npm test -- --watchAll=false`: not reached in the combined command because the build failed first.
+- Frontend `npm audit --audit-level=moderate`: failed with 34 remaining vulnerabilities, including transitive CRA-era vulnerabilities and editor libraries that require breaking upgrades or replacement.
+- Node API `npm ci`: passed.
+- Node API `npm audit --audit-level=moderate`: passed after package-lock remediation; 0 vulnerabilities reported.
+- Node API syntax checks for changed files: passed.
+- Laravel `composer validate --no-check-publish`: passed.
+- Laravel `vendor/bin/phpunit`: not runnable in this checkout because `vendor/bin/phpunit` is missing until Composer dependencies are installed.
