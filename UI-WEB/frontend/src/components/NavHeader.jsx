@@ -102,6 +102,15 @@ const NavHeader = () => {
                 {t('blogs')}
               </a>
               <a
+                href="/platform"
+                className={`flex px-1 py-[1px] hover:bg-[#ecedee] rounded-lg transition hover:border ${location.pathname === "/platform"
+                    ? "text-[#003E6F] text-sm font-semibold "
+                    : " font-medium text-sm"
+                  }`}
+              >
+                المنصة الرقمية
+              </a>
+              <a
                 href="/services"
                 className={`flex px-1 py-[1px] hover:bg-[#ecedee] rounded-lg transition hover:border ${location.pathname === "/services"
                     ? "text-[#003E6F] text-sm font-semibold "
@@ -130,7 +139,7 @@ const NavHeader = () => {
               </a>
             </div>
             <a href="/" className=" flex items-center gap-1 pl-2">
-              <img src="/images/lllll.png" className=" w-10 h-10" alt="logo" />
+              <img src="/images/lllll.png" className=" w-10 h-10" alt="شعار شركة فواز للمحاماة" />
             </a>
           </div>
         </div>

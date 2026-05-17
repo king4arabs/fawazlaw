@@ -2,7 +2,7 @@ import { Navigate, Route, Router, Routes } from "react-router-dom";
 import FooterMain from "./components/FooterMain";
 
 import NavBar from "./components/NavBar";
-import Home from "./pages/Home";
+import Home from "./pages/PremiumHome";
 import WhatWeDo from "./pages/WhatWeDo";
 import Services from "./pages/Services";
 import Blog from "./pages/Blog";
@@ -23,7 +23,9 @@ import ManageServices from "./components/dashboard/ManageServices";
 import ManageArticles from "./components/dashboard/ManageArticles";
 import ArticleDetails from "./components/ArticleDetails";
 import AllServices from "./components/AllServices";
-import ServiceDetails from "./components/ServiceDetails";
+import ServicePage from "./pages/ServicePage";
+import Platform from "./pages/Platform";
+import FloatingCTA from "./components/FloatingCTA";
 import Cart from "./pages/Cart";
 import CardViewPayment from "./components/CardViewPayment";
 
@@ -54,7 +56,8 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/whatwedo" element={<WhatWeDo />} />
           <Route path="/services" element={<Services />} />
-          <Route path="/services/:id" element={<ServiceDetails />} />
+          <Route path="/services/:slug" element={<ServicePage />} />
+          <Route path="/platform" element={<Platform />} />
           <Route path="/allServices" element={<AllServices />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:id" element={<ArticleDetails />} />
@@ -82,6 +85,7 @@ function App() {
           <Route path="*" element={<NotFound />} />
         </Routes>
         <FooterMain />
+        <FloatingCTA />
       </div>
     </>
   );

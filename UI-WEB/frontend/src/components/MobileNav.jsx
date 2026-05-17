@@ -37,6 +37,16 @@ const MobileNav = () => {
           المدونة
         </a>
         <a
+          href="/platform"
+          className={`flex px-1 py-[1px] hover:bg-[#ecedee] rounded-lg transition hover:border ${
+            location.pathname === "/platform"
+              ? "text-[#003E6F] font-bold "
+              : " font-normal"
+          }`}
+        >
+          المنصة الرقمية
+        </a>
+        <a
           href="/services"
           className={`flex px-1 py-[1px] hover:bg-[#ecedee] rounded-lg transition hover:border ${
             location.pathname === "/services"

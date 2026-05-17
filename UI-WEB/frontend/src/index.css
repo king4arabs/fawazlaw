@@ -50,3 +50,20 @@ body {
   src: url(./fonts/Montserrat-Arabic\ Medium\ 500.otf);
   font-weight: 500;
 }
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #FFFCF6;
+  color: #1F2937;
+}
+
+:focus-visible {
+  outline: 3px solid #B9975B;
+  outline-offset: 3px;
+}
+
+img {
+  max-width: 100%;
+}
