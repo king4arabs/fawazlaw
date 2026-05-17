@@ -1,4 +1,4 @@
-import { Navigate, Route, Router, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import FooterMain from "./components/FooterMain";
 
 import NavBar from "./components/NavBar";
@@ -30,13 +30,6 @@ import CardViewPayment from "./components/CardViewPayment";
 function App() {
   // const user = JSON.parse(localStorage.getItem("token"));
   const [isLoggedin, setIsLoggedin] = useState(false);
-  const [language, setLanguage] = useState('en'); // Default to English
-
-  const changeLanguage = (lang) => {
-    setLanguage(lang);
-    // Optionally, save the language preference in localStorage or a backend
-  };
-
   useEffect(() => {
     const existCart = JSON.parse(localStorage.getItem("cartItems"));
     const count = document.getElementById("cartCount");
@@ -49,7 +42,7 @@ function App() {
     <>
       <Toaster />
       <div className=" overflow-hidden">
-      <NavBar changeLanguage={changeLanguage} />
+       <NavBar />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/whatwedo" element={<WhatWeDo />} />

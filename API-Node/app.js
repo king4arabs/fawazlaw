@@ -9,10 +9,30 @@ const paymentRoutes = require('./routes/paymentRoutes');
 const authMiddleware = require('./middlewares/authMiddleware');
 const app = express();
 
+const allowedOrigin = process.env.FRONTEND_ORIGIN || 'http://localhost:3000';
+
+if (!process.env.MONGODB_URI) {
+ console.error('MONGODB_URI is required to start the Node API.');
+ process.exit(1);
+}
+
+if (!process.env.JWT_SECRET) {
+ console.error('JWT_SECRET is required to start the Node API.');
+ process.exit(1);
+}
+
+mongoose.set('strictQuery', true);
 
 // Middleware
-app.use(cors());
-app.use(express.json());
+app.disable('x-powered-by');
+app.use((req, res, next) => {
+ res.setHeader('X-Content-Type-Options', 'nosniff');
+ res.setHeader('X-Frame-Options', 'DENY');
+ res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
+ next();
+});
+app.use(cors({ origin: allowedOrigin, credentials: true }));
+app.use(express.json({ limit: '1mb' }));
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGODB_URI)

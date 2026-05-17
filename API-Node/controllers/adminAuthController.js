@@ -5,7 +5,6 @@ const Admin = require("../models/Admin");
 exports.login = async (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
-  console.log("email and password: ", email, password);
 
   try {
     // Find the admin in the database

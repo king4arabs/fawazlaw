@@ -4,7 +4,6 @@ require('dotenv').config();
 
 // Function to send payment without using the Myfatoorah library
 exports.sendPayment = async (req, res) => {
-    console.log(req.body);
     try {
         // Check if the customer exists in the database
         let customer = await Customer.findOne({ email: req.body.email }).lean();
@@ -36,21 +35,19 @@ exports.sendPayment = async (req, res) => {
         };
         const response = await axios.post(apiUrl, sessionDetails, { headers });
         if(response.data.IsSuccess) {
-            res.status(200).json({ SessionId: response.data.Data.SessionId, CountryCode: response.data.Data.CountryCode, id: customer.id, price: req.body.price });
+            return res.status(200).json({ SessionId: response.data.Data.SessionId, CountryCode: response.data.Data.CountryCode, id: customer.id, price: req.body.price });
         }
 
-        // Extract the callback URL from the response
-        console.log(response.data);
+        return res.status(502).json({ message: 'Payment session could not be initiated.' });
 
     } catch (error) {
         console.error("Failed to send payment:", error.message);
-        throw error;
+        return res.status(500).json({ message: 'Payment session failed.' });
     }
 }
 
 
 exports.executePayment = async (req, res) => {
-    console.log(req.body);
     const services = req.body.services;
     try {
         // Check if the customer exists in the database
@@ -72,7 +69,6 @@ exports.executePayment = async (req, res) => {
             }))
         };
         
-        console.log(details);
         // Construct the API URL
         const apiUrl = 'https://api-sa.myfatoorah.com/v2/ExecutePayment';
 
@@ -83,15 +79,13 @@ exports.executePayment = async (req, res) => {
         };
         const response = await axios.post(apiUrl, details, { headers });
         if(response.data.IsSuccess) {
-            res.status(200).json({ paymentUrl: response.data.Data.PaymentURL });
+            return res.status(200).json({ paymentUrl: response.data.Data.PaymentURL });
         }
 
-        // Extract the callback URL from the response
-        console.log(response.data);
+        return res.status(502).json({ message: 'Payment execution could not be completed.' });
 
     } catch (error) {
         console.error("Failed to send payment:", error.message);
-        throw error;
+        return res.status(500).json({ message: 'Payment execution failed.' });
     }
 }
-
