@@ -1,5 +1,22 @@
 "use client";
 
+import Link from "next/link";
+import Image from "next/image";
+import {
+  Download,
+  ExternalLink,
+  Eye,
+  File as FileIcon,
+  FileArchive,
+  FileAudio,
+  FileImage,
+  FileSpreadsheet,
+  FileText,
+  FileVideo,
+  LayoutGrid,
+  List,
+} from "lucide-react";
+import { useMemo, useState } from "react";
 import type {
   BoardColumn,
   ChartCard,
@@ -9,8 +26,11 @@ import { CasesManagement } from "@/features/office/components/cases-management";
 import { CalendarPage } from "@/features/office/components/calendar-page";
 import { ClientsManagement } from "@/features/office/components/clients-management";
 import { ConsultationsManagement } from "@/features/office/components/consultations-management";
+import { DocumentsManagement } from "@/features/office/components/documents-management";
 import { HomeDashboard } from "@/features/office/components/home-dashboard";
 import { OperationsManagement } from "@/features/office/components/operations-management";
+import { SupportChatsManagement } from "@/features/office/components/support-chats-management";
+import { SupportTicketsManagement } from "@/features/office/components/support-tickets-management";
 import { useOfficePreferences } from "@/features/office/components/office-preferences-provider";
 import { TasksBoardPage } from "@/features/office/components/tasks-board-page";
 
@@ -271,35 +291,329 @@ function ChatView({ page }: Readonly<{ page: OfficePageData }>) {
 }
 
 function ArchiveView({ page }: Readonly<{ page: OfficePageData }>) {
-  const { translateText } = useOfficePreferences();
+  const { dir, translateText } = useOfficePreferences();
   const archive = page.archive;
+  const [query, setQuery] = useState("");
+  const [categoryFilter, setCategoryFilter] = useState("all");
+  const [visibilityFilter, setVisibilityFilter] = useState("all");
+  const [viewMode, setViewMode] = useState<"grid" | "table">("grid");
 
   if (!archive) {
     return null;
   }
 
+  const folderMap: Record<string, { key: string; name: string; description: string }> = {
+    clients: {
+      key: "العملاء",
+      name: "العملاء",
+      description: "الملفات المرتبطة بسجلات العملاء.",
+    },
+    cases: {
+      key: "القضايا",
+      name: "القضايا",
+      description: "ملفات القضايا والمرفقات القانونية المرتبطة بها.",
+    },
+    services: {
+      key: "الخدمات",
+      name: "الخدمات",
+      description: "الملفات المرتبطة بالطلبات والخدمات والعمليات.",
+    },
+    categories: {
+      key: "التصنيفات",
+      name: "التصنيفات",
+      description: "الملفات المصنفة تحت فئات المستندات.",
+    },
+    other: {
+      key: "أخرى",
+      name: "أخرى",
+      description: "ملفات غير مرتبطة أو غير مصنفة.",
+    },
+  };
+
+  const slug = page.path.startsWith("/office/archive/")
+    ? page.path.replace("/office/archive/", "")
+    : "";
+  const selectedFolder = slug ? folderMap[slug] ?? null : null;
+
+  const allRows = (archive.recent ?? []).map((row) => ({
+    id: row.id ?? "",
+    title: row.title ?? "-",
+    category: row.category ?? "-",
+    format: row.format ?? "-",
+    size: row.size ?? "-",
+    visibility: row.visibility ?? "-",
+    related: row.related ?? "أخرى",
+    owner: row.owner ?? "-",
+    updatedAt: row.updatedAt ?? "-",
+  }));
+
+  const counts = {
+    العملاء: allRows.filter((row) => row.related === "العملاء").length,
+    القضايا: allRows.filter((row) => row.related === "القضايا").length,
+    الخدمات: allRows.filter((row) => row.related === "الخدمات").length,
+    التصنيفات: allRows.filter((row) => row.related === "التصنيفات").length,
+    أخرى: allRows.filter((row) => row.related === "أخرى").length,
+  };
+
+  const currentRows = selectedFolder
+    ? allRows.filter((row) => row.related === selectedFolder.key)
+    : allRows;
+  const folderEntries = [
+    { slug: "clients", name: "العملاء" },
+    { slug: "cases", name: "القضايا" },
+    { slug: "services", name: "الخدمات" },
+    { slug: "categories", name: "التصنيفات" },
+    { slug: "other", name: "أخرى" },
+  ];
+  const groupedByCategory = Object.entries(
+    currentRows.reduce<Record<string, number>>((acc, row) => {
+      const key = row.category?.trim() || "غير مصنف";
+      acc[key] = (acc[key] ?? 0) + 1;
+      return acc;
+    }, {}),
+  ).sort((a, b) => b[1] - a[1]);
+  const categories = Array.from(new Set(currentRows.map((r) => r.category).filter(Boolean)));
+  const visibilities = Array.from(new Set(currentRows.map((r) => r.visibility).filter(Boolean)));
+
+  const filteredRows = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    return currentRows.filter((row) => {
+      const matchesQuery =
+        q.length === 0 ||
+        `${row.title} ${row.category} ${row.owner} ${row.related}`.toLowerCase().includes(q);
+      const matchesCategory = categoryFilter === "all" || row.category === categoryFilter;
+      const matchesVisibility = visibilityFilter === "all" || row.visibility === visibilityFilter;
+      return matchesQuery && matchesCategory && matchesVisibility;
+    });
+  }, [categoryFilter, currentRows, query, visibilityFilter]);
+
+  const fileTypeInfo = (format: string, title: string) => {
+    const value = `${format} ${title}`.toLowerCase();
+    if (value.includes("pdf")) return { key: "PDF", icon: FileText };
+    if (value.includes("image") || value.includes("jpg") || value.includes("jpeg") || value.includes("png") || value.includes("gif") || value.includes("webp")) return { key: "Image", icon: FileImage };
+    if (value.includes("doc") || value.includes("word")) return { key: "DOC", icon: FileText };
+    if (value.includes("xls") || value.includes("xlsx") || value.includes("csv") || value.includes("sheet")) return { key: "XLS", icon: FileSpreadsheet };
+    if (value.includes("video") || value.includes("mp4") || value.includes("mov") || value.includes("avi") || value.includes("mkv")) return { key: "Video", icon: FileVideo };
+    if (value.includes("audio") || value.includes("mp3") || value.includes("wav") || value.includes("m4a")) return { key: "Audio", icon: FileAudio };
+    if (value.includes("zip") || value.includes("rar") || value.includes("7z") || value.includes("archive")) return { key: "Archive", icon: FileArchive };
+    return { key: "Other", icon: FileIcon };
+  };
+
   return (
     <div className="space-y-6">
-      <div className="grid gap-4 md:grid-cols-3">
-        {archive.folders.map((folder) => (
-          <article
-            key={folder.name}
-            className="rounded-[1.4rem] border border-[#c8d8ef] bg-white p-5 shadow-[0_10px_24px_rgba(111,145,183,0.08)] dark:border-[#1d2d46] dark:bg-[#0f1b2d]"
-          >
-            <p className="text-base font-semibold text-[#183a60] dark:text-[#eef4ff]">{translateText(folder.name)}</p>
-            <p className="mt-3 text-sm text-[#7f93ae] dark:text-[#8da0bd]">{translateText(folder.count)}</p>
-          </article>
-        ))}
-      </div>
-      <TableView
-        columns={[
-          { key: "title", label: "العنوان" },
-          { key: "category", label: "التصنيف" },
-          { key: "owner", label: "المالك" },
-          { key: "updatedAt", label: "آخر تحديث" },
-        ]}
-        rows={archive.recent}
-      />
+      {!selectedFolder ? (
+        <>
+          <header className="rounded-[1.5rem] border border-[#d6e2f1] bg-white p-5 shadow-[0_10px_24px_rgba(111,145,183,0.08)] dark:border-[#1d2d46] dark:bg-[#0f1b2d]">
+            <h2 className="text-2xl font-semibold text-[#12375f] dark:text-[#eef4ff]">{translateText("الأرشيف")}</h2>
+            <p className="mt-1 text-sm text-[#7890ad] dark:text-[#8da0bd]">{translateText("تصفح الأرشيف")}</p>
+            <p className="mt-1 text-xs text-[#8ea4bf] dark:text-[#7f96b3]">{translateText("اختر مجموعة للمتابعة.")}</p>
+          </header>
+          <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+            {[
+              ["clients", "العملاء"],
+              ["cases", "القضايا"],
+              ["services", "الخدمات"],
+              ["categories", "التصنيفات"],
+              ["other", "أخرى"],
+            ].map(([folderSlug, folderName]) => (
+              <Link
+                key={folderSlug}
+                href={`/office/archive/${folderSlug}`}
+                className="group rounded-[1.4rem] border border-[#c8d8ef] bg-white p-5 shadow-[0_10px_24px_rgba(111,145,183,0.08)] transition hover:border-[#9fbbdc] hover:bg-[#f8fbff] dark:border-[#1d2d46] dark:bg-[#0f1b2d] dark:hover:border-[#2e4a6a] dark:hover:bg-[#13233a]"
+              >
+                <div className="mb-2">
+                  <Image src="/folder-icon.png" alt={translateText("مستندات")} width={28} height={28} className="h-7 w-7 object-contain" />
+                </div>
+                <p className="text-base font-semibold text-[#183a60] dark:text-[#eef4ff]">{translateText(folderName)}</p>
+                <p className="mt-3 text-sm text-[#7f93ae] dark:text-[#8da0bd]">
+                  {counts[folderName as keyof typeof counts]} {translateText("ملف")}
+                </p>
+              </Link>
+            ))}
+          </div>
+        </>
+      ) : (
+        <>
+          <header className="rounded-[1.5rem] border border-[#d6e2f1] bg-white p-5 shadow-[0_10px_24px_rgba(111,145,183,0.08)] dark:border-[#1d2d46] dark:bg-[#0f1b2d]">
+            <p className="text-sm text-[#7f95b1] dark:text-[#8ea3c0]">
+              {translateText("الأرشيف")} / {translateText(selectedFolder.name)}
+            </p>
+            <div className="mt-2 flex flex-wrap items-center justify-between gap-3">
+              <div>
+                <h2 className="text-2xl font-semibold text-[#12375f] dark:text-[#eef4ff]">{translateText(selectedFolder.name)}</h2>
+                <p className="mt-1 text-xs text-[#8ea4bf] dark:text-[#7f96b3]">{translateText(selectedFolder.description)}</p>
+              </div>
+              <Link
+                href="/office/archive"
+                className="rounded-xl border border-[#d7e2f0] bg-white px-4 py-2 text-sm text-[#547094] hover:bg-[#f3f7fd] dark:border-[#2c3f5b] dark:bg-[#0f1b2e] dark:text-[#9cb3ce]"
+              >
+                {translateText("العودة إلى المجلدات")}
+              </Link>
+            </div>
+          </header>
+
+          <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-5">
+            {folderEntries.map(({ slug: folderSlug, name: folderName }) => {
+              const isActive = slug === folderSlug;
+              return (
+                <Link
+                  key={folderSlug}
+                  href={`/office/archive/${folderSlug}`}
+                  className={[
+                    "rounded-[1.2rem] border p-4 transition",
+                    isActive
+                      ? "border-[#9fbbdc] bg-[#f3f8ff] dark:border-[#2e4a6a] dark:bg-[#13233a]"
+                      : "border-[#d6e2f1] bg-white hover:border-[#bdd0e8] dark:border-[#1d2d46] dark:bg-[#0f1b2d]",
+                  ].join(" ")}
+                >
+                  <div className="mb-2">
+                    <Image src="/folder-icon.png" alt={translateText("مستندات")} width={22} height={22} className="h-[22px] w-[22px] object-contain" />
+                  </div>
+                  <p className="text-sm font-semibold text-[#183a60] dark:text-[#eef4ff]">{translateText(folderName)}</p>
+                  <p className="mt-1 text-xs text-[#7f93ae] dark:text-[#8da0bd]">
+                    {counts[folderName as keyof typeof counts]} {translateText("ملف")}
+                  </p>
+                </Link>
+              );
+            })}
+          </div>
+
+          <div className="mt-4 grid gap-4 xl:grid-cols-[280px_1fr]">
+            <aside className="rounded-[1.25rem] border border-[#d6e2f1] bg-white p-3 shadow-[0_10px_24px_rgba(111,145,183,0.06)] dark:border-[#1d2d46] dark:bg-[#0f1b2d]">
+              <h3 className="mb-3 text-sm font-semibold text-[#12375f] dark:text-[#eef4ff]">{translateText("مجلدات داخلية")}</h3>
+              <div className="space-y-2">
+                {groupedByCategory.length === 0 ? (
+                  <p className="rounded-lg border border-dashed border-[#d7e2f1] bg-[#f8fbff] px-3 py-3 text-xs text-[#7b91ab] dark:border-[#29405d] dark:bg-[#132238] dark:text-[#9ab2cf]">
+                    {translateText("لا توجد مجلدات فرعية حتى الآن.")}
+                  </p>
+                ) : (
+                  groupedByCategory.map(([category, count]) => (
+                    <div key={category} className="flex items-center justify-between rounded-lg border border-[#e4ecf8] bg-[#fbfdff] px-3 py-2 dark:border-[#223752] dark:bg-[#122136]">
+                      <div className="flex min-w-0 items-center gap-2">
+                        <Image src="/folder-icon.png" alt={translateText("مجلد")} width={16} height={16} className="h-4 w-4 object-contain" />
+                        <span className="truncate text-xs text-[#17395f] dark:text-[#e8f0ff]">{translateText(category)}</span>
+                      </div>
+                      <span className="rounded-full bg-[#edf5ff] px-2 py-0.5 text-[11px] text-[#2a67b5] dark:bg-[#1a2d47] dark:text-[#9fc3ec]">{count}</span>
+                    </div>
+                  ))
+                )}
+              </div>
+            </aside>
+
+            <div className="rounded-[1.5rem] border border-[#d6e2f1] bg-white p-4 shadow-[0_10px_24px_rgba(111,145,183,0.08)] dark:border-[#1d2d46] dark:bg-[#0f1b2d]">
+            <div className="mb-4 grid gap-3 md:grid-cols-3">
+              <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder={translateText("بحث بالعنوان أو الفئة أو الرافع...")} className="rounded-xl border border-[#d9e4f4] bg-[#fbfdff] px-4 py-2.5 text-sm text-[#2a4364] dark:border-[#2a3f5c] dark:bg-[#122136] dark:text-[#d5e3f4]" />
+              <select value={categoryFilter} onChange={(e) => setCategoryFilter(e.target.value)} className="rounded-xl border border-[#d9e4f4] bg-[#fbfdff] px-4 py-2.5 text-sm text-[#2a4364] dark:border-[#2a3f5c] dark:bg-[#122136] dark:text-[#d5e3f4]">
+                <option value="all">{translateText("التصنيف: الكل")}</option>
+                {categories.map((category) => (
+                  <option key={category} value={category}>{translateText(category)}</option>
+                ))}
+              </select>
+              <select value={visibilityFilter} onChange={(e) => setVisibilityFilter(e.target.value)} className="rounded-xl border border-[#d9e4f4] bg-[#fbfdff] px-4 py-2.5 text-sm text-[#2a4364] dark:border-[#2a3f5c] dark:bg-[#122136] dark:text-[#d5e3f4]">
+                <option value="all">{translateText("الظهور: الكل")}</option>
+                {visibilities.map((visibility) => (
+                  <option key={visibility} value={visibility}>{translateText(visibility)}</option>
+                ))}
+              </select>
+            </div>
+            <div className="mb-4 flex items-center justify-between">
+              <p className="text-xs text-[#7891b0] dark:text-[#9cb3ce]">{translateText("عرض افتراضي: شبكة")}</p>
+              <div className="inline-flex rounded-xl border border-[#d9e4f4] bg-[#fbfdff] p-1 dark:border-[#2a3f5c] dark:bg-[#122136]">
+                <button type="button" onClick={() => setViewMode("grid")} className={["inline-flex items-center gap-1 rounded-lg px-3 py-1.5 text-xs", viewMode === "grid" ? "bg-[#e9f1ff] text-[#144673] dark:bg-[#1b314d] dark:text-[#d2e2f6]" : "text-[#6a84a7] dark:text-[#9ab0cc]"].join(" ")}><LayoutGrid className="h-3.5 w-3.5" />{translateText("شبكة")}</button>
+                <button type="button" onClick={() => setViewMode("table")} className={["inline-flex items-center gap-1 rounded-lg px-3 py-1.5 text-xs", viewMode === "table" ? "bg-[#e9f1ff] text-[#144673] dark:bg-[#1b314d] dark:text-[#d2e2f6]" : "text-[#6a84a7] dark:text-[#9ab0cc]"].join(" ")}><List className="h-3.5 w-3.5" />{translateText("جدول")}</button>
+              </div>
+            </div>
+
+            {filteredRows.length === 0 ? (
+              <div className="rounded-2xl border border-dashed border-[#d7e2f1] bg-[#f8fbff] px-4 py-10 text-center text-sm text-[#718aa9] dark:border-[#29405d] dark:bg-[#132238] dark:text-[#9ab2cf]">
+                <p className="font-medium">{translateText("لا توجد ملفات في هذا المجلد")}</p>
+                <p className="mt-1 text-xs">{translateText("ستظهر هنا الملفات المرفوعة والمرتبطة بهذا القسم.")}</p>
+              </div>
+            ) : viewMode === "grid" ? (
+              <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
+                {filteredRows.map((row, index) => {
+                  const type = fileTypeInfo(row.format, row.title);
+                  const TypeIcon = type.icon;
+                  return (
+                    <article key={`${row.title}-${index}`} className="rounded-[1.1rem] border border-[#d8e4f2] bg-[#fbfdff] p-3 transition hover:border-[#b8cce4] hover:bg-white dark:border-[#223752] dark:bg-[#122136] dark:hover:border-[#2f4b69]">
+                      <div className="mb-3 flex items-start justify-between gap-2">
+                        <div className="flex items-center gap-2">
+                          <div className="rounded-lg bg-[#eef5ff] p-2 text-[#245f9f] dark:bg-[#1b304a] dark:text-[#a9c7e8]">
+                            <TypeIcon className="h-5 w-5" />
+                          </div>
+                          <span className="rounded-full bg-[#fff5df] px-2 py-0.5 text-[11px] text-[#b57010] dark:bg-[#3a2b18] dark:text-[#f0c58b]">{type.key}</span>
+                        </div>
+                        <span className="rounded-full bg-[#edf5ff] px-2 py-0.5 text-[11px] text-[#2a67b5] dark:bg-[#1a2d47] dark:text-[#9fc3ec]">{translateText(row.visibility)}</span>
+                      </div>
+                      <p className="line-clamp-2 text-sm font-semibold text-[#153a62] dark:text-[#eaf2ff]">{translateText(row.title)}</p>
+                      <div className="mt-2 space-y-1 text-xs text-[#6f89ab] dark:text-[#9cb3ce]">
+                        <p>{translateText("التصنيف")}: {translateText(row.category)}</p>
+                        <p>{translateText("مرتبط بـ")}: {translateText(row.related)}</p>
+                        <p>{translateText("تاريخ الرفع")}: {translateText(row.updatedAt)}</p>
+                        <p>{translateText("تم الرفع بواسطة")}: {translateText(row.owner)}</p>
+                      </div>
+                      <div className="mt-3 flex flex-wrap gap-1.5">
+                        <Link href={`/office/documents?doc=${encodeURIComponent(row.id ?? row.title)}`} className="inline-flex items-center gap-1 rounded-lg bg-[#e9f1fc] px-2 py-1 text-xs text-[#20518b]"><Eye className="h-3.5 w-3.5" />{translateText("معاينة")}</Link>
+                        <Link href={`/office/documents?doc=${encodeURIComponent(row.id ?? row.title)}`} className="inline-flex items-center gap-1 rounded-lg bg-[#103a67] px-2 py-1 text-xs text-white"><ExternalLink className="h-3.5 w-3.5" />{translateText("فتح")}</Link>
+                        <Link href={`/office/documents?doc=${encodeURIComponent(row.id ?? row.title)}`} className="inline-flex items-center gap-1 rounded-lg border border-[#d7e2f0] bg-white px-2 py-1 text-xs text-[#2a67b5] dark:border-[#28415f] dark:bg-[#0f1b2d] dark:text-[#9fc3ec]"><Download className="h-3.5 w-3.5" />{translateText("تحميل")}</Link>
+                      </div>
+                    </article>
+                  );
+                })}
+              </div>
+            ) : (
+              <div className="overflow-x-auto rounded-xl border border-[#e1e9f5]">
+                <table dir={dir} className="min-w-[1100px] w-full text-sm">
+                  <thead className="bg-[#f3f8ff] text-[#5b7594] dark:bg-[#13233a] dark:text-[#9bb1cd]">
+                    <tr>
+                      <th className="px-4 py-3">{translateText("العنوان / اسم الملف")}</th>
+                      <th className="px-4 py-3">{translateText("التصنيف")}</th>
+                      <th className="px-4 py-3">{translateText("الصيغة")}</th>
+                      <th className="px-4 py-3">{translateText("الحجم")}</th>
+                      <th className="px-4 py-3">{translateText("الظهور")}</th>
+                      <th className="px-4 py-3">{translateText("مرتبط بـ")}</th>
+                      <th className="px-4 py-3">{translateText("تاريخ الرفع")}</th>
+                      <th className="px-4 py-3">{translateText("تم الرفع بواسطة")}</th>
+                      <th className="px-4 py-3">{translateText("الإجراءات")}</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {filteredRows.map((row, index) => (
+                      <tr key={`${row.title}-${index}`} className="border-t border-[#e7eef8] dark:border-[#223752]">
+                        <td className="px-4 py-3 text-[#17395f] dark:text-[#e8f0ff]">{translateText(row.title)}</td>
+                        <td className="px-4 py-3 text-[#17395f] dark:text-[#e8f0ff]">{translateText(row.category)}</td>
+                        <td className="px-4 py-3 text-[#17395f] dark:text-[#e8f0ff]">{translateText(row.format)}</td>
+                        <td className="px-4 py-3 text-[#17395f] dark:text-[#e8f0ff]">{translateText(row.size)}</td>
+                        <td className="px-4 py-3 text-[#17395f] dark:text-[#e8f0ff]">{translateText(row.visibility)}</td>
+                        <td className="px-4 py-3 text-[#17395f] dark:text-[#e8f0ff]">{translateText(row.related)}</td>
+                        <td className="px-4 py-3 text-[#17395f] dark:text-[#e8f0ff]">{translateText(row.updatedAt)}</td>
+                        <td className="px-4 py-3 text-[#17395f] dark:text-[#e8f0ff]">{translateText(row.owner)}</td>
+                        <td className="px-4 py-3">
+                          <div className="flex flex-wrap gap-1">
+                            <Link
+                              href={`/office/documents?doc=${encodeURIComponent(row.id ?? row.title)}`}
+                              className="rounded-lg bg-[#e9f1fc] px-2 py-1 text-xs text-[#20518b]"
+                            >
+                              {translateText("عرض / فتح")}
+                            </Link>
+                            <Link
+                              href={`/office/documents?doc=${encodeURIComponent(row.id ?? row.title)}`}
+                              className="rounded-lg bg-[#edf5ff] px-2 py-1 text-xs text-[#2a67b5]"
+                            >
+                              {translateText("تنزيل")}
+                            </Link>
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
+            </div>
+          </div>
+        </>
+      )}
     </div>
   );
 }
@@ -460,6 +774,18 @@ export function OfficePageRenderer({ page }: Readonly<{ page: OfficePageData }>)
 
   if (page.path === "/office/consultations") {
     return <ConsultationsManagement page={page} />;
+  }
+
+  if (page.path === "/office/documents") {
+    return <DocumentsManagement page={page} />;
+  }
+
+  if (page.path === "/office/support/support-tickets") {
+    return <SupportTicketsManagement page={page} />;
+  }
+
+  if (page.path === "/office/tickets-chat") {
+    return <SupportChatsManagement page={page} />;
   }
 
   return (
