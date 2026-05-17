@@ -6,7 +6,7 @@ const ManageServices = () => {
   const [services, setServices] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [selectedService, setSelectedService] = useState(null); // State to hold the selected service
+  const [, setSelectedService] = useState(null); // State to hold the selected service
   const navigate = useNavigate();
 
   useEffect(() => {

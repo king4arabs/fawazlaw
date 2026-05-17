@@ -104,7 +104,7 @@ const CardViewPayment = () => {
        .then(async apiResponse => { // Renamed from 'response' to 'apiResponse'
         const existCart = JSON.parse(localStorage.getItem("cartItems"));
         const filteredData = consolidateObjects(existCart ?? []);
-          const { sessionId, cardBrand, cardIdentifier } = apiResponse;
+          const { sessionId } = apiResponse;
           console.log(sessionId); // Use 'apiResponse' instead of 'response'
           const details = {
             "sessionID": sessionId,

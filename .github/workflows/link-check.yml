@@ -1,0 +1,52 @@
+name: Link check
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  schedule:
+    - cron: "0 7 * * 1"  # Weekly Monday 07:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  lychee:
+    name: Lychee link checker
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Restore lychee cache
+        uses: actions/cache@v4
+        with:
+          path: .lycheecache
+          key: cache-lychee-${{ github.sha }}
+          restore-keys: cache-lychee-
+
+      - name: Run lychee on marketing site sources and root docs
+        id: lychee
+        uses: lycheeverse/lychee-action@v2
+        with:
+          # Scan markdown docs at the root and the marketing site source.
+          # Excludes node_modules, vendor, build outputs, and lock files.
+          args: >-
+            --no-progress
+            --cache
+            --max-cache-age 1d
+            --accept 200,204,206,301,302,308,403,429
+            --exclude-path UI-WEB/frontend/node_modules
+            --exclude-path UI-WEB/frontend/build
+            --exclude-path API-BACKEND/api/vendor
+            --exclude-path API-Node/node_modules
+            --exclude-path node_modules
+            './*.md'
+            'docs/**/*.md'
+            'UI-WEB/frontend/public/**/*.{html,md}'
+            'UI-WEB/frontend/src/**/*.{js,jsx,ts,tsx,md}'
+          fail: false
+          token: ${{ secrets.GITHUB_TOKEN }}

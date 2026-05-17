@@ -1,0 +1,58 @@
+# Dependabot configuration for the fawazlaw monorepo.
+# See: https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file
+version: 2
+updates:
+  # GitHub Actions used by workflows in .github/workflows
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 5
+    labels:
+      - "dependencies"
+      - "github-actions"
+
+  # React (CRA) frontend
+  - package-ecosystem: "npm"
+    directory: "/UI-WEB/frontend"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 10
+    labels:
+      - "dependencies"
+      - "frontend"
+    groups:
+      minor-and-patch:
+        update-types:
+          - "minor"
+          - "patch"
+
+  # Node/Express API prototype
+  - package-ecosystem: "npm"
+    directory: "/API-Node"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 5
+    labels:
+      - "dependencies"
+      - "api-node"
+    groups:
+      minor-and-patch:
+        update-types:
+          - "minor"
+          - "patch"
+
+  # Laravel API
+  - package-ecosystem: "composer"
+    directory: "/API-BACKEND/api"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 5
+    labels:
+      - "dependencies"
+      - "api-backend"
+    groups:
+      minor-and-patch:
+        update-types:
+          - "minor"
+          - "patch"

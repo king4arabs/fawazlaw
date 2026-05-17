@@ -4,7 +4,6 @@ import EachFaq from "./EachFaq";
 
 const FaqComponent = () => {
   const { t, i18n } = useTranslation();
-  const activeLanguage = i18n.language; // 'en' or 'ar'
 
   useEffect(() => {
     const savedLanguage = localStorage.getItem('selectedLanguage');

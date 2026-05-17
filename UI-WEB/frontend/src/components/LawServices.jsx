@@ -3,10 +3,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import React, {useEffect} from "react";
 import { useTranslation } from 'react-i18next';
-import { BsArrowLeftCircle } from "react-icons/bs";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { PiCaretLeft, PiCaretRight } from "react-icons/pi";
-import SwperController from "./SwperController";
 import SwperController2 from "./SwperController2";
 
 const LawServices = () => {

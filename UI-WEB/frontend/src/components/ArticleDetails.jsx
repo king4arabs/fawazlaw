@@ -1,6 +1,6 @@
 import React from "react";
 import parse from "html-react-parser";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { Helmet } from 'react-helmet';
 
 const ArticleDetails = () => {
