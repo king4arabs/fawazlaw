@@ -1,0 +1,19 @@
+{
+  "name": "mohamaa-monorepo",
+  "private": true,
+  "workspaces": [
+    "apps/web",
+    "apps/api"
+  ],
+  "scripts": {
+    "dev": "concurrently -n web,api -c \"#0f766e,#1d4ed8\" \"npm run dev --workspace web\" \"composer run dev --working-dir=apps/api\"",
+    "dev:web": "npm run dev --workspace web",
+    "dev:api": "composer run dev --working-dir=apps/api",
+    "build": "npm run build --workspace web",
+    "lint": "npm run lint --workspace web",
+    "test:api": "composer run test --working-dir=apps/api"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}

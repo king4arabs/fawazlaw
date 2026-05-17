@@ -1,0 +1,12 @@
+node_modules
+
+apps/web/.next
+apps/web/node_modules
+apps/web/package-lock.json
+
+apps/api/node_modules
+apps/api/public/build
+apps/api/public/hot
+apps/api/vendor
+
+.DS_Store
