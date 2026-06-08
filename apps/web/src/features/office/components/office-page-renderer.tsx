@@ -30,6 +30,7 @@ import { DocumentsManagement } from "@/features/office/components/documents-mana
 import { AttendanceScheduleManagement } from "@/features/office/components/attendance-schedule-management";
 import { AttendanceRecordsManagement } from "@/features/office/components/attendance-records-management";
 import { EmployeesManagement } from "@/features/office/components/employees-management";
+import { ExpensesManagement } from "@/features/office/components/expenses-management";
 import { HomeDashboard } from "@/features/office/components/home-dashboard";
 import { InvoicesManagement } from "@/features/office/components/invoices-management";
 import { LeaveRequestsManagement } from "@/features/office/components/leave-requests-management";
@@ -810,6 +811,10 @@ export function OfficePageRenderer({ page }: Readonly<{ page: OfficePageData }>)
 
   if (page.path === "/office/finance/invoices") {
     return <InvoicesManagement page={page} />;
+  }
+
+  if (page.path === "/office/finance/expenses") {
+    return <ExpensesManagement page={page} />;
   }
 
   if (page.path === "/office/consultations") {
