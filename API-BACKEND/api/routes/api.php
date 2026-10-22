@@ -26,7 +26,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Admin login route
-Route::post('/admin/login', [AdminAuthController::class, 'login'])->name('admin.login');
+Route::post('/admin/login', [AdminAuthController::class, 'login'])->middleware('throttle:5,1')->name('admin.login');
 
 Route::get('tags', [TagController::class, 'index']);
 Route::get('tags/{id}', [TagController::class, 'show']);
