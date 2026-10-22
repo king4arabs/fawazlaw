@@ -45,7 +45,7 @@ class PaymentController extends Controller
             'service_id' => 'required|exists:services,id',
             'customerName' => 'required',
             'price' => 'required',
-            'qty' => 'required',
+            'qty' => 'required|integer|min:1|max:1000',
             'customerEmail' => 'required|email',
             'cardNumber' => 'required',
             'ExpiryMonth' => 'required',
@@ -91,8 +91,8 @@ class PaymentController extends Controller
     {
         $directpayRequest = [
             'PaymentType' => 'card',
-            'Bypass3DS' => true,
-            'SaveToken' => true,
+            'Bypass3DS' => false,
+            'SaveToken' => false,
             'Card' => [
                 'Number' => $requestData['cardNumber'],
                 'ExpiryMonth' => $requestData['ExpiryMonth'],

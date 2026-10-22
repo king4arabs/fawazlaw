@@ -3,31 +3,25 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ImageUpload extends Controller
 {
-    /**
-     * Upload image and return its path.
-     */
     public function upload(Request $request)
     {
-        try {
-            // Validate the incoming request data (if needed)
+        $request->validate([
+            'image' => ['required', 'file', 'image', 'mimes:jpg,jpeg,png,webp', 'max:5120'],
+        ]);
 
-            // Check if image is provided in the request
-            if ($request->hasFile('image')) {
-                // Upload the image
-                $imagePath = $request->file('image')->store('public/images');
-                $imageUrl = asset('storage/' . str_replace('public/', '', $imagePath));
-                // Return the image path and url as a JSON response
-                return response()->json(['image_path' => $imagePath, 'image_url' => $imageUrl], 201);
-            }
+        $path = $request->file('image')->store('images', 'public');
 
-            // If no image is provided in the request, return an error response
-            return response()->json(['error' => 'No image provided'], 400);
-        } catch (\Exception $e) {
-            // Handle any errors
+        if ($path === false) {
             return response()->json(['error' => 'Failed to upload image'], 500);
         }
+
+        return response()->json([
+            'image_path' => 'public/' . $path,
+            'image_url' => Storage::disk('public')->url($path),
+        ], 201);
     }
 }
