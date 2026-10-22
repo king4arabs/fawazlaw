@@ -2,18 +2,27 @@
 
 namespace Tests\Feature;
 
-// use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class ExampleTest extends TestCase
 {
-    /**
-     * A basic test example.
-     */
-    public function test_the_application_returns_a_successful_response(): void
+    public function test_api_only_application_has_no_root_page(): void
     {
-        $response = $this->get('/');
+        $this->get('/')->assertNotFound();
+    }
 
-        $response->assertStatus(200);
+    public function test_anonymous_requests_cannot_read_the_current_user(): void
+    {
+        $this->getJson('/api/user')->assertUnauthorized();
+    }
+
+    public function test_anonymous_requests_cannot_create_articles(): void
+    {
+        $this->postJson('/api/articles', ['title' => 'Unauthorized'])->assertUnauthorized();
+    }
+
+    public function test_anonymous_requests_cannot_upload_images(): void
+    {
+        $this->postJson('/api/upload-images')->assertUnauthorized();
     }
 }
